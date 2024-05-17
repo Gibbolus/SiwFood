@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>SiwFood - Homepage</title>
+	<link rel="stylesheet" href="/css/styles.css?v=1.0" />
+</head>
+
+<body>
+	<nav class="nav_bar">
+		<div>
+			<a href="/">
+				<img class="icons_home" src="/images/home.svg"></img>
+			</a>
+		</div>
+		<li>
+			<a class="ali" href="/recipe">Ricette</a>
+		</li>
+		<li>
+			<a class="ali" href="/cook">Cuochi</a>
+		</li>
+
+		<!-- Search Bar start -->
+		<div class="search-bar">
+
+			<!-- Search box input start -->
+			<div class="search-box">
+				<input type="text" id="search-input" placeholder="Cerca qualcosa..." />
+				<i class="fa-solid fa-magnifying-glass"></i>
+			</div>
+			<!-- Search box input ends -->
+		</div>
+		<!-- Search Bar ends -->
+		<div>
+			<a href="/login">
+				<img class="icons_login" src="/images/account.svg"></img>
+			</a>
+		</div>
+
+	</nav>
+	<h1>Consulta l'archivio</h1>
+	<div>
+		<br>
+		<a href="/formSearchRecipes"> Cerca ricette per nome</a>
+		<br>
+		<a href="/formSearchCooks"> Cerca cuoco per nome</a>
+	</div>
+	<h2>Gestisci l'archivio</h2>
+	<div>
+		<a href="/cookUser/formNewRecipe">Aggiungi tu una ricetta</a>
+		<br>
+		<a href="/cookUser/formNewCook">Aggiungi tu un cuoco</a>
+		<br>
+		<a href="/admin/manageRecipes">Gestisci Film</a>
+	</div>
+
+	
+</body>
+
+</html>

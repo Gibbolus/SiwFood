@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Ricette</title>
+	<link rel="stylesheet" href="/css/styles_recipes.css?v=1.8" />
+</head>
+
+<body>
+	<nav class="nav_bar">
+		<div>
+			<a href="/">
+				<img class="icons_home" src="/images/home.svg"></img>
+			</a>
+		</div>
+		<li>
+			<a class="ali" href="/recipe">Ricette</a>
+		</li>
+		<li>
+			<a class="ali" href="/cook">Cuochi</a>
+		</li>
+		<!-- Search Bar start -->
+		<div class="search-bar">
+			<!-- Search box input start -->
+			<div class="search-box">
+				<input type="text" id="search-input" placeholder="Cerca qualcosa..." />
+				<i class="fa-solid fa-magnifying-glass"></i>
+			</div>
+			<!-- Search box input ends -->
+		</div>
+		<!-- Search Bar ends -->
+		<div>
+			<a href="/login">
+				<img class="icons_login" src="/images/account.svg"></img>
+			</a>
+		</div>
+	</nav>
+	
+	<h1>Ricette</h1>
+	<div th:if="${recipes.isEmpty()}">Non ci sono ricette nel sistema</div>
+
+	<div class="container2">
+		<div class="div_princ" th:each="recipe : ${recipes}">
+
+			<a th:href="@{'/recipe' + '/' + ${recipe.id}}">
+				<img class="img" th:src="${recipe.urlImage}">
+			</a>
+				
+			<h2 class="text" th:text="${recipe.name}"></h2>
+			
+			<div class="subtext">Cuoco:
+				<span th:if="${recipe.cook != null}">
+					<span th:text="${recipe.cook.name}	+ ' ' + ${recipe.cook.surname}"></span></span>
+				<span th:unless="${recipe.cook != null}">Non disponibile</span>
+			</div>			<!-- class subtext -->
+			
+			<div class="info">
+				<div class="div_int">
+					<img class="icons" src="/images/clock.svg"></img>
+					<p class="icon_info" th:text="${recipe.cookTime} + ' min'"></p>
+				</div>			<!-- class div_int -->
+				<div class="div_int">
+					<img class="icons" src="/images/plate.svg"></img>
+					<p class="icon_info" th:text="${recipe.recipeType}"></p>
+				</div>			<!-- class div_int -->
+				<div class="div_int">
+					<img class="icons" src="/images/puzzle.svg"></img>
+					<p class="icon_info" th:text="${recipe.difficulty}"></p>
+				</div>			<!-- class div_int -->
+				
+			</div>			<!-- class info -->
+		</div>		<!-- class div_princ -->
+	</div>		<!-- class container -->
+</body>
+
+</html>

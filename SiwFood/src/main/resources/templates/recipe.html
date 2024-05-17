@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+ 
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Ricette</title>
+	<link rel="stylesheet" href="/css/styles_recipe.css?v=0.1" />
+</head>
+
+<body>
+	
+	<div th:if="${recipe}">
+		<h1 th:text="${recipe.name}">Nome ricette</h1>
+		<div>Cuoco:
+			<span th:if="${recipe.cook != null}">
+				<span th:text="${recipe.cook.name}	+ ' ' + ${recipe.cook.surname}"></span>
+			</span>
+			<span th:unless="${recipe.cook != null}">Non disponibile</span>
+		</div>
+		<span th:text="${recipe.description}"></span>
+	</div>
+		<span><img width="15%" th:src=${recipe.urlImage} /></span>
+	   
+	    <div th:unless="${recipe}">Non esiste</div>
+	 
+</body>
+
+</html>

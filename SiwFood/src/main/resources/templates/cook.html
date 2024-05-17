@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+    <title>Cuoco</title>
+    <link rel="stylesheet" href="/css/styles.css?v=0.1" />
+  </head>
+  <body>
+    <div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
+    <div th:if="${cook}">
+      <h1 th:text="${cook.name} + ' ' + ${cook.surname}">Info cuoco</h1>
+      <div>
+        Anno di nascita:
+        <span th:if="${cook.year != null}">
+			<span th:text="${#temporals.format(cook.year, 'dd-MM-yyyy')}"></span>
+        </span>
+        <span th:if="${cook.year == null}">
+          Non disponibile
+        </span>
+      </div>
+      <span><img width="15%" th:src="${cook.urlImage}" /></span>
+    </div>
+  </body>
+</html>

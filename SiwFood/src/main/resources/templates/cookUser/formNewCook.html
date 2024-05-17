@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Nuovo Cuoco</title>
+	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+</head>
+
+<body>
+	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
+	<h1>Aggiungi un nuovo cuoco!</h1>
+	<form th:action="@{/cooks}" method="POST" th:object="${cook}">
+		<div>
+			<span th:text="${messaggioErrore}">Errore</span>
+		</div>
+		<div>
+			Nome: <span><input required type="text" th:field="${cook.name}" /></span>
+		</div>
+		<div>
+			Cognome: <span><input required type="text" th:field="${cook.surname}" /></span>
+		</div>
+		<div>
+			Data Di Nascita (dd-MM-yyyy): <span><input required type="date" th:field="${cook.year}" /></span>
+		</div>
+		<div>
+			URL immagine: <span><input type="url" th:field="${cook.urlImage}" /></span>
+		</div>
+		<div>
+			<span><button type="submit">Conferma</button></span>
+		</div>
+	</form>
+</body>
+
+</html>

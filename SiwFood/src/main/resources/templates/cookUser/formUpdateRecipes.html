@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+ 
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Ricette</title>
+	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+</head>
+
+<body>
+	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
+	    <div th:if="${recipe}">
+		    <h1 th:text="${recipe.name}">Nome ricette</h1>
+		<!-- Aggiunta della riga per visualizzare il direttore -->
+		<div th:if="${recipe.cook}">
+			<br>
+			<a th:href="@{'/addCook' + '/' + ${recipe.id}}">Modifica cuoco</a>
+			<br>
+			<p>Cuoco: <span th:text="${recipe.cook.name}	+ ' ' + ${recipe.cook.surname}"></span></p>
+		</div>
+		<div th:unless="${recipe.cook}">
+			<p>Non c'è nessun cuoco per questa ricetta.</p>
+		</div>
+		<div th:unless="${recipe.cook}">
+			<a th:href="@{'/addCook' + '/' + ${recipe.id}}">Aggiungi cuoco</a>
+		</div>
+		<br>
+		<span><img width="15%" th:src="${recipe.urlImage}" /></span>
+
+		   
+	</div>
+	    <div th:unless="${recipe}">Non esiste</div>
+	 
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+    <title>Cuochi</title>
+    <link rel="stylesheet" href="/css/styles.css?v=0.1" />
+  </head>
+
+  <body>
+    <div><a href="/"><img src="/images/logo-siw.png" width="50%"/></a></div>
+    <h1>Cuochi</h1>
+    <div th:if="${cooks.isEmpty()}">Non ci sono cuochi nel sistema</div>
+    <ul>
+      <li th:each="cook : ${cooks}">
+		<span th:text="${cook.name} + ' (' + ${cook.surname} + ')'"></span>
+		<a th:href="@{'/setCookToRecipe/' + ${cook.id} + '/' + ${recipe.id}}">(Aggiungi come cuoco)</a>
+
+      </li>
+    </ul>
+  </body>
+
+</html>
