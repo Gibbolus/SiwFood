@@ -9,12 +9,11 @@
 </head>
 
 <body>
-
 	<h1>Registrazione nuovo utente</h1>
 	<form th:action="@{/register}" method="POST">
 		<div>
 			<label>Nome</label>
-			<span><input type="text" placeholder="name" required th:field="${user.name}" /></span>
+			<span><input type="text" placeholder="name" required th:field="${user.name}"/></span>
 			<span th:if="${#fields.hasErrors('user.name')}" th:errors="${user.name}" th:style="'color:red'">
 			</span>
 		</div>

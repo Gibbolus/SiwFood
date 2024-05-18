@@ -9,11 +9,13 @@
 </head>
 
 <body>
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
 	<h1>Aggiungi una ricetta</h1>
 	<form th:action="@{/recipes}" method="POST" th:object="${recipe}">
 		<div>
 			<span th:text="${messaggioErrore}">Errore</span>
+		</div>
+		<div>
+			Cuoco: <span> ** nome utente/cuoco** </span>
 		</div>
 		<div>
 			Nome: <span><input required type="text" th:field="${recipe.name}" /></span>
