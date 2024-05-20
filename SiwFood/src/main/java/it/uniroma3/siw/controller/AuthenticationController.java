@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import it.uniroma3.siw.model.Cook;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.service.CookService;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.UserService;
 import jakarta.validation.Valid;
@@ -26,6 +28,9 @@ public class AuthenticationController {
 
     @Autowired
 	private UserService userService;
+    
+    @Autowired
+    private CookService cookService;
 	
 	@GetMapping(value = "/register") 
 	public String showRegisterForm (Model model) {
@@ -73,12 +78,18 @@ public class AuthenticationController {
                  BindingResult credentialsBindingResult,
                  Model model) {
 
-		// se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
+		// se user e credential hanno entrambi contenuti validi, memorizza User, Credentials e il nuovo Cook nel DB
         if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
             userService.saveUser(user);
             credentials.setUser(user);
             credentialsService.saveCredentials(credentials);
             model.addAttribute("user", user);
+            Cook newCook = new Cook();
+            newCook.setName(user.getName());
+            newCook.setSurname(user.getSurname());
+            newCook.setYear(user.getYear());
+            newCook.setUrlImage(user.getUrlImage());
+            this.cookService.save(newCook);
             return "registrationSuccessful";
         }
         return "registerUser";

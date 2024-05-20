@@ -23,10 +23,10 @@ public class CookController {
 
 	@Autowired RecipeService recipeService;
 
-	@GetMapping("/cookUser/formNewCook")
+	@GetMapping("/admin/formNewCook")
 	public String formNewCook(Model model) {
 		model.addAttribute("cook", new Cook());
-		return "cookUser/formNewCook.html";
+		return "admin/formNewCook.html";
 	}
 	@PostMapping("/cooks")
 	public String newCook(@ModelAttribute("cook") Cook cook, Model model) {
@@ -36,7 +36,7 @@ public class CookController {
 			return "redirect:cook/"+cook.getId();
 		} else {
 			model.addAttribute("messaggioErrore", "Questo cuoco esiste già");
-			return "formNewcook.html";
+			return "admin/formNewcook.html";
 		}
 	}
 

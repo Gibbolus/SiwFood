@@ -15,7 +15,7 @@
 			<span th:text="${messaggioErrore}">Errore</span>
 		</div>
 		<div>
-			Cuoco: <span> ** nome utente/cuoco** </span>
+			Cuoco: <span th:text="${users}"></span>
 		</div>
 		<div>
 			Nome: <span><input required type="text" th:field="${recipe.name}" /></span>

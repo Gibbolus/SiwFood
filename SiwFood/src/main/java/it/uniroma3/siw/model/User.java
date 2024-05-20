@@ -3,6 +3,8 @@ package it.uniroma3.siw.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,13 +27,18 @@ public class User {
 	private String name;
 	@NotBlank
 	private String surname;
+	
 	private String email;
-	private LocalDate dateOfBirth;
-	private String address;
-	private Integer tel;
+	
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private LocalDate year;
+	
+	private String urlImage;
 	
 	@OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private Credentials credentials;
+	
+	
 
 	public Long getId() {
 		return id;
@@ -57,20 +64,20 @@ public class User {
 		this.surname = surname;
 	}
 
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
+	public LocalDate getYear() {
+		return year;
 	}
 
-	public void setDateOfBirth(LocalDate dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	public void setYear(LocalDate year) {
+		this.year = year;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getUrlImage() {
+		return urlImage;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 
 	public String getEmail() {
@@ -79,14 +86,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Integer getTel() {
-		return tel;
-	}
-
-	public void setTel(Integer tel) {
-		this.tel = tel;
 	}
 
 	public Credentials getCredentials() {

@@ -30,6 +30,20 @@
 			</span>
 		</div>
 		<div>
+			<label>Foto</label>
+			<!-- <span><input type="file" placeholder="link foto" required th:field="${user.urlImage}" accept="image/png, image/jpeg"/></span>
+			-->
+			<span><input type="url" placeholder="link foto" required th:field="${user.urlImage}" /></span>
+			<span th:if="${#fields.hasErrors('user.urlImage')}" th:errors="${user.urlImage}" th:style="'color:red'">
+			</span>
+		</div>
+		<div>
+			<label>Data Di Nascita</label>
+			<span><input type="date" placeholder="data di nascita" required th:field="${user.year}" /></span>
+			<span th:if="${#fields.hasErrors('user.year')}" th:errors="${user.year}" th:style="'color:red'">
+			</span>
+		</div>
+		<div>
 			<label>Username</label>
 			<span>
 				<input type="text" placeholder="username" required th:field="${credentials.username}" />

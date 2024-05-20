@@ -22,15 +22,15 @@ public class Cook {
 	private Long id;
 	
 	@NotNull
-	private String name;
+	public String name;
 	
 	@NotNull
-	private String surname;
+	public String surname;
 	
-	private String urlImage;
+	public String urlImage;
 	
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	private LocalDate year;
+	public LocalDate year;
 
 	@OneToMany(mappedBy = "cook")
 	private List<Recipe> cook;

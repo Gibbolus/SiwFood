@@ -3,13 +3,11 @@ package it.uniroma3.siw.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import it.uniroma3.siw.model.Cook;
 import it.uniroma3.siw.model.Recipe;
 import it.uniroma3.siw.repository.CookRepository;
@@ -26,7 +24,7 @@ public class RecipeController {
 
 	@Autowired RecipeRepository recipeRepository;
 	@Autowired CookRepository cookRepository;
-
+	
 	@GetMapping("/cookUser/formNewRecipe")
 	public String formNewRecipe(Model model) {
 		model.addAttribute("recipe", new Recipe());
