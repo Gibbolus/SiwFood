@@ -1,6 +1,7 @@
 package it.uniroma3.siw.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,8 @@ import it.uniroma3.siw.service.RecipeService;
 @Controller 
 public class RecipeController {
 
+	GlobalController gl;
+	
 	@Autowired RecipeService recipeService;
 	@Autowired CookService cookService;
 
@@ -61,17 +64,17 @@ public class RecipeController {
 		return "foundRecipes.html";
 	}
 
-	@GetMapping("/admin/manageRecipes")
+	@GetMapping("/cookUser/manageRecipes")
 	public String manageRecipes(Model model) {
 		model.addAttribute("recipes", this.recipeService.findAll());
-		return "admin/manageRecipes.html";
+		return "cookUser/manageRecipes.html";
 	}
 
-	@GetMapping("/addCook/{idRecipe}")
+	@GetMapping("/admin/addCook/{idRecipe}")
 	public String addCook(@PathVariable("idRecipe") Long recipeId, Model model) {
 		model.addAttribute("cooks", cookService.findAll());
 		model.addAttribute("recipe", recipeService.findById(recipeId));
-		return "addCook.html";
+		return "admin/addCook.html";
 	}
 
 	@GetMapping("/cookUser/formUpdateRecipes/{id}")

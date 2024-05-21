@@ -9,13 +9,12 @@
 </head>
 
 <body>
-	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
 	<h1>Ricette</h1>
 	<div th:if="${recipes.isEmpty()}">Non ci sono ricette nel sistema</div>
 	<ul>
 		<li th:each="recipe : ${recipes}">
 			<span th:text="${recipe.name}"></span>
-			<a th:href="@{'/formUpdateRecipes' + '/' + ${recipe.id}}">(Aggiorna)</a>
+			<a th:href="@{'/cookUser/formUpdateRecipes' + '/' + ${recipe.id}}">(Aggiorna)</a>
 		</li>
 	</ul>
 </body>

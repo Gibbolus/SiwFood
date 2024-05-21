@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -35,6 +36,10 @@ public class Cook {
 	@OneToMany(mappedBy = "cook")
 	private List<Recipe> cook;
 
+	@OneToOne
+	private User user;  // non so se è da tenere 
+	
+	
 	public Cook(){
 		this.cook = new LinkedList<>();
 	}
@@ -86,6 +91,15 @@ public class Cook {
 	public void setCookOf(List<Recipe> cookedRecepie) {
 		this.cook = cookedRecepie;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	
 	@Override
 	public int hashCode() {
@@ -100,6 +114,7 @@ public class Cook {
 	    return Objects.equals(name, artist.name) &&
 	            Objects.equals(surname, artist.surname);
 	}
+
 
 
 

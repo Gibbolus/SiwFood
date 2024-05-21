@@ -23,14 +23,11 @@ import jakarta.validation.Valid;
 @Controller
 public class AuthenticationController {
 	
-	@Autowired
-	private CredentialsService credentialsService;
+	@Autowired CredentialsService credentialsService;
 
-    @Autowired
-	private UserService userService;
+    @Autowired UserService userService;
     
-    @Autowired
-    private CookService cookService;
+    @Autowired CookService cookService;
 	
 	@GetMapping(value = "/register") 
 	public String showRegisterForm (Model model) {
@@ -80,16 +77,18 @@ public class AuthenticationController {
 
 		// se user e credential hanno entrambi contenuti validi, memorizza User, Credentials e il nuovo Cook nel DB
         if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
-            userService.saveUser(user);
-            credentials.setUser(user);
-            credentialsService.saveCredentials(credentials);
-            model.addAttribute("user", user);
-            Cook newCook = new Cook();
+        	Cook newCook = new Cook();
             newCook.setName(user.getName());
             newCook.setSurname(user.getSurname());
             newCook.setYear(user.getYear());
             newCook.setUrlImage(user.getUrlImage());
             this.cookService.save(newCook);
+            user.setCook(newCook);
+            userService.saveUser(user);
+            credentials.setUser(user);
+            credentialsService.saveCredentials(credentials);
+            model.addAttribute("user", user);
+            
             return "registrationSuccessful";
         }
         return "registerUser";

@@ -38,8 +38,9 @@ public class User {
 	@OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
 	private Credentials credentials;
 	
+	@OneToOne
+	private Cook cook;  // non so se è da tenere 
 	
-
 	public Long getId() {
 		return id;
 	}
@@ -96,6 +97,16 @@ public class User {
 		this.credentials = credentials;
 	}
 
+	public Cook getCook() {
+		return cook;
+	}
+
+	public void setCook(Cook cook) {
+		this.cook = cook;
+	}
+	
+	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(email);
@@ -112,8 +123,6 @@ public class User {
 		User other = (User) obj;
 		return Objects.equals(email, other.email);
 	}
-	
 
-	
 	
 }
