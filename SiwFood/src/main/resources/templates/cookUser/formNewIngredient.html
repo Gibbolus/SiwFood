@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Recipes</title>
+	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+</head>
+
+<body>
+	<form th:action="@{/cookUser/ingredient}" method="POST" th:object="${ingredient}">
+		<h1>Inserisci Ingrediente</h1>
+		<span>Inserisci di seguito tutte le informazioni richieste</span>
+		<input required type="text" placeholder="Nome" th:field="${ingredient.name}">
+		<input required type="text" placeholder="Descrizione" th:field="${ingredient.description}">
+		<input required type="text" placeholder="URL Immagine" th:field="${ingredient.urlImage}">
+		<button>Inserisci</button>
+	</form>
+
+
+</body>
+
+</html>

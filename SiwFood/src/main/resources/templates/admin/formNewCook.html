@@ -4,12 +4,12 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>Nuovo Cuoco</title>
+	<title>Nuovo cook</title>
 	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
 </head>
 
 <body>
-	<h1>Aggiungi un nuovo cuoco!</h1>
+	<h1>Aggiungi un new cook!</h1>
 	<form th:action="@{/cooks}" method="POST" th:object="${cook}">
 		<div>
 			<span th:text="${messaggioErrore}">Errore</span>
@@ -18,7 +18,7 @@
 			Nome: <span><input required type="text" th:field="${cook.name}" /></span>
 		</div>
 		<div>
-			Cognome: <span><input required type="text" th:field="${cook.surname}" /></span>
+			Cogname: <span><input required type="text" th:field="${cook.surname}" /></span>
 		</div>
 		<div>
 			Data Di Nascita (dd-MM-yyyy): <span><input required type="date" th:field="${cook.year}" /></span>

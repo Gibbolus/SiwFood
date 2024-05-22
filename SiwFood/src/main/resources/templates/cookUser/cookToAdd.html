@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Recipes</title>
+	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+</head>
+
+<body>
+	<h3 class>Lista dei Cuochi</h3>
+	<div th:if="${cooks.isEmpty()}">Non ci sono cuochi nel sistema </div>
+	<li th:each="cook : ${cooks}">
+		<a th:href="@{'/cookUser' + '/' + ${cook.id}}" th:text="${cook.name} + ' ' + ${cook.surname}"></a>
+	</li>
+
+
+
+</body>
+
+</html>

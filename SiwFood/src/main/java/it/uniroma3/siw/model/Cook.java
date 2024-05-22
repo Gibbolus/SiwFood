@@ -12,112 +12,93 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Cook {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	@NotNull
-	public String name;
-	
-	@NotNull
-	public String surname;
-	
-	public String urlImage;
-	
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	public LocalDate year;
 
-	@OneToMany(mappedBy = "cook")
-	private List<Recipe> cook;
+		@Id
+		@GeneratedValue(strategy = GenerationType.AUTO)
+		private long id;
+		
+		public String name;
+		
+		public String surname;
+		
+		public String urlImage;
+		
+		@DateTimeFormat(pattern = "dd-MM-yyyy")
+		public LocalDate year;
+		
+		@OneToMany(mappedBy = "cook")
+		private List<Recipe> recipes;
+		
+		public Cook() {
+			this.recipes = new LinkedList<>();
+		}
 
-	@OneToOne
-	private User user;  // non so se è da tenere 
-	
-	
-	public Cook(){
-		this.cook = new LinkedList<>();
-	}
-	
-	public String getName() {
-		return name;
-	}
+		public String getSurname() {
+			return surname;
+		}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+		public void setSurname(String surname) {
+			this.surname = surname;
+		}
 
-	public String getSurname() {
-		return surname;
-	}
+		public String getName() {
+			return name;
+		}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+		public void setName(String name) {
+			this.name = name;
+		}
 
-	public String getUrlImage() {
-		return urlImage;
-	}
+		public String getUrlImage() {
+			return urlImage;
+		}
 
-	public void setUrlImage(String urlImage) {
-		this.urlImage = urlImage;
-	}
+		public void setUrlImage(String urlImage) {
+			this.urlImage = urlImage;
+		}
 
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+		public List<Recipe> getRecipes() {
+			return recipes;
+		}
 
-	public LocalDate getYear() {
-		return year;
-	}
+		public void setRecipes(List<Recipe> recipes) {
+			this.recipes = recipes;
+		}
+		
+		public long getId() {
+			return id;
+		}
 
-	public void setYear(LocalDate year) {
-		this.year = year;
-	}
-	
-	public List<Recipe> getCookOf() {
-		return cook;
-	}
+		public void setId(long id) {
+			this.id = id;
+		}
+		public LocalDate getYear() {
+			return year;
+		}
 
-	public void setCookOf(List<Recipe> cookedRecepie) {
-		this.cook = cookedRecepie;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-	
-	@Override
-	public int hashCode() {
-	    return Objects.hash(name, surname);
-	}
-
-	@Override
-	public boolean equals(Object o) {
-	    if (this == o) return true;
-	    if (o == null || getClass() != o.getClass()) return false;
-	    Cook artist = (Cook) o;
-	    return Objects.equals(name, artist.name) &&
-	            Objects.equals(surname, artist.surname);
-	}
+		public void setYear(LocalDate year) {
+			this.year = year;
+		}
+		
+		@Override
+		public int hashCode() {
+		    return Objects.hash(name, surname);
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
+			Cook cook = (Cook) o;
+			return Objects.equals(name, cook.name) && Objects.equals(surname, cook.surname);
+		}
 
 
 
-
-	
-	
+		
+		
 }

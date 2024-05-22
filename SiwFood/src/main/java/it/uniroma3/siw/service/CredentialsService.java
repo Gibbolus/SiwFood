@@ -12,25 +12,25 @@ import it.uniroma3.siw.repository.CredentialsRepository;
 
 @Service
 public class CredentialsService {
-
+	
     @Autowired
     protected PasswordEncoder passwordEncoder;
 
-    @Autowired
-    protected CredentialsRepository credentialsRepository;
+	@Autowired
+	protected CredentialsRepository credentialsRepository;
+	
+	@Transactional
+	public Credentials getCredentials(Long id) {
+		Optional<Credentials> result = this.credentialsRepository.findById(id);
+		return result.orElse(null);
+	}
 
-    @Transactional
-    public Credentials getCredentials(Long id) {
-        Optional<Credentials> result = this.credentialsRepository.findById(id);
-        return result.orElse(null);
-    }
-
-    @Transactional
-    public Credentials getCredentials(String username) {
-        Optional<Credentials> result = this.credentialsRepository.findByUsername(username);
-        return result.orElse(null);
-    }
-
+	@Transactional
+	public Credentials getCredentials(String username) {
+		Credentials result = this.credentialsRepository.findByUsername(username);
+		return result;
+	}
+		
     @Transactional
     public Credentials saveCredentials(Credentials credentials) {
         credentials.setRole(Credentials.COOK_ROLE);

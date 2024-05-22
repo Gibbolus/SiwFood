@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	<h1>Registrazione nuovo utente</h1>
+	<h1>Registrazione new utente</h1>
 	<form th:action="@{/register}" method="POST">
 		<div>
 			<label>Nome</label>
@@ -18,7 +18,7 @@
 			</span>
 		</div>
 		<div>
-			<label>Cognome</label>
+			<label>Cogname</label>
 			<span><input type="text" placeholder="surname" required th:field="${user.surname}" /></span>
 			<span th:if="${#fields.hasErrors('user.surname')}" th:errors="${user.surname}" th:style="'color:red'">
 			</span>
@@ -39,7 +39,7 @@
 		</div>
 		<div>
 			<label>Data Di Nascita</label>
-			<span><input type="date" placeholder="data di nascita" required th:field="${user.year}" /></span>
+			<span><input type="date" placeholder="data di year" required th:field="${user.year}" /></span>
 			<span th:if="${#fields.hasErrors('user.year')}" th:errors="${user.year}" th:style="'color:red'">
 			</span>
 		</div>

@@ -12,59 +12,65 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.model.Cook;
 import it.uniroma3.siw.repository.CookRepository;
 import it.uniroma3.siw.service.CookService;
-import it.uniroma3.siw.service.RecipeService;
 
 @Controller
 public class CookController {
-
-	@Autowired CookService cookService;
-
+	
 	@Autowired CookRepository cookRepository;
-
-	@Autowired RecipeService recipeService;
-
-	@GetMapping("/admin/formNewCook")
-	public String formNewCook(Model model) {
-		model.addAttribute("cook", new Cook());
-		return "admin/formNewCook.html";
-	}
-	@PostMapping("/cooks")
-	public String newCook(@ModelAttribute("cook") Cook cook, Model model) {
-		if (!cookRepository.existsByNameAndSurname(cook.getName(), cook.getSurname())) {
-			this.cookService.save(cook);
-			model.addAttribute("cook", cook);
-			return "redirect:cook/"+cook.getId();
-		} else {
-			model.addAttribute("messaggioErrore", "Questo cuoco esiste già");
-			return "admin/formNewcook.html";
-		}
-	}
-
+	
+	@Autowired CookService cookService;
+	
+	
 	@GetMapping("/cook/{id}")
 	public String getCook(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("cook", this.cookRepository.findById(id).get());
 		return "cook.html";
 	}
 
-	@GetMapping("/cook")
-	public String showCook(Model model) {
+	@GetMapping("/cooks")
+	public String ShowCook(Model model) {
 		model.addAttribute("cooks", this.cookService.findAll());
 		return "cooks.html";
 	}
-
-	@GetMapping("/formSearchCooks")
-	public String formSearchCooks() {
-		return "formSearchCooks.html";
+	
+	@GetMapping(value="/admin/formNewCook")
+	public String formNewCook(Model model) {
+		model.addAttribute("cook", new Cook());
+		return "admin/formNewCook.html";
 	}
-
-	@PostMapping("/formSearchCooks")
+	
+	@GetMapping("/admin/manageCooks")
+	public String ShowCookAdmin(Model model) {
+		model.addAttribute("cooks", this.cookService.findAll());
+		return "/admin/manageCooks.html";
+	}
+	
+	@GetMapping(value="/admin/indexCuco")
+	public String indexCook() {
+		return "admin/indexCook.html";
+	}
+	
+	@PostMapping("/searchCooks")
 	public String searchCooks(Model model, @RequestParam String name) {
-		model.addAttribute("cooks", this.cookService.findByName(name));
-		return "foundCooks.html";
+		model.addAttribute("cooks", this.cookRepository.findByName(name));
+		return "cooks.html";
 	}
-
-
-
-
-
+	
+	@PostMapping("admin/searchCooks")
+	public String searchCooksAdmin(Model model, @RequestParam String name) {
+		model.addAttribute("cooks", this.cookRepository.findByName(name));
+		return "/admin/manageCooks.html";
+	}
+	
+	@PostMapping("/admin/cooks")
+	public String newCook(@ModelAttribute("cook") Cook cook, Model model) {
+		if (!cookRepository.existsByNameAndSurname(cook.getName(), cook.getSurname())) {
+			this.cookService.save(cook);
+			model.addAttribute("cook", cook);
+			return "cook.html";
+		} else {
+			model.addAttribute("messaggioErrore", "Questo cook esiste già");
+			return "/admin/formNewCook.html";
+		}
+	}
 }

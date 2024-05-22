@@ -4,13 +4,13 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>Cerca Ricetta</title>
+	<title>Cerca Recipe</title>
 	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
 </head>
 
 <body>
 	<div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
-	<h1>Cerca ricetta per nome</h1>
+	<h1>Cerca recipe per name</h1>
 	<form th:action="@{/formSearchRecipes}" method="post">
 		<div>Nome: <input type="text" th:value="${name}" name="name" />
 		</div>

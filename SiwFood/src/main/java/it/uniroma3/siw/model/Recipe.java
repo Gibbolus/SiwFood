@@ -3,62 +3,62 @@ package it.uniroma3.siw.model;
 import java.util.Objects;
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
-
 
 @Entity
 public class Recipe {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
-    @NotBlank
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
+
 	private String name;
-    
+	/* poi va modificata come lista di immagini */
 	private String urlImage;
-	
+
+	@Column(length = 2000)
 	private String description;
-	
+
 	private Integer cookTime;
-	
+
 	private String difficulty;
-	
+
 	private String recipeType;
-	
-	@ManyToMany
-	private Set<Ingredient> ingredients;
 
 	@ManyToOne
 	private Cook cook;
 
-	public Long getId() {
-		return id;
+	@ManyToMany
+	private Set<Ingredient> ingredientsUtilizzati;
+
+	public Set<Ingredient> getIngredientsUtilizzati() {
+		return ingredientsUtilizzati;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public Cook getCook() {
-		return cook;
-	}
-
-	public void setCook(Cook cook) {
-		this.cook = cook;
+	public void setIngredientsUtilizzati(Set<Ingredient> ingredientsUtilizzati) {
+		this.ingredientsUtilizzati = ingredientsUtilizzati;
 	}
 
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 
 	public String getDescription() {
@@ -68,15 +68,38 @@ public class Recipe {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public String getUrlImage() {
-		return urlImage;
+
+	public Cook getCook() {
+		return cook;
 	}
 
-	public void setUrlImage(String urlImage) {
-		this.urlImage = urlImage;
+	public void setCook(Cook cook) {
+		this.cook = cook;
 	}
-	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, cook);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Recipe r = (Recipe) o;
+		return Objects.equals(name, r.name) && Objects.equals(cook, r.cook);
+	}
+
 	public Integer getCookTime() {
 		return cookTime;
 	}
@@ -84,7 +107,7 @@ public class Recipe {
 	public void setCookTime(Integer cookTime) {
 		this.cookTime = cookTime;
 	}
-	
+
 	public String getDifficulty() {
 		return difficulty;
 	}
@@ -99,24 +122,6 @@ public class Recipe {
 
 	public void setRecipeType(String recipeType) {
 		this.recipeType = recipeType;
-	}
-
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(name, description);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Recipe other = (Recipe) obj;
-		return Objects.equals(name, other.name) && description.equals(other.description);
 	}
 
 }

@@ -16,10 +16,10 @@
 			</a>
 		</div>
 		<li>
-			<a class="ali" href="/recipes">Riectte</a>
+			<a class="ali" href="/recipes">Recipes</a>
 		</li>
 		<li>
-			<a class="ali" href="/cooks">Cuochi</a>
+			<a class="ali" href="/cooks">Cooks</a>
 		</li>
 		<li>
 			<a class="ali" href="/ingredients">Ingredienti</a>
@@ -45,21 +45,19 @@
 	</nav>
 	<div>
 		<br>
-		<a href="/formSearchRecipes"> Cerca ricette per nome</a>
+		<a href="/formSearchRecipes"> Cerca ricetta per nome</a>
 		<br>
 		<a href="/formSearchCooks"> Cerca cuoco per nome</a>
 		<br>
-		<div>
-			<h4  style="margin: 20px auto auto 0;">Vuoi aggiungere una ricetta?</h4>
-			<a href="/register"> Registrati qui! </a>
-			<h4  style="margin: 20px auto auto 0;">Oppure esegui il login!</h4>
-			<a href="/login"> Login qui! </a>
+		<div th:if="${userDetails != null}">			
+			<a th:href="@{'/cookUser/formNewRecipe' + '/' + ${userDetails.username}}">Aggiungi una ricetta</a>
 		</div>
-
+		<br>
+		<a href="/cookUser/formNewIngredient">Aggiungi un igrediente</a>
+		<br>
+		<a href="/cookUser/manageRecipes">Gestisci le tue ricette</a>
+		<br>
 	</div>
-
-
-
 
 </body>
 

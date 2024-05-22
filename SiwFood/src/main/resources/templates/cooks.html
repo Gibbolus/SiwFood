@@ -16,10 +16,13 @@
 			</a>
 		</div>
 		<li>
-			<a class="ali" href="/recipe">Ricette</a>
+			<a class="ali" href="/recipes">Recipes</a>
 		</li>
 		<li>
-			<a class="ali" href="/cook">Cuochi</a>
+			<a class="ali" href="/cooks">Cooks</a>
+		</li>
+		<li>
+			<a class="ali" href="/ingredients">Ingredienti</a>
 		</li>
 		<!-- Search Bar start -->
 		<div class="search-bar">
@@ -39,8 +42,8 @@
 		</div>
 	</nav>
 
-	<h1>Cuochi</h1>
-	<div th:if="${cooks.isEmpty()}">Non ci sono cuochi nel sistema</div>
+	<h1>Cooks</h1>
+	<div th:if="${cooks.isEmpty()}">Non ci sono cooks nel sistema</div>
 
 	<div class="container2">
 		<div class="div_princ" th:each="cook : ${cooks}">

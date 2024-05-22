@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+ 
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Ingrediente</title>
+	<link rel="stylesheet" href="/css/styles_recipe.css?v=0.1" />
+</head>
+
+<body>
+
+	<div th:if="${ingredient}">
+		<img th:if="${ingredient.urlImage.startsWith('https')}" th:src="${ingredient.urlImage}"
+			style="width: 30%; height: auto;">
+		<img th:unless="${ingredient.urlImage.startsWith('https')}" th:src="@{/images/__${ingredient.urlImage}__}"
+			style="width: 30%; height: auto;">
+		<h1 th:text="${ingredient.name}">Nome ingrediente</h1>
+		<span th:text="${ingredient.description}"></span>
+	</div>
+	<span><img width="15%" th:src=${ingredient.urlImage} /></span>
+	   
+	    <div th:unless="${ingredient}">Non esiste</div>
+	 
+</body>
+
+</html>

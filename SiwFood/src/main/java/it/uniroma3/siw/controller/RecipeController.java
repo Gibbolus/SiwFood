@@ -1,104 +1,299 @@
 package it.uniroma3.siw.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import it.uniroma3.siw.controller.validator.RecipeValidator;
+import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Cook;
+import it.uniroma3.siw.model.Ingredient;
 import it.uniroma3.siw.model.Recipe;
+import it.uniroma3.siw.model.User;
+import it.uniroma3.siw.repository.CredentialsRepository;
 import it.uniroma3.siw.repository.CookRepository;
+import it.uniroma3.siw.repository.IngredientRepository;
 import it.uniroma3.siw.repository.RecipeRepository;
 import it.uniroma3.siw.service.CookService;
 import it.uniroma3.siw.service.RecipeService;
 
+import jakarta.validation.Valid;
 
-@Controller 
+@Controller
 public class RecipeController {
 
-	GlobalController gl;
-	
-	@Autowired RecipeService recipeService;
-	@Autowired CookService cookService;
+	@Autowired
+	RecipeRepository recipeRepository;
 
-	@Autowired RecipeRepository recipeRepository;
-	@Autowired CookRepository cookRepository;
-	
-	@GetMapping("/cookUser/formNewRecipe")
-	public String formNewRecipe(Model model) {
-		model.addAttribute("recipe", new Recipe());
-		return "cookUser/formNewRecipe.html";
-	}
+	@Autowired
+	RecipeService recipeService;
 
-	@PostMapping("/recipes")
-	public String newRecipe(@ModelAttribute("recipe") Recipe recipe, Model model) {
-		this.recipeService.save(recipe);
-		model.addAttribute("recipe", recipe);
-		return "redirect:recipe/"+recipe.getId();
-	}
+	@Autowired
+	RecipeValidator recipeValidator;
 
-	@GetMapping("/recipe/{id}")
+	@Autowired
+	CookService cookService;
+
+	@Autowired
+	CookRepository cookRepository;
+
+	@Autowired
+	IngredientRepository ingredientRepository;
+
+	@Autowired
+	CredentialsRepository credentialsRepository;
+
+	@GetMapping(value = "/recipe/{id}")
 	public String getRecipe(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("recipe", this.recipeRepository.findById(id).get());
 		return "recipe.html";
 	}
 
-	@GetMapping("/recipe")
-	public String showRecipe(Model model) {
+	@GetMapping(value = "/recipes")
+	public String ShowRecipeIndex(Model model) {
 		model.addAttribute("recipes", this.recipeService.findAll());
 		return "recipes.html";
 	}
 
-	@GetMapping("/formSearchRecipes")
-	public String formSearchRecipes() {
-		return "formSearchRecipes.html";
-	}
-
-	@PostMapping("/formSearchRecipes")
+	@PostMapping(value = "/searchRecipes")
 	public String searchRecipes(Model model, @RequestParam String name) {
-		model.addAttribute("recipes", this.recipeService.findByName(name));
-		return "foundRecipes.html";
+		model.addAttribute("recipes", this.recipeRepository.findByName(name));
+		return "recipes.html";
 	}
 
-	@GetMapping("/cookUser/manageRecipes")
-	public String manageRecipes(Model model) {
+	@PostMapping(value = "admin/searchRecipes")
+	public String searchRecipesAdmin(Model model, @RequestParam String name) {
+		model.addAttribute("recipes", this.recipeRepository.findByName(name));
+		return "/admin/manageRecipes.html";
+	}
+
+	@PostMapping(value = "cookUser/searchRecipes")
+	public String searchRecipesCook(Model model, @RequestParam String name) {
+		model.addAttribute("recipes", this.recipeRepository.findByName(name));
+		return "/cookUser/manageRecipes.html";
+	}
+
+	@GetMapping(value = "/admin/manageRecipes")
+	public String ShowRecipeAdmin(Model model) {
 		model.addAttribute("recipes", this.recipeService.findAll());
-		return "cookUser/manageRecipes.html";
+		return "/admin/manageRecipes.html";
 	}
 
-	@GetMapping("/admin/addCook/{idRecipe}")
+	@GetMapping(value = "/cookUser/manageRecipes")
+	public String ShowRecipeCook(Model model) {
+		model.addAttribute("recipes", this.recipeService.findAll());
+		return "/cookUser/manageRecipes.html";
+	}
+
+	@GetMapping(value = "/admin/formNewRecipe")
+	public String formNewRecipe(Model model) {
+		model.addAttribute("recipe", new Recipe());
+		return "/admin/formNewRecipe.html";
+	}
+
+	@PostMapping(value = "/admin/recipe")
+	public String newRecipe(@Valid @ModelAttribute("recipe") Recipe recipe, BindingResult bindingResult,
+			Model model) {
+		this.recipeValidator.validate(recipe, bindingResult);
+		if (!bindingResult.hasErrors()) {
+			this.recipeRepository.save(recipe);
+			model.addAttribute("recipe", recipe);
+			return "recipe.html";
+		} else {
+			return "/admin/formNewRecipe.html";
+		}
+	}
+
+	@GetMapping(value = "/cookUser/formNewRecipe/{username}")
+	public String formNewRecipeCook(@PathVariable("username") String username, Model model) {
+	    Credentials tempUser = credentialsRepository.findByUsername(username);
+	    User currentUser = tempUser.getUser();
+	    Cook currentCook = this.cookRepository.findByNameAndSurname(currentUser.getName(), currentUser.getSurname());
+	    Recipe recipe = new Recipe();
+	    model.addAttribute("cook", currentCook);
+	    model.addAttribute("cookId", currentCook.getId());
+	    model.addAttribute("recipe", recipe);
+	    model.addAttribute("userDetails", tempUser); // Aggiungi userDetails al modello
+	    return "cookUser/formNewRecipe.html";
+	}
+
+
+	@PostMapping(value = "/cookUser/recipe")
+	public String newRecipeCook(@Valid @ModelAttribute("recipe") Recipe recipe, BindingResult bindingResult, @RequestParam("username") String username, Model model) {
+		Credentials tempUser = credentialsRepository.findByUsername(username);
+		User currentUser = tempUser.getUser();
+		Cook currentCook = this.cookRepository.findByNameAndSurname(currentUser.getName(), currentUser.getSurname());
+		recipe.setCook(currentCook);
+
+		this.recipeValidator.validate(recipe, bindingResult);
+		if (!bindingResult.hasErrors()) {
+			this.recipeRepository.save(recipe);
+			model.addAttribute("recipe", recipe);
+			return "recipe.html";
+		} else {
+			return "cookUser/formNewRecipe.html";
+		}
+	}
+
+	@GetMapping(value = "/admin/addCook/{idRecipe}")
 	public String addCook(@PathVariable("idRecipe") Long recipeId, Model model) {
 		model.addAttribute("cooks", cookService.findAll());
-		model.addAttribute("recipe", recipeService.findById(recipeId));
-		return "admin/addCook.html";
+		model.addAttribute("recipe", recipeRepository.findById(recipeId).get());
+		// Ritorna il name della pagina HTML da visualizzare
+		return "/admin/addCook.html";
 	}
 
-	@GetMapping("/cookUser/formUpdateRecipes/{id}")
-	public String formUpdateRecipes(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("recipe", recipeService.findById(id));
-		return "cookUser/formUpdateRecipes.html";
+	@GetMapping(value = "/admin/formUpdateRecipe/{id}")
+	public String formUpdateRecipe(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("recipe", recipeRepository.findById(id).get());
+		return "admin/formUpdateRecipe.html";
 	}
 
-	@GetMapping("/setCookToRecipe/{cookId}/{recipeId}")
-	public String setCookToRecipe(@PathVariable("cookId") Long cookId, @PathVariable("recipeId") Long recipeId, Model model) {
+	@GetMapping(value = "/cookUser/formUpdateRecipe/{id}/{username}")
+	public String formUpdateRecipeCook(@PathVariable("id") Long id, @PathVariable("username") String username,
+			Model model, RedirectAttributes redirectAttributes) {
+		// Recupera l'utente dal repository
+		Credentials tempUser = credentialsRepository.findByUsername(username);
+		User currentUser = tempUser.getUser();
+
+		// Recupera la recipe dal repository
+		Recipe recipe = recipeRepository.findById(id).orElse(null);
+
+		// Verifica se il cook della recipe è il cook corrente
+		if (recipe == null || recipe.getCook() == null || !recipe.getCook().getName().equals(currentUser.getName())
+				|| !recipe.getCook().getSurname().equals(currentUser.getSurname())) {
+			// Gestisci il caso di accesso non autorizzato
+			redirectAttributes.addFlashAttribute("messaggioErrore",
+					"Non puoi modificare questa recipe perché non ti appartiene!");
+			return "redirect:/cookUser/manageRecipes";
+		}
+
+		// Aggiungi la recipe al modello e restituisci la vista
+		model.addAttribute("recipe", recipe);
+		return "cookUser/formUpdateRecipe.html";
+	}
+
+	@GetMapping(value = "/admin/setCookToRecipe/{cookId}/{recipeId}")
+	public String setCookToRecipe(@PathVariable("cookId") Long cookId, @PathVariable("recipeId") Long recipeId,
+			Model model) {
 
 		Cook cook = this.cookService.findById(cookId);
-		Recipe recipe = this.recipeService.findById(recipeId);
+		Recipe recipe = this.recipeRepository.findById(recipeId).get();
 		recipe.setCook(cook);
-		this.recipeService.save(recipe);
+		this.recipeRepository.save(recipe);
 
 		model.addAttribute("recipe", recipe);
-		return "cookUser/formUpdateRecipes.html";
+		return "admin/formUpdateRecipe.html";
 	}
 
+	/* per aggiungere o togliere ingredients a mo di lista */
+	@GetMapping(value = "/admin/updateIngredients/{id}")
+	public String updateIngredients(@PathVariable("id") Long id, Model model) {
 
+		List<Ingredient> ingredientsToAdd = this.ingredientsToAdd(id);
+		model.addAttribute("ingredientsToAdd", ingredientsToAdd);
+		model.addAttribute("recipe", this.recipeRepository.findById(id).get());
 
+		return "admin/addIngredient.html";
+	}
+
+	@GetMapping(value = "/cookUser/updateIngredients/{id}")
+	public String updateIngredientsCook(@PathVariable("id") Long id, Model model) {
+
+		List<Ingredient> ingredientsToAdd = this.ingredientsToAdd(id);
+		model.addAttribute("ingredientsToAdd", ingredientsToAdd);
+		model.addAttribute("recipe", this.recipeRepository.findById(id).get());
+
+		return "cookUser/addIngredient.html";
+	}
+
+	@GetMapping(value = "/admin/addIngredientToRecipe/{ingredientId}/{recipeId}")
+	public String addIngredientToRecipe(@PathVariable("ingredientId") Long ingredientId,
+			@PathVariable("recipeId") Long recipeId, Model model) {
+		Recipe recipe = this.recipeRepository.findById(recipeId).get();
+		Ingredient ingredient = this.ingredientRepository.findById(ingredientId).get();
+		Set<Ingredient> ingredients = recipe.getIngredientsUtilizzati();
+		ingredients.add(ingredient);
+		this.recipeRepository.save(recipe);
+
+		List<Ingredient> ingredientsToAdd = ingredientsToAdd(recipeId);
+
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("ingredientsToAdd", ingredientsToAdd);
+
+		return "admin/addIngredient.html";
+	}
+
+	@GetMapping(value = "/cookUser/addIngredientToRecipe/{ingredientId}/{recipeId}")
+	public String addIngredientToRecipeCook(@PathVariable("ingredientId") Long ingredientId,
+			@PathVariable("recipeId") Long recipeId, Model model) {
+		Recipe recipe = this.recipeRepository.findById(recipeId).get();
+		Ingredient ingredient = this.ingredientRepository.findById(ingredientId).get();
+		Set<Ingredient> ingredients = recipe.getIngredientsUtilizzati();
+		ingredients.add(ingredient);
+		this.recipeRepository.save(recipe);
+
+		List<Ingredient> ingredientsToAdd = ingredientsToAdd(recipeId);
+
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("ingredientsToAdd", ingredientsToAdd);
+
+		return "cookUser/addIngredient.html";
+	}
+
+	@GetMapping(value = "/admin/removeIngredientFromRecipe/{ingredientId}/{recipeId}")
+	public String removeIngredientFromRecipe(@PathVariable("ingredientId") Long ingredientId,
+			@PathVariable("recipeId") Long recipeId, Model model) {
+		Recipe recipe = this.recipeRepository.findById(recipeId).get();
+		Ingredient ingredient = this.ingredientRepository.findById(ingredientId).get();
+		Set<Ingredient> ingredientsUtilizzati = recipe.getIngredientsUtilizzati();
+		ingredientsUtilizzati.remove(ingredient);
+		this.recipeRepository.save(recipe);
+
+		List<Ingredient> ingredientsToAdd = ingredientsToAdd(recipeId);
+
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("ingredientsToAdd", ingredientsToAdd);
+
+		return "admin/addIngredient.html";
+	}
+
+	@GetMapping(value = "/cookUser/removeIngredientFromRecipe/{ingredientId}/{recipeId}")
+	public String removeIngredientFromRecipeCook(@PathVariable("ingredientId") Long ingredientId,
+			@PathVariable("recipeId") Long recipeId, Model model) {
+		Recipe recipe = this.recipeRepository.findById(recipeId).get();
+		Ingredient ingredient = this.ingredientRepository.findById(ingredientId).get();
+		Set<Ingredient> ingredientsUtilizzati = recipe.getIngredientsUtilizzati();
+		ingredientsUtilizzati.remove(ingredient);
+		this.recipeRepository.save(recipe);
+
+		List<Ingredient> ingredientsToAdd = ingredientsToAdd(recipeId);
+
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("ingredientsToAdd", ingredientsToAdd);
+
+		return "cookUser/addIngredient.html";
+	}
+
+	private List<Ingredient> ingredientsToAdd(Long recipeId) {
+		List<Ingredient> ingredientsToAdd = new ArrayList<>();
+
+		for (Ingredient i : ingredientRepository.findIngredientsNotInRecipe(recipeId)) {
+			ingredientsToAdd.add(i);
+		}
+		return ingredientsToAdd;
+	}
 
 
 }
-
-

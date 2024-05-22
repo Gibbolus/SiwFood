@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+ 
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Recipes</title>
+	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+</head>
+
+<body>
+	<div th:if="${recipe}">
+		<h1 th:text="${recipe.name}">Nome Ricetta</h1>
+		<div th:if="${recipe.cook}">
+			<br>
+			<p>Cuoco: <span th:text="${recipe.cook.name} + ' ' + ${recipe.cook.surname}"></span></p>
+			<!--											<a th:href="@{'/admin/addCook' + '/' + ${recipe.id}}">-->
+			<!--												<button type="button">Modifica cuoco</button> </a>-->
+		</div>
+		<div th:unless="${recipe.cook}">
+			<p>Non c'è nessun cook per questa recipe.</p>
+			<!--											<a th:href="@{'/admin/addCook' + '/' + ${recipe.id}}">-->
+			<!--												<button type="button">Aggiungi cuoco</button> </a> -->
+		</div>
+		<strong>Lista degli ingredienti:</strong>
+		<ul>
+			<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">
+				<li>
+					<span th:text="${ingredient.name} + ' ' + ${ingredient.quantity}"></span>
+					<a th:href="@{'/cookUser/updateQuantity/' + ${ingredient.id}}"> edita </a>
+				</li>
+			</div>
+		</ul>
+		<a th:href="@{'/cookUser/updateIngredients/' + ${recipe.id}}">
+			<button type="button">Modifica</button>
+		</a>
+
+		<div>
+			<span th:text="${recipe.description}"></span>
+		</div>
+		<span th:if="${recipe.description== null}"> Non disponibile </span>
+	</div>
+	<div th:unless="${recipe}">Non esiste</div>
+	 
+</body>
+
+</html>

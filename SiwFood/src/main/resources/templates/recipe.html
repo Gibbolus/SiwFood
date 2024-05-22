@@ -5,23 +5,38 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>Ricette</title>
+	<title>Recipes</title>
 	<link rel="stylesheet" href="/css/styles_recipe.css?v=0.1" />
 </head>
 
 <body>
-	
+
 	<div th:if="${recipe}">
-		<h1 th:text="${recipe.name}">Nome ricette</h1>
-		<div>Cuoco:
+		<h1 th:text="${recipe.name}">Nome ricetta</h1>
+		<div>cook:
 			<span th:if="${recipe.cook != null}">
 				<span th:text="${recipe.cook.name}	+ ' ' + ${recipe.cook.surname}"></span>
 			</span>
 			<span th:unless="${recipe.cook != null}">Non disponibile</span>
 		</div>
+		<span><img width="15%" th:src=${recipe.urlImage}/></span>
+		<strong>Lista degli ingredienti:</strong>
+		<ul>
+			<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">
+				<li>
+					<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}" th:text="${ingredient.name} + ':' + ' '">
+					</a>
+					<div th:text="${ingredient.quantity}"> Quantità </div>
+				</li>
+			</div>
+		</ul>
+		<a th:href="@{'/cookUser/updateIngredients/' + ${recipe.id}}">
+			<button type="button">Modifica</button>
+		</a>
+		<div> Descrizione: </div>					
 		<span th:text="${recipe.description}"></span>
+		<span th:if="${recipe.description == null}"> Non disponibile </span>
 	</div>
-		<span><img width="15%" th:src=${recipe.urlImage} /></span>
 	   
 	    <div th:unless="${recipe}">Non esiste</div>
 	 

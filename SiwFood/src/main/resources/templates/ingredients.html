@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>SiwFood - Homepage</title>
-	<link rel="stylesheet" href="/css/styles.css?v=1.0" />
+	<title>Recipes</title>
+	<link rel="stylesheet" href="/css/styles_recipes.css?v=1.8" />
 </head>
 
 <body>
@@ -16,18 +16,17 @@
 			</a>
 		</div>
 		<li>
-			<a class="ali" href="/recipes">Riectte</a>
+			<a class="ali" href="/recipes">Recipes</a>
 		</li>
 		<li>
-			<a class="ali" href="/cooks">Cuochi</a>
+			<a class="ali" href="/cooks">Cooks</a>
 		</li>
 		<li>
 			<a class="ali" href="/ingredients">Ingredienti</a>
 		</li>
-
+		
 		<!-- Search Bar start -->
 		<div class="search-bar">
-
 			<!-- Search box input start -->
 			<div class="search-box">
 				<input type="text" id="search-input" placeholder="Cerca qualcosa..." />
@@ -41,26 +40,21 @@
 				<img class="icons_login" src="/images/account.svg"></img>
 			</a>
 		</div>
-
 	</nav>
-	<div>
-		<br>
-		<a href="/formSearchRecipes"> Cerca ricette per nome</a>
-		<br>
-		<a href="/formSearchCooks"> Cerca cuoco per nome</a>
-		<br>
-		<div>
-			<h4  style="margin: 20px auto auto 0;">Vuoi aggiungere una ricetta?</h4>
-			<a href="/register"> Registrati qui! </a>
-			<h4  style="margin: 20px auto auto 0;">Oppure esegui il login!</h4>
-			<a href="/login"> Login qui! </a>
-		</div>
 
-	</div>
+	<h1>Ingredienti</h1>
+	<div th:if="${ingredients.isEmpty()}">Non ci sono ingredienti nel sistema</div>
 
+	<div class="container2" th:if="${!ingredients.isEmpty()}">
+		<div class="div_princ" th:each="ingredient : ${ingredients}">
+			<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}">
+				<img class="img" th:src="${ingredient.urlImage}">
+			</a>
 
+			<h2 class="text" th:text="${ingredient.name}"></h2>
 
-
+		</div> <!-- class div_princ -->
+	</div> <!-- class container -->
 </body>
 
 </html>

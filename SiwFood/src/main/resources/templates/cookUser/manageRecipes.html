@@ -4,17 +4,28 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>Ricette</title>
+	<title>Recipes</title>
 	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
 </head>
 
 <body>
 	<h1>Ricette</h1>
-	<div th:if="${recipes.isEmpty()}">Non ci sono ricette nel sistema</div>
-	<ul>
+
+	<form th:action="@{/cookUser/searchRecipes}" method="post">
+		<div>
+			<span>search</span>
+			<input type="text" name="name" th:value="${name}" placeholder="Ricerca">
+		</div>
+	</form>
+	<div th:if="${recipes.isEmpty()}">Non ci sono recipes nel sistema</div>
+	<div th:if="${messaggioErrore != null}" class="error-message">
+		<p th:text="${messaggioErrore}">Messaggio Errore</p>
+	</div>
+	<ul th:if="${!recipes.isEmpty()}">
 		<li th:each="recipe : ${recipes}">
-			<span th:text="${recipe.name}"></span>
-			<a th:href="@{'/cookUser/formUpdateRecipes' + '/' + ${recipe.id}}">(Aggiorna)</a>
+			<a th:href="@{'/recipe' + '/' + ${recipe.id}}" th:text="${recipe.name}"></a>
+			<a th:if="${userDetails != null}"
+				th:href="@{'/cookUser/formUpdateRecipe' + '/' + ${recipe.id} + '/' + ${userDetails.username}}">(Aggiorna)</a>
 		</li>
 	</ul>
 </body>
