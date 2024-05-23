@@ -32,4 +32,8 @@ public class CookService {
 			return cookRepository.findByName(name);
 		}
 		
+		public void deleteById(Long id) {
+	        cookRepository.deleteById(id);
+	    }
+		
 }

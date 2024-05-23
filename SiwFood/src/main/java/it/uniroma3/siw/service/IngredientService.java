@@ -25,4 +25,9 @@ public class IngredientService {
 	public Iterable<Ingredient> findByName(String name) {
 		return ingredientRepository.findByName(name);
 	}
+	
+	public void deleteById(Long id) {
+        ingredientRepository.deleteById(id);
+    }
+	
 }

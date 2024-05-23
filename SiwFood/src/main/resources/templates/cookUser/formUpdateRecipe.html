@@ -27,8 +27,8 @@
 		<ul>
 			<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">
 				<li>
-					<span th:text="${ingredient.name} + ' ' + ${ingredient.quantity}"></span>
-					<a th:href="@{'/cookUser/updateQuantity/' + ${ingredient.id}}"> edita </a>
+					<span th:text="${ingredient.name} + ' ' + ${ingredient.quantity} + ' ' + ${ingredient.unitOfMeasure}"></span>
+					<a th:href="@{'/cookUser/updateQuantity/' + ${ingredient.id} + '/' + ${recipe.id}}"> edita </a>
 				</li>
 			</div>
 		</ul>

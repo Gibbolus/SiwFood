@@ -12,7 +12,7 @@ public interface IngredientRepository extends CrudRepository<Ingredient, Long>{
 	
 	public List<Ingredient> findByName(String name);
 	
-	public List<Ingredient> findByQuantity(String quantity);
+	public List<Ingredient> findByQuantity(Integer quantity);
 	
 	public boolean existsByName(String name);
 	

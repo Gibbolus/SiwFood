@@ -2,6 +2,7 @@ package it.uniroma3.siw.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -296,4 +297,69 @@ public class RecipeController {
 	}
 
 
+	@GetMapping(value = "/cookUser/updateQuantity/{ingredientId}/{recipeId}")
+	public String formUpdateQuantity(@PathVariable("recipeId") Long recipeId,
+			@PathVariable("ingredientId") Long ingredientId, Model model) {
+		model.addAttribute("recipe", recipeRepository.findById(recipeId).get());
+		model.addAttribute("ingredient", ingredientRepository.findById(ingredientId).get());
+		return "/cookUser/updateQuantity.html";
+	}
+	
+	@PostMapping(value = "/cookUser/updateQuantity")
+	public String updateQuantity(@RequestParam("ingredientId") Long ingredientId,
+								 @RequestParam("recipeId") Long recipeId,
+								 @RequestParam("quantityValue") Integer quantityValue, 
+								 @RequestParam("quantityUnit") String quantityUnit,
+								 Model model) {
+		Optional<Ingredient> optionalIngredient = ingredientRepository.findById(ingredientId);
+		if (optionalIngredient.isPresent()) {
+			Ingredient ingredient = optionalIngredient.get();
+			ingredient.setQuantity(quantityValue);
+			ingredient.setUnitOfMeasure(quantityUnit);
+			model.addAttribute("ingredient", ingredientRepository.findById(ingredientId).get());
+			model.addAttribute("recipe", recipeRepository.findById(recipeId).get());
+			ingredientRepository.save(ingredient);
+		}
+		return "cookUser/formUpdateRecipe.html";
+	}
+
+	@GetMapping(value = "/admin/updateQuantity/{ingredientId}/{recipeId}")
+	public String formUpdateQuantityAdmin(@PathVariable("recipeId") Long recipeId, @PathVariable("ingredientId") Long ingredientId, Model model) {
+		model.addAttribute("recipe", recipeRepository.findById(recipeId).get());
+		model.addAttribute("ingredient", ingredientRepository.findById(ingredientId).get());
+		return "/admin/updateQuantity.html";
+	}
+
+	@PostMapping(value = "/admin/updateQuantity")
+	public String updateQuantityAdmin(@RequestParam("ingredientId") Long ingredientId,
+								 @RequestParam("recipeId") Long recipeId,
+								 @RequestParam("quantityValue") Integer quantityValue, 
+								 @RequestParam("quantityUnit") String quantityUnit,
+								 Model model) {
+		Optional<Ingredient> optionalIngredient = ingredientRepository.findById(ingredientId);
+		if (optionalIngredient.isPresent()) {
+			Ingredient ingredient = optionalIngredient.get();
+			ingredient.setQuantity(quantityValue);
+			ingredient.setUnitOfMeasure(quantityUnit);
+			model.addAttribute("ingredient", ingredientRepository.findById(ingredientId).get());
+			model.addAttribute("recipe", recipeRepository.findById(recipeId).get());
+			ingredientRepository.save(ingredient);
+		}
+		return "admin/formUpdateRecipe.html";
+	}
+
+	@GetMapping(value = "/admin/deleteRecipe/{recipeId}")
+	public String deleteRecipeAdmin(@PathVariable("recipeId") Long recipeId, Model model) {
+		recipeService.deleteById(recipeId);
+        return "redirect:/admin/manageRecipes";
+	}
+
+	@GetMapping(value = "/cookUser/deleteRecipe/{recipeId}")
+	public String deleteRicettaCuoco(@PathVariable("recipeId") Long recipeId, Model model) {
+		recipeService.deleteById(recipeId);
+        return "redirect:/cookUser/manageRecipes";
+	}
+	
+	
+	
 }

@@ -26,13 +26,10 @@
 				<li>
 					<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}" th:text="${ingredient.name} + ':' + ' '">
 					</a>
-					<div th:text="${ingredient.quantity}"> Quantità </div>
+					<div th:text="${ingredient.name} + ' ' + ${ingredient.quantity} + ' ' + ${ingredient.unitOfMeasure}">  </div>
 				</li>
 			</div>
 		</ul>
-		<a th:href="@{'/cookUser/updateIngredients/' + ${recipe.id}}">
-			<button type="button">Modifica</button>
-		</a>
 		<div> Descrizione: </div>					
 		<span th:text="${recipe.description}"></span>
 		<span th:if="${recipe.description == null}"> Non disponibile </span>

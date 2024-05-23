@@ -73,4 +73,11 @@ public class CookController {
 			return "/admin/formNewCook.html";
 		}
 	}
+	
+	@GetMapping(value = "/admin/deleteCook/{cookId}")
+	public String deleteCookAdmin(@PathVariable("cookId") Long cookId, Model model) {
+		cookService.deleteById(cookId);
+        return "redirect:/admin/manageCooks";
+	}
+	
 }

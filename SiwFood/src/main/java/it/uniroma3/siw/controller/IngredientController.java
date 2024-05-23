@@ -88,4 +88,11 @@ public class IngredientController {
 			return "/cookUser/formNewIngredient.html";
 		}
 	}
+	
+	@GetMapping(value = "/admin/deleteIngredient/{ingredientId}")
+	public String deleteIngredientAdmin(@PathVariable("ingredientId") Long ingredientId, Model model) {
+		ingredientService.deleteById(ingredientId);
+        return "redirect:/admin/manageIngredients";
+	}
+	
 }
