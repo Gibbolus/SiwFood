@@ -19,7 +19,7 @@
 			</span>
 			<span th:unless="${recipe.cook != null}">Non disponibile</span>
 		</div>
-		<span><img width="15%" th:src=${recipe.urlImage}/></span>
+		<span><img class="img" th:unless="${cook.urlImage.startsWith('https')}" th:src="@{/images/__${cook.urlImage}__}"></span>
 		<strong>Lista degli ingredienti:</strong>
 		<ul>
 			<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">

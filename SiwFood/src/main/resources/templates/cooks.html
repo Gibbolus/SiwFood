@@ -49,7 +49,7 @@
 		<div class="div_princ" th:each="cook : ${cooks}">
 
 			<a th:href="@{'/cook' + '/' + ${cook.id}}">
-				<img class="img" th:src="${cook.urlImage}">
+				<img class="img" th:unless="${cook.urlImage.startsWith('https')}" th:src="@{/images/__${cook.urlImage}__}">
 			</a>
 
 			<h2 class="text" th:text="${cook.name} + ' ' + ${cook.surname}"></h2>

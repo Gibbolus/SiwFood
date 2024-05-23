@@ -19,7 +19,7 @@
           Non disponibile
         </span>
       </div>
-      <span><img width="15%" th:src="${cook.urlImage}" /></span>
+      <span><img class="img" th:unless="${cook.urlImage.startsWith('https')}" th:src="@{/images/__${cook.urlImage}__}"></span>
     </div>
   </body>
 </html>
