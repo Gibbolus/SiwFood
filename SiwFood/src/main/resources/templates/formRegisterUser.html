@@ -14,33 +14,33 @@
 		<div>
 			<label>Nome</label>
 			<span><input type="text" placeholder="name" required th:field="${user.name}"/></span>
-			<span th:if="${#fields.hasErrors('user.name')}" th:errors="${user.name}" th:style="'color:red'">
+			<span th:if="${#fields.hasErrors('user.name')}" th:errors="${user.name}">
 			</span>
 		</div>
 		<div>
 			<label>Cogname</label>
 			<span><input type="text" placeholder="surname" required th:field="${user.surname}" /></span>
-			<span th:if="${#fields.hasErrors('user.surname')}" th:errors="${user.surname}" th:style="'color:red'">
+			<span th:if="${#fields.hasErrors('user.surname')}" th:errors="${user.surname}">
 			</span>
 		</div>
 		<div>
 			<label>Email</label>
 			<span><input type="text" placeholder="email" required th:field="${user.email}" /></span>
-			<span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}" th:style="'color:red'">
+			<span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}">
 			</span>
 		</div>
 		<div>
 			<label>Foto</label>
 			<!-- <span><input type="file" placeholder="link foto" required th:field="${user.urlImage}" accept="image/png, image/jpeg"/></span>
 			-->
-			<span><input type="url" placeholder="link foto" required th:field="${user.urlImage}" /></span>
-			<span th:if="${#fields.hasErrors('user.urlImage')}" th:errors="${user.urlImage}" th:style="'color:red'">
+			<span><input type="url" placeholder="url foto" required th:field="${user.urlImage}" /></span>
+			<span th:if="${#fields.hasErrors('user.urlImage')}" th:errors="${user.urlImage}">
 			</span>
 		</div>
 		<div>
 			<label>Data Di Nascita</label>
 			<span><input type="date" placeholder="data di year" required th:field="${user.year}" /></span>
-			<span th:if="${#fields.hasErrors('user.year')}" th:errors="${user.year}" th:style="'color:red'">
+			<span th:if="${#fields.hasErrors('user.year')}" th:errors="${user.year}">
 			</span>
 		</div>
 		<div>
@@ -48,16 +48,14 @@
 			<span>
 				<input type="text" placeholder="username" required th:field="${credentials.username}" />
 			</span>
-			<span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}"
-				th:style="'color:red'">
+			<span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}">
 			</span>
 		</div>
 		<div>
 			<label>Password</label>
 			<span><input type="password" placeholder="password" required th:field="${credentials.password}" />
 			</span>
-			<span th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}"
-				th:style="'color:red'">
+			<span th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}">
 			</span>
 		</div>
 		<div>

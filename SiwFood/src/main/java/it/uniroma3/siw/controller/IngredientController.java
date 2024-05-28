@@ -22,32 +22,37 @@ public class IngredientController {
 	@Autowired IngredientService ingredientService;
 	
 	
-	@GetMapping("/ingredient/{id}")
+	@GetMapping(value = "/ingredient/{id}")
 	public String getIngredient(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("ingredient", this.ingredientRepository.findById(id).get());
 		return "ingredient.html";
 	}
 
-	@GetMapping("/ingredients")
+	@GetMapping(value = "/ingredients")
 	public String ShowIngredients(Model model) {
 		model.addAttribute("ingredients", this.ingredientService.findAll());
 		return "ingredients.html";
 	}
 	
-	@PostMapping("/searchIngredients")
+	@GetMapping(value = "/formSearchIngredients")
+	public String SearchIngredients() {
+		return "formSearchIngredients.html";
+	}
+	
+	@PostMapping(value = "/formSearchIngredients")
 	public String searchIngredients(Model model, @RequestParam String name) {
 		model.addAttribute("ingredients", this.ingredientRepository.findByName(name));
 		return "ingredients.html";
 	}
 	
-	@PostMapping("admin/searchIngredients")
+	@PostMapping(value = "admin/formSearchIngredients")
 	public String searchIngredientsAdmin(Model model, @RequestParam String name) {
 		model.addAttribute("ingredients", this.ingredientRepository.findByName(name));
 		return "/admin/manageIngredients.html";
 	}
 
 	
-	@GetMapping("/admin/manageIngredients")
+	@GetMapping(value = "/admin/manageIngredients")
 	public String ShowIngredientsAdmin(Model model) {
 		model.addAttribute("ingredients", this.ingredientService.findAll());
 		return "/admin/manageIngredients.html";
@@ -59,7 +64,7 @@ public class IngredientController {
 		return "/admin/formNewIngredient.html";
 	}
 	
-	@PostMapping("/admin/ingredient")
+	@PostMapping(value = "/admin/ingredient")
 	public String newIngredient(@ModelAttribute("ingredient") Ingredient ingredient, Model model) {
 		if (!ingredientRepository.existsByName(ingredient.getName())) {
 			this.ingredientService.save(ingredient);
@@ -77,7 +82,7 @@ public class IngredientController {
 		return "cookUser/formNewIngredient.html";
 	}
 	
-	@PostMapping("/cookUser/ingredient")
+	@PostMapping(value = "/cookUser/ingredient")
 	public String newIngredientCook(@ModelAttribute("ingredient") Ingredient ingredient, Model model) {
 		if (!ingredientRepository.existsByName(ingredient.getName())) {
 			this.ingredientService.save(ingredient);

@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title>SiwFood - Homepage</title>
-	<link rel="stylesheet" href="/css/styles.css?v=1.0" />
+	<link rel="stylesheet" href="/css/IndexStyles.css?v=5.2" />
 </head>
 
 <body>
@@ -16,7 +16,7 @@
 			</a>
 		</div>
 		<li>
-			<a class="ali" href="/recipes">Riectte</a>
+			<a class="ali" href="/recipes">Ricette</a>
 		</li>
 		<li>
 			<a class="ali" href="/cooks">Cuochi</a>
@@ -25,17 +25,6 @@
 			<a class="ali" href="/ingredients">Ingredienti</a>
 		</li>
 
-		<!-- Search Bar start -->
-		<div class="search-bar">
-
-			<!-- Search box input start -->
-			<div class="search-box">
-				<input type="text" id="search-input" placeholder="Cerca qualcosa..." />
-				<i class="fa-solid fa-magnifying-glass"></i>
-			</div>
-			<!-- Search box input ends -->
-		</div>
-		<!-- Search Bar ends -->
 		<div>
 			<a href="/login">
 				<img class="icons_login" src="/images/account.svg"></img>
@@ -43,22 +32,85 @@
 		</div>
 
 	</nav>
-	<div>
-		<br>
-		<a href="/formSearchRecipes"> Cerca ricette per nome</a>
-		<br>
-		<a href="/formSearchCooks"> Cerca cuoco per nome</a>
-		<br>
+	<div id="mainDiv">
 		<div>
-			<h4  style="margin: 20px auto auto 0;">Vuoi aggiungere una ricetta?</h4>
-			<a href="/register"> Registrati qui! </a>
-			<h4  style="margin: 20px auto auto 0;">Oppure esegui il login!</h4>
-			<a href="/login"> Login qui! </a>
+			<a class="div1" href="/formSearchRecipes">
+				<h1 class="menusText"> Cerca una ricetta: </h2>
+					<img class="indexPhotos" src="/images/searchRecipes.png"></img>
+			</a>
 		</div>
-
+		<div>
+			<a class="div1" href="/formSearchCooks">
+				<h1 class="menusText"> Cerca un cuoco: </h1>
+				<img class="indexPhotos" src="/images/searchCooks.png"></img>
+			</a>
+		</div>
+		<div>
+			<a class="div1" href="/formSearchIngredients">
+				<h1 class="menusText"> Cerca un ingrediente: </h1>
+				<img class="indexPhotos" src="/images/searchIngredients.png"></img>
+			</a>
+		</div>
 	</div>
 
+	<div id="map">
+		<div class="textmap">
+			
+			<h1>Vienici a trovare!</h1>
+			<p>
+SiwFood è arrivato a Via della Vasca Navale 79 per deliziare il tuo palato con piatti squisiti preparati con ingredienti freschi e di stagione.
+Vieni a scoprire un menu ricco di sapori che saprà conquistarti fin dal primo assaggio.<br />
+Cosa aspetti?<br />
+Ti aspettiamo a SiwFood per un pranzo o una cena indimenticabili!<br />
+			</p>
 
+
+
+		</div>
+
+		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1020.7612055854265!2d12.4686253787241!3d41
+			.85523823216099!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13258a922b3edaeb%3A0xd7c19908
+			33e3ea29!2sIngegneria%20Informatica%20-%20Universit%C3%A0%20Roma%20Tre!5e0!3m2!1sit!2sit!4v171691
+			6328047!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+			referrerpolicy="no-referrer-when-downgrade">
+		</iframe>
+	</div>
+
+	<footer class="footer">
+		<div id="accountForm">
+			<h4 class="accountform-text">Vuoi aggiungere una ricetta?</h4>
+			<a href="/register"> Registrati qui! </a>
+			<h4 class="accountform-text">Oppure esegui il login!</h4>
+			<a href="/login"> Login qui! </a>
+		</div>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su Instagram</p>
+			<a href="https://www.instagram.com">
+				<img src="/images/logoInstagram.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su Youtube</p>
+			<a href="https://www.youtube.com">
+				<img src="/images/logoYoutube.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su X</p>
+			<a href="https://www.x.com">
+				<img src="/images/logoX.png"></img>
+			</a>
+
+		</div>
+
+	</footer>
+	<div id="contact-info">
+		<p class="contact-text"> Hai qualche problema con il nostro sito? </p>
+		<address>
+			<a class="contact-text" href="tel:+393359487551">Scrivi al nostro numero dedicato:  (+39) 3359487551 ☏</a>
+		</address>
+		<a class="contact-text" href="">Contattaci via mail</a>
+	</div>
 
 
 </body>

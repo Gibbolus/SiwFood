@@ -21,25 +21,25 @@ public class CookController {
 	@Autowired CookService cookService;
 	
 	
-	@GetMapping("/cook/{id}")
+	@GetMapping(value = "/cook/{id}")
 	public String getCook(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("cook", this.cookRepository.findById(id).get());
 		return "cook.html";
 	}
 
-	@GetMapping("/cooks")
+	@GetMapping(value = "/cooks")
 	public String ShowCook(Model model) {
 		model.addAttribute("cooks", this.cookService.findAll());
 		return "cooks.html";
 	}
 	
-	@GetMapping(value="/admin/formNewCook")
+	@GetMapping(value = "/admin/formNewCook")
 	public String formNewCook(Model model) {
 		model.addAttribute("cook", new Cook());
 		return "admin/formNewCook.html";
 	}
 	
-	@GetMapping("/admin/manageCooks")
+	@GetMapping(value = "/admin/manageCooks")
 	public String ShowCookAdmin(Model model) {
 		model.addAttribute("cooks", this.cookService.findAll());
 		return "/admin/manageCooks.html";
@@ -50,19 +50,24 @@ public class CookController {
 		return "admin/indexCook.html";
 	}
 	
-	@PostMapping("/searchCooks")
+	@GetMapping(value = "/formSearchCooks")
+	public String SearchCooks() {
+		return "formSearchCooks.html";
+	}
+	
+	@PostMapping(value = "/formSearchCooks")
 	public String searchCooks(Model model, @RequestParam String name) {
 		model.addAttribute("cooks", this.cookRepository.findByName(name));
 		return "cooks.html";
 	}
 	
-	@PostMapping("admin/searchCooks")
+	@PostMapping(value = "admin/formSearchCooks")
 	public String searchCooksAdmin(Model model, @RequestParam String name) {
 		model.addAttribute("cooks", this.cookRepository.findByName(name));
 		return "/admin/manageCooks.html";
 	}
 	
-	@PostMapping("/admin/cooks")
+	@PostMapping(value = "/admin/cooks")
 	public String newCook(@ModelAttribute("cook") Cook cook, Model model) {
 		if (!cookRepository.existsByNameAndSurname(cook.getName(), cook.getSurname())) {
 			this.cookService.save(cook);

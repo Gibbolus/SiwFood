@@ -4,7 +4,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>Recipes</title>
+	<title>Ingredienti</title>
 	<link rel="stylesheet" href="/css/styles_recipes.css?v=1.8" />
 </head>
 
@@ -16,10 +16,10 @@
 			</a>
 		</div>
 		<li>
-			<a class="ali" href="/recipes">Recipes</a>
+			<a class="ali" href="/recipes">Ricette</a>
 		</li>
 		<li>
-			<a class="ali" href="/cooks">Cooks</a>
+			<a class="ali" href="/cooks">Cuochi</a>
 		</li>
 		<li>
 			<a class="ali" href="/ingredients">Ingredienti</a>
@@ -48,6 +48,7 @@
 	<div class="container2" th:if="${!ingredients.isEmpty()}">
 		<div class="div_princ" th:each="ingredient : ${ingredients}">
 			<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}">
+				<img class="img" th:if="${ingredient.urlImage.startsWith('https')}" th:src="${ingredient.urlImage}">
 				<img class="img" th:unless="${ingredient.urlImage.startsWith('https')}" th:src="@{/images/__${ingredient.urlImage}__}">
 			</a>
 

@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-    <title>cook</title>
-    <link rel="stylesheet" href="/css/styles.css?v=0.1" />
-  </head>
-  <body>
-    <div><a href="/"><img src="/images/logo-siw.png" width="50%" /></a></div>
-    <div th:if="${cook}">
-      <h1 th:text="${cook.name} + ' ' + ${cook.surname}">Info cook</h1>
-      <div>
-        Anno di year:
-        <span th:if="${cook.year != null}">
-			<span th:text="${#temporals.format(cook.year, 'dd-MM-yyyy')}"></span>
-        </span>
-        <span th:if="${cook.year == null}">
-          Non disponibile
-        </span>
-      </div>
-      <span><img class="img" th:unless="${cook.urlImage.startsWith('https')}" th:src="@{/images/__${cook.urlImage}__}"></span>
-    </div>
-  </body>
+	<title>Cuoco</title>
+	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+</head>
+
+<body>
+	<div th:if="${cook}">
+		<h1 th:text="${cook.name} + ' ' + ${cook.surname}">Info cook</h1>
+		<div>
+			Anno di nascita:
+			<span th:if="${cook.year != null}">
+				<span th:text="${#temporals.format(cook.year, 'dd-MM-yyyy')}"></span>
+			</span>
+			<span th:if="${cook.year == null}">
+				Non disponibile
+			</span>
+		</div>
+		<span>
+			<img class="img" th:if="${cook.urlImage.startsWith('https')}" th:src="${cook.urlImage}">
+			<img class="img" th:unless="${cook.urlImage.startsWith('https')}" th:src="@{/images/__${cook.urlImage}__}">
+		</span>
+	</div>
+</body>
+
 </html>

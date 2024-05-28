@@ -12,7 +12,8 @@
 <body>
 
 	<div th:if="${ingredient}">
-		<img th:unless="${ingredient.urlImage.startsWith('https')}" th:src="@{/images/__${ingredient.urlImage}__}" style="width: 15%;">
+		<img class="img" th:if="${ingredient.urlImage.startsWith('https')}" th:src="${ingredient.urlImage}">
+		<img class="img" th:unless="${ingredient.urlImage.startsWith('https')}" th:src="@{/images/__${ingredient.urlImage}__}">
 		<h1 th:text="${ingredient.name}">Nome ingrediente</h1>
 		<span th:text="${ingredient.description}"></span>
 	</div>

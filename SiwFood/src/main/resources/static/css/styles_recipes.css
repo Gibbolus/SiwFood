@@ -1,12 +1,12 @@
 body {
 	margin: 0;
-	background-color: #f5c894;
+	background-color: #fceec9;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 
 .nav_bar {
-	background-color: #fbdaad;
+	background-color: #f3c17e;
 	box-shadow: 0 2px black;
 	position: sticky;
 	height: 75px;
@@ -58,6 +58,9 @@ li {
   border: 1px solid black;
 }
 
+#search-input{
+	width: 625px;
+}
 
 #list.show {
   max-height: 300px;
@@ -159,6 +162,95 @@ li {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+#mainDiv{
+	display: flex;
+	flex-direction: row;
+}
+
+.div1{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-decoration: none;
+	margin-bottom: 300px;
+}
+
+.menusText{
+	color: black;
+	margin-bottom: -0.5%;
+}
+
+
+.indexPhotos{
+	display: flex;
+	justify-content: space-around;
+	width: 70%;
+
+}
+
+#map{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	margin: 50px auto 80px auto;
+}
+
+.textmap{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 500px;
+}
+
+#contact-info{
+	height: 100px;
+	background-color: #74361a;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+	
+}
+
+p{
+	font-size: larger;
+	text-align: start;
+}
+
+.contact-text{
+	color:white;
+	text-decoration: none;
+}
+
+.footer{
+	height: 200px;
+	background-color: #f3c17e;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.socialsFonts{
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	display: flex;
+	justify-content: center;
+	font-weight: 600;
+}
+
+.socials{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.accountform-text{
+	margin: 35px auto auto 0;
+}
+
+#address-info{
+	margin: 0;
+}
 
 
 

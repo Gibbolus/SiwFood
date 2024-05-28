@@ -66,20 +66,25 @@ public class RecipeController {
 		model.addAttribute("recipes", this.recipeService.findAll());
 		return "recipes.html";
 	}
+	
+	@GetMapping(value = "/formSearchRecipes")
+	public String SearchRecipes() {
+		return "formSearchRecipes.html";
+	}
 
-	@PostMapping(value = "/searchRecipes")
+	@PostMapping(value = "/formSearchRecipes")
 	public String searchRecipes(Model model, @RequestParam String name) {
 		model.addAttribute("recipes", this.recipeRepository.findByName(name));
 		return "recipes.html";
 	}
 
-	@PostMapping(value = "admin/searchRecipes")
+	@PostMapping(value = "admin/formSearchRecipes")
 	public String searchRecipesAdmin(Model model, @RequestParam String name) {
 		model.addAttribute("recipes", this.recipeRepository.findByName(name));
 		return "/admin/manageRecipes.html";
 	}
 
-	@PostMapping(value = "cookUser/searchRecipes")
+	@PostMapping(value = "cookUser/formSearchRecipes")
 	public String searchRecipesCook(Model model, @RequestParam String name) {
 		model.addAttribute("recipes", this.recipeRepository.findByName(name));
 		return "/cookUser/manageRecipes.html";
