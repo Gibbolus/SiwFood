@@ -52,6 +52,7 @@ li {
 #mainDiv{
 	display: flex;
 	flex-direction: row;
+	flex-wrap: nowrap;
 }
 
 
@@ -59,7 +60,10 @@ li {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	
 }
+
+
 
 .main-div-search{
 	display: flex;
@@ -78,8 +82,33 @@ li {
 	display: flex;
 	justify-content: space-around;
 	width: 70%;
-
+	border-radius: 100px;
 }
+
+#add-menu{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+
+.add-menu-container{
+	height: 80px;
+	width: 445px;
+	background-color: chocolate;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100px;
+}
+
+.add-menu-texts{
+	text-decoration: none;
+	text-wrap: nowrap;
+	color: black;
+	
+}
+
 
 #map{
 	display: flex;

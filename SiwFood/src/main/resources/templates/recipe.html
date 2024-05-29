@@ -20,8 +20,8 @@
 			<span th:unless="${recipe.cook != null}">Non disponibile</span>
 		</div>
 		<span>
-			<img class="img" th:if="${cook.urlImage.startsWith('https')}" th:src="${cook.urlImage}">
-			<img class="img" th:unless="${cook.urlImage.startsWith('https')}" th:src="@{/images/__${cook.urlImage}__}">
+			<img class="img" th:if="${recipe.urlImage.startsWith('https')}" th:src="${recipe.urlImage}">
+			<img class="img" th:unless="${recipe.urlImage.startsWith('https')}" th:src="@{/images/__${recipe.urlImage}__}">
 		</span>
 		<strong>Lista degli ingredienti:</strong>
 		<ul>
@@ -29,7 +29,7 @@
 				<li>
 					<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}" th:text="${ingredient.name} + ':' + ' '">
 					</a>
-					<div th:text="${ingredient.name} + ' ' + ${ingredient.quantity} + ' ' + ${ingredient.unitOfMeasure}">  </div>
+					<div th:text="${ingredient.name} + ' ' + ${ingredient.quantityToRecipe[recipe.id]} + ' ' + ${ingredient.unitOfMeasure}">  </div>
 				</li>
 			</div>
 		</ul>

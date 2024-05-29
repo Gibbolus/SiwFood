@@ -17,12 +17,7 @@
 		<a th:href="@{'/cookUser/removeIngredientFromRecipe/'+ ${ingredient.id}+'/'+${recipe.id}}">-
 			(rimuovi)</a>
 	</li>
-	<div>
-		
-		STACCOOOO
-		
-	</div>
-
+	<br>
 	<li th:each="ingredient : ${ingredientsToAdd}">
 		<span th:text="${ingredient.name}"></span>
 		<a th:href="@{'/cookUser/addIngredientToRecipe/'+ ${ingredient.id}+'/'+${recipe.id}}">-

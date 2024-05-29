@@ -34,16 +34,6 @@
 	</nav>
 	<div id="mainDiv">
 		<div class="search-box">
-			<h1 class="menusText"> Cerca una ricetta </h1>
-			<form th:action="@{/formSearchRecipes}" method="post">
-				<input type="text" th:value="${name}" name="name" placeholder="Ricette..." />
-			</form>
-			<br>
-			<a class="main-div-search">
-				<img class="indexPhotos" src="/images/searchRecipes.png"></img>
-			</a>
-		</div>
-		<div class="search-box">
 			<h1 class="menusText"> Cerca un cuoco </h1>
 			<form class="search-bar" th:action="@{/formSearchCooks}" method="post">
 				<input type="text" th:value="${name}" name="name" placeholder="Cuochi..." />
@@ -51,6 +41,16 @@
 			<br>
 			<a class="main-div-search">
 				<img class="indexPhotos" src="/images/searchCooks.png"></img>
+			</a>
+		</div>
+		<div class="search-box">
+			<h1 class="menusText"> Cerca una ricetta </h1>
+			<form th:action="@{/formSearchRecipes}" method="post">
+				<input type="text" th:value="${name}" name="name" placeholder="Ricette..." />
+			</form>
+			<br>
+			<a class="main-div-search">
+				<img class="indexPhotos" src="/images/searchRecipes.png"></img>
 			</a>
 		</div>
 		<div class="search-box">
@@ -65,14 +65,22 @@
 		</div>
 	</div>
 
-	<div>
-		<div th:if="${userDetails != null}">
-			<a th:href="@{'/cookUser/formNewRecipe' + '/' + ${userDetails.username}}">Aggiungi una ricetta</a>
-		</div>
-		<a href="/cookUser/manageRecipes">Gestisci le tue ricette</a>
-		<br>
-		<a href="/cookUser/formNewIngredient">Aggiungi un igrediente</a>
-		<br>
+	<div id="add-menu" th:if="${userDetails != null}">
+		<a class="add-menu-texts"  href="/cookUser/manageRecipes">
+			<div class="add-menu-container">
+				<span>Gestisci le tue ricette</span>
+			</div>
+		</a>
+		<a class="add-menu-texts" th:href="@{'/cookUser/formNewRecipe' + '/' + ${userDetails.username}}">
+			<div class="add-menu-container">
+				 <span>Aggiungi una ricetta</span>
+			</div>
+		</a>
+		<a class="add-menu-texts" href="/cookUser/formNewIngredient">
+			<div class="add-menu-container">
+				<span>Aggiungi un igrediente</span>
+			</div>
+		</a>
 	</div>
 
 

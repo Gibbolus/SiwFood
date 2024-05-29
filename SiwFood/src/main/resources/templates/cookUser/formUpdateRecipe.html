@@ -27,7 +27,12 @@
 		<ul>
 			<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">
 				<li>
-					<span th:text="${ingredient.name} + ' ' + ${ingredient.quantity} + ' ' + ${ingredient.unitOfMeasure}"></span>
+					<div th:if="${ingredient.quantityToRecipe[recipe.id]}">
+						<span th:text="${ingredient.name} + ' ' + ${ingredient.quantityToRecipe[recipe.id]} + ' ' + ${ingredient.unitOfMeasure}"></span>
+					</div>
+					<div th:unless="${ingredient.quantityToRecipe[recipe.id]}">
+						<span th:text="${ingredient.name}"></span>
+					</div>
 					<a th:href="@{'/cookUser/updateQuantity/' + ${ingredient.id} + '/' + ${recipe.id}}"> edita </a>
 				</li>
 			</div>

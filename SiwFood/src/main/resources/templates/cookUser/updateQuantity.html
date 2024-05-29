@@ -5,7 +5,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>Recipes</title>
+	<title>Ricette</title>
 	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
 </head>
 
@@ -21,7 +21,7 @@
 		<!--												<button type="button">Modifica cuoco</button> </a>-->
 	</div>
 	<div th:unless="${recipe.cook}">
-		<p>Non c'è nessun cook per questa recipe.</p>
+		<p>Non c'è nessun cuoco per questa ricetta.</p>
 		<!--											<a th:href="@{'/admin/addCook' + '/' + ${recipe.id}}">-->
 		<!--												<button type="button">Aggiungi cuoco</button> </a> -->
 	</div>
@@ -29,16 +29,21 @@
 	<ul>
 		<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">
 			<li>
-				<span th:text="${ingredient.name} + ' ' + ${ingredient.quantity}"></span>
+				<div th:if="${ingredient.quantityToRecipe[recipe.id]}">
+					<span th:text="${ingredient.name} + ' ' + ${ingredient.quantityToRecipe[recipe.id]}"></span>
+				</div>
+				<div th:unless="${ingredient.quantityToRecipe[recipe.id]}">
+					<span th:text="${ingredient.name}"></span>		
+				</div>
 				<form th:action="@{/cookUser/updateQuantity}" method="POST">
 					<input type="hidden" name="recipeId" th:value="${recipe.id}" />
 					<input type="hidden" name="ingredientId" th:value="${ingredient.id}" />
-					<input class="input" type="number" id="quantityValue" name="quantityValue"
-						th:value="${ingredient.quantity}" min="0" required>
+					<input type="number" id="quantityValue" name="quantityValue" required
+						th:value="${ingredient.quantityToRecipe[recipe.id]}" min="0">
 					<select name="quantityUnit" required>
-						<option class="option" value="grammi">Grammi</option>
-						<option class="option" value="millilitri">Millilitri</option>
-						<option class="option" value="cucchiai">Cucchiai</option>
+						<option value="grammi">Grammi</option>
+						<option value="millilitri">Millilitri</option>
+						<option value="cucchiai">Cucchiai</option>
 					</select>
 					<a th:href="@{'/cookUser/formUpdateRecipe/'+ ${recipe.id} + '/' + ${userDetails.username}}">
 						<button type="submit">Fine</button></a>

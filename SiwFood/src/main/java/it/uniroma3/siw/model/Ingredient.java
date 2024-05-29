@@ -1,16 +1,19 @@
 package it.uniroma3.siw.model;
 
 
+import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.MapKeyJoinColumn;
+import jakarta.persistence.*;
 
 @Entity
 public class Ingredient {
@@ -21,7 +24,7 @@ public class Ingredient {
 
 	private String name;
 
-	private Integer quantity;
+//	private Integer quantity;
 	
 	private String unitOfMeasure;
 
@@ -31,17 +34,34 @@ public class Ingredient {
 	private String description;
 	
 	
-
-	@ManyToMany
-    private Set<Ingredient> ingredientsUtilizzati;
+	@ElementCollection
+	/*Questa annotazione viene utilizzata per indicare che la mappa non è una semplice collezione Java, 
+	 * ma deve essere trattata come una collezione di elementi incorporati (embedded) nella stessa entità. 
+	 * In altre parole, @ElementCollection dice a JPA che la mappa deve essere mappata come una collezione 
+	 * di elementi di valore associati alla classe Ingrediente.*/
 	
+	 @CollectionTable(name = "quantita_per_ricetta", joinColumns = @JoinColumn(name = "ingredient_id"))
+	/*Questa annotazione specifica il nome della tabella che verrà utilizzata per memorizzare la collezione 
+	 * di elementi. Nel nostro caso, la tabella si chiama quantita_per_ricetta. L'elemento joinColumns all'interno 
+	 * di @CollectionTable specifica la colonna che verrà utilizzata per unire (join) questa tabella con la tabella 
+	 * della classe che contiene la collezione, ovvero Ingrediente.*/
+	
+	@MapKeyJoinColumn(name = "recipe_id")
+	/* Questa annotazione specifica la colonna nella tabella di mapping che rappresenta la chiave della mappa. 
+	 * In questo caso, la chiave della mappa è un'istanza della classe Ricetta, quindi @MapKeyJoinColumn specifica 
+	 * che la colonna ricetta_id nella tabella di mapping rappresenta la chiave della mappa. */
+	
+	@Column(name = "quantity")
+	private Map<Long, Integer> quantityToRecipe;
+		
+	public Map<Long, Integer> getQuantityToRecipe() {
+		return quantityToRecipe;
+	}
 
-	public Set<Ingredient> getIngredientsUtilizzati() {
-		return ingredientsUtilizzati;
+	public void setQuantityToRecipe(Map<Long, Integer> quantityToRecipe) {
+		this.quantityToRecipe = quantityToRecipe;
 	}
-	public void setIngredientsUtilizzati(Set<Ingredient> ingredientsUtilizzati) {
-		this.ingredientsUtilizzati = ingredientsUtilizzati;
-	}
+	
 	public String getName() {
 		return name;
 	}
@@ -66,12 +86,12 @@ public class Ingredient {
 	public void setUnitOfMeasure(String unitOfMeasure) {
 		this.unitOfMeasure = unitOfMeasure;
 	}
-	public Integer getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
+//	public Integer getQuantity() {
+//		return quantity;
+//	}
+//	public void setQuantity(Integer quantity) {
+//		this.quantity = quantity;
+//	}
 	public long getId() {
 		return id;
 	}
@@ -81,7 +101,7 @@ public class Ingredient {
 	
 	@Override
 	public int hashCode() {
-	    return Objects.hash(name, quantity);
+	    return Objects.hash(name);
 	}
 	
 	@Override
@@ -89,7 +109,7 @@ public class Ingredient {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Ingredient i = (Ingredient) o;
-		return Objects.equals(name, i.name) && Objects.equals(quantity, i.quantity);
+		return Objects.equals(name, i.name);
 	}
 
 }

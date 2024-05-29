@@ -2,6 +2,7 @@ package it.uniroma3.siw.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -27,6 +28,7 @@ import it.uniroma3.siw.repository.CookRepository;
 import it.uniroma3.siw.repository.IngredientRepository;
 import it.uniroma3.siw.repository.RecipeRepository;
 import it.uniroma3.siw.service.CookService;
+import it.uniroma3.siw.service.IngredientService;
 import it.uniroma3.siw.service.RecipeService;
 
 import jakarta.validation.Valid;
@@ -45,6 +47,9 @@ public class RecipeController {
 
 	@Autowired
 	CookService cookService;
+	
+	@Autowired
+	IngredientService ingredientService;
 
 	@Autowired
 	CookRepository cookRepository;
@@ -305,8 +310,7 @@ public class RecipeController {
 		}
 		return ingredientsToAdd;
 	}
-
-
+	
 	@GetMapping(value = "/cookUser/updateQuantity/{ingredientId}/{recipeId}")
 	public String formUpdateQuantity(@PathVariable("recipeId") Long recipeId,
 			@PathVariable("ingredientId") Long ingredientId, Model model) {
@@ -322,13 +326,19 @@ public class RecipeController {
 								 @RequestParam("quantityUnit") String quantityUnit,
 								 Model model) {
 		Optional<Ingredient> optionalIngredient = ingredientRepository.findById(ingredientId);
-		if (optionalIngredient.isPresent()) {
+		Optional<Recipe> optionalRecipe = recipeRepository.findById(recipeId);
+		
+		if (optionalIngredient.isPresent() && optionalRecipe.isPresent()) {
 			Ingredient ingredient = optionalIngredient.get();
-			ingredient.setQuantity(quantityValue);
+			Recipe recipe = optionalRecipe.get();
+			Map<Long, Integer> quantityToRecipe = ingredient.getQuantityToRecipe();
+			quantityToRecipe.put(recipe.getId(), quantityValue);
 			ingredient.setUnitOfMeasure(quantityUnit);
-			model.addAttribute("ingredient", ingredientRepository.findById(ingredientId).get());
+			ingredient.setQuantityToRecipe(quantityToRecipe);
+			ingredientRepository.save(ingredient); 		// Aggiorna l'ingrediente nel database
 			model.addAttribute("recipe", recipeRepository.findById(recipeId).get());
-			ingredientRepository.save(ingredient);
+			model.addAttribute("ingredient", ingredientRepository.findById(ingredientId).get());
+			model.addAttribute("quantityValue", quantityValue);
 		}
 		return "cookUser/formUpdateRecipe.html";
 	}
@@ -347,16 +357,38 @@ public class RecipeController {
 								 @RequestParam("quantityUnit") String quantityUnit,
 								 Model model) {
 		Optional<Ingredient> optionalIngredient = ingredientRepository.findById(ingredientId);
-		if (optionalIngredient.isPresent()) {
+		Optional<Recipe> optionalRecipe = recipeRepository.findById(recipeId);
+
+		if (optionalIngredient.isPresent() && optionalRecipe.isPresent()) {
 			Ingredient ingredient = optionalIngredient.get();
-			ingredient.setQuantity(quantityValue);
+			Recipe recipe = optionalRecipe.get();
+			Map<Long, Integer> quantityToRecipe = ingredient.getQuantityToRecipe();
+			quantityToRecipe.put(recipe.getId(), quantityValue);
 			ingredient.setUnitOfMeasure(quantityUnit);
-			model.addAttribute("ingredient", ingredientRepository.findById(ingredientId).get());
+			ingredient.setQuantityToRecipe(quantityToRecipe);
+			ingredientRepository.save(ingredient);			// Aggiorna l'ingrediente nel database
 			model.addAttribute("recipe", recipeRepository.findById(recipeId).get());
-			ingredientRepository.save(ingredient);
+			model.addAttribute("ingredient", ingredientRepository.findById(ingredientId).get());
+			model.addAttribute("quantityValue", quantityValue);
 		}
 		return "admin/formUpdateRecipe.html";
 	}
+	
+	public Integer getQuantityPerRecipe(Long ingredientId, Long recipeId) {
+		Optional<Ingredient> optionalIngredient = ingredientRepository.findById(ingredientId);
+		Optional<Recipe> optionalRecipe = recipeRepository.findById(recipeId);
+
+		if (optionalIngredient.isPresent() && optionalRecipe.isPresent()) {
+			Ingredient ingredient = optionalIngredient.get();
+			Recipe recipe = optionalRecipe.get();
+			return ingredient.getQuantityToRecipe().getOrDefault(recipe, 0); // Restituisce la quantità, se presente,
+																				// altrimenti 0
+		} else {
+			throw new RuntimeException("Ingrediente o Ricetta non trovati");
+		}
+	}
+	
+	
 
 	@GetMapping(value = "/admin/deleteRecipe/{recipeId}")
 	public String deleteRecipeAdmin(@PathVariable("recipeId") Long recipeId, Model model) {

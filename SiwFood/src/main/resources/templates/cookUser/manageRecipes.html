@@ -4,7 +4,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>Recipes</title>
+	<title>Ricette</title>
 	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
 </head>
 
@@ -17,7 +17,7 @@
 			<input type="text" name="name" th:value="${name}" placeholder="Ricerca">
 		</div>
 	</form>
-	<div th:if="${recipes.isEmpty()}">Non ci sono recipes nel sistema</div>
+	<div th:if="${recipes.isEmpty()}">Non ci sono ricette nel sistema</div>
 	<div th:if="${messaggioErrore != null}" class="error-message">
 		<p th:text="${messaggioErrore}">Messaggio Errore</p>
 	</div>
