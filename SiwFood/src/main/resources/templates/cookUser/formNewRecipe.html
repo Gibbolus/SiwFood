@@ -5,20 +5,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title>New Recipe</title>
-	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+	<link rel="stylesheet" href="/css/formContactStyle.css?v=0.1" />
 </head>
 
 <body>
-	<h1>Aggiungi una recipe</h1>
+	<h1>Aggiungi una ricetta</h1>
 	<form th:action="@{/cookUser/recipe}" method="POST" th:object="${recipe}">
-		<h1>Inserisci ricetta</h1>
 		<br>
 		<div>
 			<div>
 				Nome: <span><input required type="text" th:field="${recipe.name}" placeholder="Nome"/></span>
 			</div>
 			<div>
-				description: <span><input required type="text" th:field="${recipe.description}" placeholder="Descrizione"/></span>
+				Descrizione: <span><input required type="text" th:field="${recipe.description}" placeholder="Descrizione"/></span>
 			</div>
 			<div>
 				URL immagine: <span><input required type="url" th:field="${recipe.urlImage}" placeholder="URL Immagine"/></span>

@@ -74,7 +74,7 @@ public class CookController {
 			model.addAttribute("cook", cook);
 			return "cook.html";
 		} else {
-			model.addAttribute("messaggioErrore", "Questo cook esiste già");
+			model.addAttribute("messaggioErrore", "Questo cuoco esiste già");
 			return "/admin/formNewCook.html";
 		}
 	}

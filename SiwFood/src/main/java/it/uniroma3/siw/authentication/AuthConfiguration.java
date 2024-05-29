@@ -51,9 +51,9 @@ public class AuthConfiguration {
 		// chiunque (autenticato o no) può accedere alle pagine index, login, register, ai css e alle immagini
 		.requestMatchers(HttpMethod.GET,"/","/index","/register","/css/**", "/images/**", "favicon.ico",
 				"/cooks", "/recipes","ingredients", "/cook/**", "/recipe/**", "/ingredient/**",
-				"/formSearchRecipes", "/formSearchCooks", "/formSearchIngredients").permitAll()
+				"/formSearchRecipes", "/formSearchCooks", "/formSearchIngredients", "/formContact").permitAll()
 		// chiunque (autenticato o no) può mandare richieste POST al punto di accesso per login e register
-		.requestMatchers(HttpMethod.POST,"/register", "/login", "/formSearchRecipes", "/formSearchCooks", "/formSearchIngredients").permitAll()
+		.requestMatchers(HttpMethod.POST,"/register", "/login", "/formSearchRecipes", "/formSearchCooks", "/formSearchIngredients", "/formContact").permitAll()
 		.requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
 		.requestMatchers(HttpMethod.POST,"/admin/**").hasAnyAuthority(ADMIN_ROLE)
 		.requestMatchers(HttpMethod.GET,"/cookUser/**").hasAnyAuthority(COOK_ROLE)

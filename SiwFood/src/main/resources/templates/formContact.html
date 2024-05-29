@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Contact Form</title>
+	<link rel="stylesheet" href="/css/formContactStyle.css?v=0.1" />
+</head>
+
+<body>
+	<h3>Contact Form</h3>
+
+	<div class="container">
+		<form action="/action_page.php">
+			<label>Nome</label>
+			<input type="text" name="name" placeholder="Il tuo nome...">
+
+			<label>Cognome</label>
+			<input type="text" name="surname" placeholder="Il tuo cognome...">
+
+			<label>Paese</label>
+			<select name="paese">
+				<option value="italia">Italia</option>
+				<option value="spagna">Spagna</option>
+				<option value="francia">Francia</option>
+				<option value="usa">USA</option>
+				<option value="canada">Canada</option>
+			</select>
+
+			<label>Subject</label>
+			<textarea name="subject" placeholder="Scrivi qualcosa..." style="height:200px"></textarea>
+
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+
+</body>
+
+</html>

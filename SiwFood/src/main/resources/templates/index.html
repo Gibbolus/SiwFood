@@ -33,35 +33,48 @@
 
 	</nav>
 	<div id="mainDiv">
-		<div>
-			<a class="div1" href="/formSearchRecipes">
-				<h1 class="menusText"> Cerca una ricetta: </h2>
-					<img class="indexPhotos" src="/images/searchRecipes.png"></img>
+		<div class="search-box">
+			<h1 class="menusText"> Cerca una ricetta </h1>
+			<form th:action="@{/formSearchRecipes}" method="post">
+				<input type="text" th:value="${name}" name="name" placeholder="Ricette..." />
+			</form>
+			<br>
+			<a class="main-div-search">
+				<img class="indexPhotos" src="/images/searchRecipes.png"></img>
 			</a>
 		</div>
-		<div>
-			<a class="div1" href="/formSearchCooks">
-				<h1 class="menusText"> Cerca un cuoco: </h1>
+		<div class="search-box">
+			<h1 class="menusText"> Cerca un cuoco </h1>
+			<form class="search-bar" th:action="@{/formSearchCooks}" method="post">
+				<input type="text" th:value="${name}" name="name" placeholder="Cuochi..." />
+			</form>
+			<br>
+			<a class="main-div-search">
 				<img class="indexPhotos" src="/images/searchCooks.png"></img>
 			</a>
 		</div>
-		<div>
-			<a class="div1" href="/formSearchIngredients">
-				<h1 class="menusText"> Cerca un ingrediente: </h1>
+		<div class="search-box">
+			<h1 class="menusText"> Cerca un ingrediente </h1>
+			<form th:action="@{/formSearchIngredients}" method="post">
+				<input type="text" th:value="${name}" name="name" placeholder="Ingredienti..." />
+			</form>
+			<br>
+			<a class="main-div-search">
 				<img class="indexPhotos" src="/images/searchIngredients.png"></img>
 			</a>
 		</div>
 	</div>
-
+	
 	<div id="map">
 		<div class="textmap">
-			
+
 			<h1>Vienici a trovare!</h1>
 			<p>
-SiwFood è arrivato a Via della Vasca Navale 79 per deliziare il tuo palato con piatti squisiti preparati con ingredienti freschi e di stagione.
-Vieni a scoprire un menu ricco di sapori che saprà conquistarti fin dal primo assaggio.<br />
-Cosa aspetti?<br />
-Ti aspettiamo a SiwFood per un pranzo o una cena indimenticabili!<br />
+				SiwFood è arrivato a Via della Vasca Navale 79 per deliziare il tuo palato con piatti squisiti preparati
+				con ingredienti freschi e di stagione.
+				Vieni a scoprire un menu ricco di sapori che saprà conquistarti fin dal primo assaggio.<br />
+				Cosa aspetti?<br />
+				Ti aspettiamo a SiwFood per un pranzo o una cena indimenticabili!<br />
 			</p>
 
 
@@ -107,9 +120,9 @@ Ti aspettiamo a SiwFood per un pranzo o una cena indimenticabili!<br />
 	<div id="contact-info">
 		<p class="contact-text"> Hai qualche problema con il nostro sito? </p>
 		<address>
-			<a class="contact-text" href="tel:+393359487551">Scrivi al nostro numero dedicato:  (+39) 3359487551 ☏</a>
+			<a class="contact-text" href="tel:+393359487551">Scrivi al nostro numero dedicato: (+39) 3359487551 ☏</a>
 		</address>
-		<a class="contact-text" href="">Contattaci via mail</a>
+		<a class="contact-text" href="/formContact">Contattaci via mail</a>
 	</div>
 
 

@@ -29,8 +29,10 @@
 		<div class="search-bar">
 			<!-- Search box input start -->
 			<div class="search-box">
-				<input type="text" id="search-input" placeholder="Cerca qualcosa..." />
-				<i class="fa-solid fa-magnifying-glass"></i>
+				<form th:action="@{/formSearchIngredients}" method="post">
+					<input id="search-input" type="text" th:value="${name}" name="name"
+						placeholder="Cerca un ingrediente..." />
+				</form>
 			</div>
 			<!-- Search box input ends -->
 		</div>
@@ -45,7 +47,7 @@
 	<h1>Ingredienti</h1>
 	<div th:if="${ingredients.isEmpty()}">Non ci sono ingredienti nel sistema</div>
 
-	<div class="container2" th:if="${!ingredients.isEmpty()}">
+	<div class="container" th:if="${!ingredients.isEmpty()}">
 		<div class="div_princ" th:each="ingredient : ${ingredients}">
 			<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}">
 				<img class="img" th:if="${ingredient.urlImage.startsWith('https')}" th:src="${ingredient.urlImage}">
