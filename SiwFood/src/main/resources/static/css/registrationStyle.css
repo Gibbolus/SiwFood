@@ -1,0 +1,99 @@
+body {
+	margin: 0;
+	background-color: #fceec9;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.nav_bar {
+	background-color: #f3c17e;
+	box-shadow: 0 2px black;
+	position: sticky;
+	height: 75px;
+	display: flex;
+  	align-items: center;
+  	justify-content: space-evenly;
+  	margin-bottom: 50px;
+}
+
+
+li {
+	list-style: none;
+	font-size: larger;
+	
+}
+
+.ali {
+	text-decoration: none;
+	color: black;
+}
+
+.icons_login {
+	margin-top: 0.5rem;
+	height: 3.75rem;
+}
+
+.icons_home {
+	margin-top: 1.25rem;
+	height: 5.6rem;
+}
+
+
+#registr-main{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 15rem;
+}
+
+
+.registr-info{
+	font-size: larger;
+	margin: 10px;
+}
+
+#login-div{
+	background-color:#ed9c4a ;
+	height: 3rem;
+	width: 6rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	color: black;
+	border-radius: 2rem;
+}
+
+.footer{
+	height: 12.5rem;
+	background-color: #f3c17e;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.socialsFonts{
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	display: flex;
+	justify-content: center;
+	font-weight: 600;
+}
+
+.socials{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#accountForm{
+	display: flex;
+	flex-direction: column;
+	align-content: space-between;
+	justify-content: center;
+}
+
+#accountform-text{
+	width: 22rem;
+	margin: 35px auto auto 0;
+	white-space: wrap;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+ 
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Ricette</title>
+	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+</head>
+
+<body>
+
+	<span><img width="15%" th:src=${recipe.urlImage} /></span>
+	<h1 th:text="${recipe.name}">Nome Ricetta</h1>
+
+	<div th:if="${recipe.cook}">
+		<br>
+		<p>Cuoco: <span th:text="${recipe.cook.name} + ' ' + ${recipe.cook.surname}"></span></p>
+		<!--											<a th:href="@{'/admin/addCook' + '/' + ${recipe.id}}">-->
+		<!--												<button type="button">Modifica cuoco</button> </a>-->
+	</div>
+	<div th:unless="${recipe.cook}">
+		<p>Non c'è nessun cuoco per questa ricetta.</p>
+		<!--											<a th:href="@{'/admin/addCook' + '/' + ${recipe.id}}">-->
+		<!--												<button type="button">Aggiungi cuoco</button> </a> -->
+	</div>
+	<strong>Lista degli ingredienti:</strong>
+	<ul>
+		<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">
+			<li>
+				<div th:if="${ingredient.quantityToRecipe[recipe.id]}">
+					<span th:text="${ingredient.name} + ' ' + ${ingredient.quantityToRecipe[recipe.id]}"></span>
+				</div>
+				<div th:unless="${ingredient.quantityToRecipe[recipe.id]}">
+					<span th:text="${ingredient.name}"></span>		
+				</div>
+				<form th:action="@{/cookUser/updateQuantity}" method="POST">
+					<input type="hidden" name="recipeId" th:value="${recipe.id}" />
+					<input type="hidden" name="ingredientId" th:value="${ingredient.id}" />
+					<input type="number" id="quantityValue" name="quantityValue" required
+						th:value="${ingredient.quantityToRecipe[recipe.id]}" min="0">
+					<select name="quantityUnit" required>
+						<option value="grammi">Grammi</option>
+						<option value="millilitri">Millilitri</option>
+						<option value="cucchiai">Cucchiai</option>
+					</select>
+					<a th:href="@{'/cookUser/formUpdateRecipe/'+ ${recipe.id} + '/' + ${userDetails.username}}">
+						<button type="submit">Fine</button></a>
+				</form>
+			</li>
+		</div>
+	</ul>
+	<a th:href="@{'/admin/formUpdateRecipe/'+ ${recipe.id} + '/' + ${userDetails.username}}">
+		<button type="button">Modifica</button>
+	</a>
+
+	<div>
+		<span th:text="${recipe.description}"></span>
+	</div>
+	<span th:if="${recipe.description== null}"> Non disponibile </span>
+	 
+</body>
+
+</html>

@@ -15,7 +15,7 @@
 			<a href="/logout">Logout</a>
 		</div>
 	</div>
-	<div th:if="${cooks.isEmpty()}">Non ci sono cooks nel sistema</div>
+	<div th:if="${cooks.isEmpty()}">Non ci sono cuochi nel sistema</div>
 	<li th:each="cook : ${cooks}">
 		<span th:text="${cook.name} + ' ' + ${cook.surname}"></span>
 		<a th:href="@{'/admin/setCookToRecipe/' + ${cook.id} + '/' + ${recipe.id}}">(Aggiungi)</a>

@@ -9,12 +9,21 @@
 </head>
 
 <body>
-	<h1>Recipes</h1>
-	<div th:if="${recipes.isEmpty()}">Non ci sono recipes nel sistema</div>
-	<ul>
+	<h1> Ricette </h1>
+
+	<form th:action="@{/admin/searchRecipes}" method="post">
+		<div>
+			<span>search</span>
+			<input type="text" name="name" th:value="${name}" placeholder="Ricerca...">
+		</div>
+	</form>
+
+
+	<div th:if="${recipes.isEmpty()}">Non ci sono ricette nel sistema</div>
+	<ul th:if="${!recipes.isEmpty()}">
 		<li th:each="recipe : ${recipes}">
-			<span th:text="${recipe.name}"></span>
-			<a th:href="@{'/cookUser/formUpdateRecipes' + '/' + ${recipe.id}}">(Aggiorna)</a>
+			<a th:href="@{'/recipe' + '/' + ${recipe.id}}" th:text="${recipe.name}"></a>
+			<a th:href="@{'/admin/formUpdateRecipe' + '/' + ${recipe.id}}">(Aggiorna)</a>
 		</li>
 	</ul>
 </body>

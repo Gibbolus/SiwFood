@@ -4,7 +4,6 @@ body {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-
 .nav_bar {
 	background-color: #f3c17e;
 	box-shadow: 0 2px black;
@@ -15,17 +14,9 @@ body {
   	justify-content: space-evenly;
 }
 
-
 .ali {
 	text-decoration: none;
 	color: black;
-}
-
-
-.divInt {
-	border: 1px solid black;
-	padding: 4px;
-	width: 22em;
 }
 
 li {
@@ -34,20 +25,32 @@ li {
 	font-size: larger;
 }
 
-.icons_login {
-	margin-top: 8px;
-	height: 60px;
+.account-reg-log{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
+}
+
+.reg-log-button{
+	text-decoration: none;
+	color: black;
+	display: flex;
+	justify-content: center;
+	height: 110%;
+	width: 140%;
+	border-radius: 1rem;
+	background-color: #f8dbb0;
+}
+
+#reg-button{
+	margin-bottom: 0.5rem;
 }
 
 .icons_home {
-	margin-top: 20px;
+	margin-top: 1.25rem;
 	height: 90px;
 }
-
-#list.show {
-  max-height: 300px;
-}
-
 
 #mainDiv{
 	display: flex;
@@ -55,22 +58,18 @@ li {
 	flex-wrap: nowrap;
 }
 
-
 .search-box{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	
 }
-
-
 
 .main-div-search{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-decoration: none;
-	margin-bottom: 60px;
+	margin-bottom: 3.75rem;
 }
 
 .menusText{
@@ -82,7 +81,7 @@ li {
 	display: flex;
 	justify-content: space-around;
 	width: 70%;
-	border-radius: 100px;
+	border-radius: 6.25rem;
 }
 
 #add-menu{
@@ -91,30 +90,27 @@ li {
 	justify-content: space-around;
 }
 
-
 .add-menu-container{
-	height: 80px;
-	width: 445px;
+	height: 5rem;
+	width: 27.8rem;
 	background-color: chocolate;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border-radius: 100px;
+	border-radius: 6.25rem;
 }
 
 .add-menu-texts{
 	text-decoration: none;
 	text-wrap: nowrap;
 	color: black;
-	
 }
-
 
 #map{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
-	margin: 50px auto 80px auto;
+	margin: 50px auto 5rem auto;
 }
 
 .textmap{
@@ -124,28 +120,13 @@ li {
 	width: 500px;
 }
 
-#contact-info{
-	height: 100px;
-	background-color: #74361a;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-evenly;
-	
-}
-
 p{
 	font-size: larger;
 	text-align: start;
 }
 
-.contact-text{
-	color:white;
-	text-decoration: none;
-}
-
 .footer{
-	height: 200px;
+	height: 12.5rem;
 	background-color: #f3c17e;
 	display: flex;
 	flex-direction: row;
@@ -166,11 +147,17 @@ p{
 	justify-content: center;
 }
 
-.accountform-text{
-	margin: 35px auto auto 0;
+#accountForm{
+	display: flex;
+	flex-direction: column;
+	align-content: space-between;
+	justify-content: center;
 }
 
-#address-info{
-	margin: 0;
+#accountform-text{
+	width: 22rem;
+	margin: 35px auto auto 0;
+	white-space: wrap;
 }
+
 

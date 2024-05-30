@@ -5,16 +5,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title>Cuochi</title>
-	<link rel="stylesheet" href="/css/styles_cooks.css?v=1.4" />
+	<link rel="stylesheet" href="/css/styles_co_re_in.css?v=1.4" />
 </head>
 
 <body>
 	<nav class="nav_bar">
-		<div>
+		<li>
 			<a href="/">
 				<img class="icons_home" src="/images/home.svg"></img>
 			</a>
-		</div>
+		</li>
 		<li>
 			<a class="ali" href="/recipes">Ricette</a>
 		</li>
@@ -24,24 +24,24 @@
 		<li>
 			<a class="ali" href="/ingredients">Ingredienti</a>
 		</li>
-		<!-- Search Bar start -->
 		<div class="search-bar">
-
-			<!-- Search box input start -->
 			<div class="search-box">
 				<form th:action="@{/formSearchCooks}" method="post">
 					<input id="search-input" type="text" th:value="${name}" name="name"
 						placeholder="Cerca un cuoco..." />
 				</form>
 			</div>
-			<!-- Search box input ends -->
 		</div>
-		<!-- Search Bar ends -->
-		<div>
-			<a href="/login">
-				<img class="icons_login" src="/images/account.svg"></img>
-			</a>
-		</div>
+		<li>
+			<div class="account-reg-log">
+				<a id="reg-button" class="reg-log-button" href="/register">
+					Registrati
+				</a>
+				<a class="reg-log-button" href="/login">
+					Login
+				</a>
+			</div>
+		</li>
 	</nav>
 
 	<h1>Cuochi</h1>
@@ -51,8 +51,8 @@
 		<div class="div_princ" th:each="cook : ${cooks}">
 
 			<a th:href="@{'/cook' + '/' + ${cook.id}}">
-				<img class="img" th:if="${cook.urlImage.startsWith('https')}" th:src="${cook.urlImage}">
-				<img class="img" th:unless="${cook.urlImage.startsWith('https')}"
+				<img class="img-cooks" th:if="${cook.urlImage.startsWith('https')}" th:src="${cook.urlImage}">
+				<img class="img-cooks" th:unless="${cook.urlImage.startsWith('https')}"
 					th:src="@{/images/__${cook.urlImage}__}">
 			</a>
 
@@ -62,10 +62,13 @@
 
 	<footer class="footer">
 		<div id="accountForm">
-			<h4 class="accountform-text">Vuoi aggiungere una ricetta?</h4>
-			<a href="/register"> Registrati qui! </a>
-			<h4 class="accountform-text">Oppure esegui il login!</h4>
-			<a href="/login"> Login qui! </a>
+			<div id="accountform-text">
+				<h3>Problemi con il sito?</h4>
+					<p id="email-contact">
+						Puoi contattarci cliccando
+						<a href="/formContact" style="color: black;">qui</a>
+					</p>
+			</div>
 		</div>
 		<div class="socials">
 			<p class="socialsFonts">Seguici su Instagram</p>
@@ -84,17 +87,8 @@
 			<a href="https://www.x.com">
 				<img src="/images/logoX.png"></img>
 			</a>
-
 		</div>
-
 	</footer>
-	<div id="contact-info">
-		<p class="contact-text"> Hai qualche problema con il nostro sito? </p>
-		<address>
-			<a class="contact-text" href="tel:+393359487551">Scrivi al nostro numero dedicato: (+39) 3359487551 ☏</a>
-		</address>
-		<a class="contact-text" href="">Contattaci via mail</a>
-	</div>
 
 
 

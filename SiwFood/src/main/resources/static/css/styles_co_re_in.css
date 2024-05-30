@@ -4,6 +4,7 @@ body {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+
 .nav_bar {
 	background-color: #f3c17e;
 	box-shadow: 0 2px black;
@@ -26,21 +27,32 @@ body {
 	align-items: center;
 }
 
-.divInt {
-	border: 1px solid black;
-	padding: 4px;
-	width: 22em;
+.account-reg-log{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
+}
+
+.reg-log-button{
+	text-decoration: none;
+	color: black;
+	display: flex;
+	justify-content: center;
+	height: 110%;
+	width: 140%;
+	border-radius: 1rem;
+	background-color: #f8dbb0;
+}
+
+#reg-button{
+	margin-bottom: 0.5rem;
 }
 
 li {
 	list-style: none;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	font-size: larger;
-}
-
-.icons_login {
-	margin-top: 8px;
-	height: 60px;
 }
 
 .icons_home {
@@ -59,11 +71,6 @@ li {
 
 #search-input{
 	width: 625px;
-}
-
-
-#list.show {
-  max-height: 300px;
 }
 
 .search-box {
@@ -92,35 +99,83 @@ li {
   font-weight: 500;
 }
 
+
 .container {
 	display: flex;
 	flex-wrap: wrap;
-	padding-bottom: 100px;
+	padding-bottom: 6.25rem;
 }
 
 .div_princ{
 	margin: auto;
 	background-color: #f8dbb0;
-	margin-top: 60px;
-	height: 400px;
+	margin-top: 3.75rem;
+	height: 25rem;
 	width: 450px;
 	border-radius: 50px;
 	box-shadow: #74361a 4px 4px 30px;
 }
 
-.img {
-	margin: 8px 0 0 8px;
+.img-recipe-ingredient {
+	margin: 0.5rem 0 0 0.5rem;
+	height: 12rem;
+	width: 20rem;
+	border-radius: 50px;
+	box-shadow: black 1px 1px 5px;
+}
+
+.img-cooks {
+	margin: 0.5rem 0 0 0.5rem;
 	max-height: 18rem;
 	max-width: 20rem;
 	border-radius: 50px;
 	box-shadow: black 1px 1px 5px;
 }
 
+.info {
+	margin-top: 20px;
+	height: 6.25rem;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.div_int {
+	display: flex;
+	flex-direction: column;
+  	justify-content: center;
+  	align-items: center;
+	height: 6.25rem;
+	width: 6.25rem;
+}
+
+.icons {
+	height: 50px;
+	width: 50px;
+}
+
+.icon_info {
+	margin-top: 5px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	font-size: larger;
+}
+
+
+.type {
+	font-size: larger;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	text-align: center;
+}
+
 .text{
-	margin: 25px 25px -5px 25px;
+	margin: 5px 25px -5px 25px;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.subtext{
+	margin: 0px 25px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 
 #mainDiv{
 	display: flex;
@@ -152,7 +207,7 @@ li {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
-	margin: 50px auto 80px auto;
+	margin: 50px auto 5rem auto;
 }
 
 .textmap{
@@ -163,7 +218,7 @@ li {
 }
 
 #contact-info{
-	height: 100px;
+	height: 6.25rem;
 	background-color: #74361a;
 	display: flex;
 	flex-direction: row;
@@ -183,7 +238,7 @@ p{
 }
 
 .footer{
-	height: 200px;
+	height: 12.5rem;
 	background-color: #f3c17e;
 	display: flex;
 	flex-direction: row;
@@ -204,13 +259,16 @@ p{
 	justify-content: center;
 }
 
-.accountform-text{
+#accountForm{
+	display: flex;
+	flex-direction: column;
+	align-content: space-between;
+	justify-content: center;
+}
+
+#accountform-text{
+	width: 22rem;
 	margin: 35px auto auto 0;
+	white-space: wrap;
 }
-
-#address-info{
-	margin: 0;
-}
-
-
 

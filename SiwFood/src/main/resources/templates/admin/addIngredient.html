@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Cooks</title>
+	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+</head>
+
+<body>
+	<div th:if="${userDetails}">
+		<div>
+			<div th:text="${userDetails.username}"></div>
+			<a href="/logout">Logout</a>
+		</div>
+	</div>
+	<h3 th:text="'Ingredienti della ricetta' + ' ' + ${recipe.name}"></h3>
+	<div th:if="${recipe.ingredientsUtilizzati.isEmpty()}">Non ci sono ingredienti per questa ricetta </div>
+
+
+	<ul>
+		<li th:each="ingredient : ${recipe.ingredientsUtilizzati}">
+			<span th:text="${ingredient.name}"></span>
+			<a th:href="@{'/admin/removeIngredientFromRecipe/'+ ${ingredient.id}+'/'+${recipe.id}}">- (rimuovi)</a>
+		</li>
+	</ul>
+
+	<ul>
+		<li th:each="ingredient : ${ingredientsToAdd}">
+			<span th:text="${ingredient.name}"></span>
+			<a th:href="@{'/admin/addIngredientToRecipe/' + ${ingredient.id} + '/' + ${recipe.id}}">(Aggiungi)</a>
+		</li>
+	</ul>
+	<div>
+		<a th:href="@{'/admin/formUpdateRecipe/' + ${recipe.id}}">
+			<button type="button"> Fine </button>
+		</a>
+	</div>
+
+</body>
+
+</html>

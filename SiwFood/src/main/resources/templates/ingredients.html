@@ -5,16 +5,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title>Ingredienti</title>
-	<link rel="stylesheet" href="/css/styles_recipes.css?v=1.8" />
+	<link rel="stylesheet" href="/css/styles_co_re_in.css?v=1.8" />
 </head>
 
 <body>
 	<nav class="nav_bar">
-		<div>
+		<li>
 			<a href="/">
 				<img class="icons_home" src="/images/home.svg"></img>
 			</a>
-		</div>
+		</li>
 		<li>
 			<a class="ali" href="/recipes">Ricette</a>
 		</li>
@@ -24,24 +24,20 @@
 		<li>
 			<a class="ali" href="/ingredients">Ingredienti</a>
 		</li>
-		
-		<!-- Search Bar start -->
 		<div class="search-bar">
-			<!-- Search box input start -->
 			<div class="search-box">
 				<form th:action="@{/formSearchIngredients}" method="post">
 					<input id="search-input" type="text" th:value="${name}" name="name"
-						placeholder="Cerca un ingrediente..." />
+						placeholder="Cerca un ingredienti..." />
 				</form>
 			</div>
-			<!-- Search box input ends -->
 		</div>
-		<!-- Search Bar ends -->
-		<div>
-			<a href="/login">
-				<img class="icons_login" src="/images/account.svg"></img>
-			</a>
-		</div>
+		<li>
+			<div class="account-reg-log">
+				<a id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+				<a class="reg-log-button" href="/login"> Login </a>
+			</div>
+		</li>
 	</nav>
 
 	<h1>Ingredienti</h1>
@@ -50,14 +46,48 @@
 	<div class="container" th:if="${!ingredients.isEmpty()}">
 		<div class="div_princ" th:each="ingredient : ${ingredients}">
 			<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}">
-				<img class="img" th:if="${ingredient.urlImage.startsWith('https')}" th:src="${ingredient.urlImage}">
-				<img class="img" th:unless="${ingredient.urlImage.startsWith('https')}" th:src="@{/images/__${ingredient.urlImage}__}">
+				<img class="img-recipe-ingredient" th:if="${ingredient.urlImage.startsWith('https')}"
+					th:src="${ingredient.urlImage}">
+				<img class="img-recipe-ingredient" th:unless="${ingredient.urlImage.startsWith('https')}"
+					th:src="@{/images/__${ingredient.urlImage}__}">
 			</a>
 
 			<h2 class="text" th:text="${ingredient.name}"></h2>
 
 		</div> <!-- class div_princ -->
 	</div> <!-- class container -->
+
+	<footer class="footer">
+		<div id="accountForm">
+			<div id="accountform-text">
+				<h3>Problemi con il sito?</h4>
+					<p>
+						Puoi contattarci cliccando
+						<a href="/formContact" style="color: black;">qui</a>
+					</p>
+			</div>
+		</div>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su Instagram</p>
+			<a href="https://www.instagram.com">
+				<img src="/images/logoInstagram.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su Youtube</p>
+			<a href="https://www.youtube.com">
+				<img src="/images/logoYoutube.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su X</p>
+			<a href="https://www.x.com">
+				<img src="/images/logoX.png"></img>
+			</a>
+		</div>
+	</footer>
+
+
 </body>
 
 </html>

@@ -2,33 +2,93 @@
 <html>
 
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
 	<title>SiwFood - Registrazione conclusa</title>
-	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/registrationStyle.css?v=0.5" />
 </head>
 
 <body>
-	<header>
-		<div th:if="${userDetails}">
-			<span th:text="${userDetails.username}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${user}">
-			<a href="/login">Login</a>
-		</div>
-	</header>
 
-	<h1>Congratulazioni ti sei registrato!</h1>
-	<div>
-		<span>Nome: </span>
-		<span th:text="${user.name}"></span>
+	<nav class="nav_bar">
+		<li>
+			<a href="/">
+				<img class="icons_home" src="/images/home.svg"></img>
+			</a>
+		</li>
+		<li>
+			<a class="ali" href="/recipes">Ricette</a>
+		</li>
+		<li>
+			<a class="ali" href="/cooks">Cuochi</a>
+		</li>
+		<li>
+			<a class="ali" href="/ingredients">Ingredienti</a>
+		</li>
+		<li>
+			<a href="/login">
+				<img class="icons_login" src="/images/account.svg"></img>
+			</a>
+		</li>
+	</nav>
+
+
+
+	<div id="registr-main">
+		<h1> Registrazione completata!</h1>
+		<br>
+		<div class="registr-info">
+			<span>Nome: </span>
+			<span th:text="${user.name}"></span>
+		</div>
+
+		<div class="registr-info">
+			<span>Cognome: </span>
+			<span th:text="${user.surname}"></span>
+		</div>
+
+		<div class="registr-info">
+			<span>Email: </span>
+			<span th:text="${user.email}"></span>
+		</div>
+		<br>
+		<a id="login-div" href="/login">
+			<span> Login </span>
+		</a>
 	</div>
-	<div>
-		<span>Cognome: </span>
-		<span th:text="${user.surname}"></span>
-	</div>
-	<div>
-		<span>Email: </span>
-		<span th:text="${user.email}"></span>
-	</div>
+	
+	
+	
+	<footer class="footer">
+		<div id="accountForm">
+			<div id="accountform-text">
+				<h3>Problemi con il sito?</h4>
+				<p>
+					Puoi contattarci cliccando 
+					<a href="/formContact" style="color: black;" >qui</a>
+				</p>
+			</div>
+		</div>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su Instagram</p>
+			<a href="https://www.instagram.com">
+				<img src="/images/logoInstagram.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su Youtube</p>
+			<a href="https://www.youtube.com">
+				<img src="/images/logoYoutube.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su X</p>
+			<a href="https://www.x.com">
+				<img src="/images/logoX.png"></img>
+			</a>
+		</div>
+	</footer>
+	
 </body>
+
 </html>

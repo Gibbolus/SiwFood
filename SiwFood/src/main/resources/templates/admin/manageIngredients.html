@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>Recipes</title>
+	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+</head>
+
+<body>
+	<h1> Ingredienti </h1>
+
+
+	<form th:action="@{/admin/searchIngredients}" method="post">
+		<div>
+			<span>search</span>
+			<input type="text" name="name" th:value="${name}" placeholder="Ricerca...">
+		</div>
+	</form>
+	<div th:if="${ingredients.isEmpty()}">Non ci sono ingredienti nel sistema</div>
+	<ul th:if="${!ingredients.isEmpty()}">
+		<li th:each="ingredient : ${ingredients}">
+			<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}"
+				th:text="${ingredient.name}"></a>
+			<a th:href="@{'/admin/deleteIngredient/' + ${ingredient.id}}">(Elimina)</a>
+		</li>
+	</ul>
+</body>
+
+</html>

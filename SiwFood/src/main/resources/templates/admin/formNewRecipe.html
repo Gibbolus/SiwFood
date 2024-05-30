@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>New Recipe</title>
+	<link rel="stylesheet" href="/css/formContactStyle.css?v=0.1" />
+</head>
+
+<body>
+	<h1>Aggiungi una ricetta</h1>
+	<form th:action="@{/admin/recipe}" method="POST" th:object="${recipe}">
+		<br>
+		<div>
+			<div>
+				Nome: <span><input required type="text" th:field="${recipe.name}" placeholder="Nome"/></span>
+			</div>
+			<div>
+				Descrizione: <span><input required type="text" th:field="${recipe.description}" placeholder="Descrizione"/></span>
+			</div>
+			<div>
+				URL immagine: <span><input required type="url" th:field="${recipe.urlImage}" placeholder="URL Immagine"/></span>
+			</div>
+			<div>
+				Tempo: <span><input required type="number" th:field="${recipe.cookTime}" placeholder="Tempo"/></span>
+			</div>
+			
+			<div>Tipo di piatto: 
+				<select required th:field="${recipe.recipeType}" placeholder="Tipo di piatto">
+					<option value='Antipasto'>Antipasto</option>
+				    <option value='Primo'>Primo</option>
+				    <option value='Secondo'>Secondo</option>
+				    <option value='Dolce'>Dolce</option>
+				</select>
+			</div>
+			<div>
+				Difficoltà: 
+				<select required th:field="${recipe.difficulty}" placeholder="Difficoltà">
+					<option value='Facile'>Facile</option>
+				    <option value='Medio'>Medio</option>
+				    <option value='Difficile'>Difficile</option>
+				</select>
+			</div>
+			<input type="hidden" name="username" th:value="${userDetails.username}"/>
+		</div>
+		<div>
+			<span><button type="submit">Conferma</button></span>
+		</div>
+	</form>
+</body>
+
+</html>

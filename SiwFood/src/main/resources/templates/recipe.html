@@ -11,6 +11,37 @@
 
 <body>
 
+	<nav class="nav_bar">
+		<li>
+			<a href="/">
+				<img class="icons_home" src="/images/home.svg"></img>
+			</a>
+		</li>
+		<li>
+			<a class="ali" href="/recipes">Ricette</a>
+		</li>
+		<li>
+			<a class="ali" href="/cooks">Cuochi</a>
+		</li>
+		<li>
+			<a class="ali" href="/ingredients">Ingredienti</a>
+		</li>
+		<div class="search-bar">
+			<div class="search-box">
+				<form th:action="@{/formSearchRecipes}" method="post">
+					<input id="search-input" type="text" th:value="${name}" name="name"
+						placeholder="Cerca un ricetta..." />
+				</form>
+			</div>
+		</div>
+		<li>
+			<div class="account-reg-log">
+				<a id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+				<a class="reg-log-button" href="/login"> Login </a>
+			</div>
+		</li>
+	</nav>
+
 	<div th:if="${recipe}">
 		<h1 th:text="${recipe.name}">Nome ricetta</h1>
 		<div>cook:
@@ -20,8 +51,8 @@
 			<span th:unless="${recipe.cook != null}">Non disponibile</span>
 		</div>
 		<span>
-			<img class="img" th:if="${recipe.urlImage.startsWith('https')}" th:src="${recipe.urlImage}">
-			<img class="img" th:unless="${recipe.urlImage.startsWith('https')}" th:src="@{/images/__${recipe.urlImage}__}">
+			<img class="img-recipe-ingredient" th:if="${recipe.urlImage.startsWith('https')}" th:src="${recipe.urlImage}">
+			<img class="img-recipe-ingredient" th:unless="${recipe.urlImage.startsWith('https')}" th:src="@{/images/__${recipe.urlImage}__}">
 		</span>
 		<strong>Lista degli ingredienti:</strong>
 		<ul>
@@ -29,17 +60,50 @@
 				<li>
 					<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}" th:text="${ingredient.name} + ':' + ' '">
 					</a>
-					<div th:text="${ingredient.name} + ' ' + ${ingredient.quantityToRecipe[recipe.id]} + ' ' + ${ingredient.unitOfMeasure}">  </div>
+					<div
+						th:text="${ingredient.name} + ' ' + ${ingredient.quantityToRecipe[recipe.id]} + ' ' + ${ingredient.unitOfMeasure}">
+					</div>
 				</li>
 			</div>
 		</ul>
-		<div> Descrizione: </div>					
+		<div> Descrizione: </div>
 		<span th:text="${recipe.description}"></span>
 		<span th:if="${recipe.description == null}"> Non disponibile </span>
 	</div>
-	   
-	    <div th:unless="${recipe}">Non esiste</div>
 	 
+	<div th:unless="${recipe}">Non esiste</div>
+	 
+	<footer class="footer">
+		<div id="accountForm">
+			<div id="accountform-text">
+				<h3>Problemi con il sito?</h4>
+					<p id="email-contact">
+						Puoi contattarci cliccando
+						<a href="/formContact" style="color: black;">qui</a>
+					</p>
+			</div>
+		</div>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su Instagram</p>
+			<a href="https://www.instagram.com">
+				<img src="/images/logoInstagram.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su Youtube</p>
+			<a href="https://www.youtube.com">
+				<img src="/images/logoYoutube.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su X</p>
+			<a href="https://www.x.com">
+				<img src="/images/logoX.png"></img>
+			</a>
+		</div>
+	</footer>
+
+
 </body>
 
 </html>
