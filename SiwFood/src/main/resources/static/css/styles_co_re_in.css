@@ -5,7 +5,7 @@ body {
 }
 
 
-.nav_bar {
+.nav-bar {
 	background-color: #f3c17e;
 	box-shadow: 0 2px black;
 	position: sticky;
@@ -56,8 +56,7 @@ li {
 }
 
 .icons_home {
-	margin-top: 20px;
-	height: 90px;
+	height: 50px;
 }
 
 .search-bar {
@@ -192,7 +191,6 @@ li {
 
 .menusText{
 	color: black;
-	margin-bottom: -0.5%;
 }
 
 

@@ -4,7 +4,7 @@ body {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.nav_bar {
+.nav-bar {
 	background-color: #f3c17e;
 	box-shadow: 0 2px black;
 	position: sticky;
@@ -12,6 +12,7 @@ body {
 	display: flex;
   	align-items: center;
   	justify-content: space-evenly;
+  	margin-bottom: 2%;
 }
 
 .ali {
@@ -48,8 +49,7 @@ li {
 }
 
 .icons_home {
-	margin-top: 1.25rem;
-	height: 90px;
+	height: 50px;
 }
 
 #mainDiv{
@@ -58,11 +58,27 @@ li {
 	flex-wrap: nowrap;
 }
 
+#hamburger{
+	display: none;
+}
+
 .search-box{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  min-width: 250px;
+  border-radius: 50px;
+  background-color: white;
+  border: 1px solid black;
+  padding: 0.8rem 0.8rem;
+  
+}
+
 
 .main-div-search{
 	display: flex;
@@ -74,7 +90,6 @@ li {
 
 .menusText{
 	color: black;
-	margin-bottom: -0.5%;
 }
 
 .indexPhotos{
@@ -82,6 +97,7 @@ li {
 	justify-content: space-around;
 	width: 70%;
 	border-radius: 6.25rem;
+	box-shadow: black 1px 5px 10px;
 }
 
 #add-menu{
@@ -158,6 +174,99 @@ p{
 	width: 22rem;
 	margin: 35px auto auto 0;
 	white-space: wrap;
+}
+
+
+.per ora bho{}
+
+
+
+@media(max-width: 768px){
+	
+	
+	.navbar{
+		min-height: 70px;
+		background-color: #f3c17e;
+		box-shadow: 0 2px black;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 24px;
+	}
+	
+	.nav-menu{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 60px;
+	}
+	
+	
+	.nav-link{
+		transition: 0.7s ease;
+	}
+	
+	.nav-link:hover{
+		color: aliceblue;
+	}
+	
+	.hamburger{
+		display: block;
+		cursor: pointer;
+	}
+	
+	.bar{
+		display: block;
+		width: 25px;
+		height: 3px;
+		margin: 5px auto;
+		-webkit-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+		background-color: black;
+	}
+	
+	
+	.hamburger.active .bar:nth-child(2){
+		opacity: 0;
+	}
+	.hamburger.active .bar:nth-child(1){
+		transform: translateY(8px) rotate(45deg);
+	}
+	.hamburger.active .bar:nth-child(3){
+		transform: translateY(-8px) rotate(-45deg);
+	}
+	
+	.nav-menu{
+		position: fixed;
+		left: 0;
+		top: 56px;
+		gap: 0;
+		flex-direction: column;
+		background-color: white;
+		width: 50%;
+		text-align: center;
+		transition: 0.3s;
+	}
+	
+	.nav-item{
+		margin: 16px 0;
+	}
+	
+	.nav-menu.active{
+		left: 44%;
+	}
+	
+	.nav-bar{
+		display: none;
+	}
+	
+	#mainDiv{
+		display: none;
+	}
+	
+	.footer{
+		display: none;
+	}
 }
 
 

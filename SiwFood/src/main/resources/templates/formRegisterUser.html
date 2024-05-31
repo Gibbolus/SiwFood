@@ -5,63 +5,123 @@
 	<title>
 		SiwFood - Registrazione
 	</title>
-	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/register_style.css" />
 </head>
 
 <body>
-	<h1>Registrazione new utente</h1>
-	<form th:action="@{/register}" method="POST">
-		<div>
-			<label>Nome</label>
-			<span><input type="text" placeholder="name" required th:field="${user.name}"/></span>
-			<span th:if="${#fields.hasErrors('user.name')}" th:errors="${user.name}">
-			</span>
+	<nav class="nav-bar">
+		<li>
+			<a href="/">
+				<img class="icons_home" src="/images/home.svg"></img>
+			</a>
+		</li>
+		<li>
+			<a class="ali" href="/recipes">Ricette</a>
+		</li>
+		<li>
+			<a class="ali" href="/cooks">Cuochi</a>
+		</li>
+		<li>
+			<a class="ali" href="/ingredients">Ingredienti</a>
+		</li>
+		<li>
+			<div class="account-reg-log">
+				<a id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+				<a class="reg-log-button" href="/login"> Login </a>
+			</div>
+		</li>
+	</nav>
+	
+	<div id="form-main">
+		<h1>Registrazione nuovo utente</h1>
+		<form th:action="@{/register}" method="POST">
+			<div>
+				<label class="text">Nome</label>
+				<span><input class="search-bar" type="text" placeholder="Nome..." required th:field="${user.name}"/></span>
+				<span th:if="${#fields.hasErrors('user.name')}" th:errors="${user.name}">
+				</span>
+			</div>
+			<div>
+				<label class="text">Cogname</label>
+				<br>
+				<span><input class="search-bar" type="text" placeholder="Cognome..." required th:field="${user.surname}" /></span>
+				<span th:if="${#fields.hasErrors('user.surname')}" th:errors="${user.surname}">
+				</span>
+			</div>
+			<div>
+				<label class="text">Email</label>
+				<span><input class="search-bar" type="text" placeholder="Email..." required th:field="${user.email}" /></span>
+				<span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}">
+				</span>
+			</div>
+			<div>
+				<label class="text">Foto</label>
+				<span><input class="search-bar" type="url" placeholder="Foto..." required th:field="${user.urlImage}" /></span>
+				<span th:if="${#fields.hasErrors('user.urlImage')}" th:errors="${user.urlImage}">
+				</span>
+			</div>
+			<div>
+				<label class="text">Data Di Nascita</label>
+				<span><input class="search-bar" type="date" required th:field="${user.year}" /></span>
+				<span th:if="${#fields.hasErrors('user.year')}" th:errors="${user.year}">
+				</span>
+			</div>
+			<div>
+				<label class="text">Username</label>
+				<span>
+					<input class="search-bar" type="text" placeholder="Username..." required th:field="${credentials.username}" />
+				</span>
+				<span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}">
+				</span>
+			</div>
+			<div>
+				<label class="text">Password</label>
+				<span><input class="search-bar" type="password" placeholder="Password..." required th:field="${credentials.password}" />
+				</span>
+				<span th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}">
+				</span>
+			</div>
+			<div id="reg-button-main">
+				<button id="send-reg-button" type="submit">Registra</button>
+			</div>
+		</form>
+	</div>
+	
+	
+	
+	
+	
+		<footer class="footer">
+		<div id="accountForm">
+			<div id="accountform-text">
+				<h3>Problemi con il sito?</h4>
+					<p>
+						Puoi contattarci cliccando
+						<a href="/formContact" style="color: black;">qui</a>
+					</p>
+			</div>
 		</div>
-		<div>
-			<label>Cogname</label>
-			<span><input type="text" placeholder="surname" required th:field="${user.surname}" /></span>
-			<span th:if="${#fields.hasErrors('user.surname')}" th:errors="${user.surname}">
-			</span>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su Instagram</p>
+			<a href="https://www.instagram.com">
+				<img src="/images/logoInstagram.png"></img>
+			</a>
 		</div>
-		<div>
-			<label>Email</label>
-			<span><input type="text" placeholder="email" required th:field="${user.email}" /></span>
-			<span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}">
-			</span>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su Youtube</p>
+			<a href="https://www.youtube.com">
+				<img src="/images/logoYoutube.png"></img>
+			</a>
 		</div>
-		<div>
-			<label>Foto</label>
-			<!-- <span><input type="file" placeholder="link foto" required th:field="${user.urlImage}" accept="image/png, image/jpeg"/></span>
-			-->
-			<span><input type="url" placeholder="url foto" required th:field="${user.urlImage}" /></span>
-			<span th:if="${#fields.hasErrors('user.urlImage')}" th:errors="${user.urlImage}">
-			</span>
+		<div class="socials">
+			<p class="socialsFonts">Seguici su X</p>
+			<a href="https://www.x.com">
+				<img src="/images/logoX.png"></img>
+			</a>
 		</div>
-		<div>
-			<label>Data Di Nascita</label>
-			<span><input type="date" placeholder="data di year" required th:field="${user.year}" /></span>
-			<span th:if="${#fields.hasErrors('user.year')}" th:errors="${user.year}">
-			</span>
-		</div>
-		<div>
-			<label>Username</label>
-			<span>
-				<input type="text" placeholder="username" required th:field="${credentials.username}" />
-			</span>
-			<span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}">
-			</span>
-		</div>
-		<div>
-			<label>Password</label>
-			<span><input type="password" placeholder="password" required th:field="${credentials.password}" />
-			</span>
-			<span th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}">
-			</span>
-		</div>
-		<div>
-			<button type="submit">Registra</button>
-		</div>
-	</form>
+	</footer>
+	
+	
 </body>
 
 </html>

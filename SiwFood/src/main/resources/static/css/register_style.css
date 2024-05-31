@@ -4,7 +4,7 @@ body {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.nav_bar {
+.nav-bar {
 	background-color: #f3c17e;
 	box-shadow: 0 2px black;
 	position: sticky;
@@ -12,14 +12,7 @@ body {
 	display: flex;
   	align-items: center;
   	justify-content: space-evenly;
-  	margin-bottom: 50px;
-}
-
-
-li {
-	list-style: none;
-	font-size: larger;
-	
+  	margin-bottom: 2%;
 }
 
 .ali {
@@ -27,40 +20,85 @@ li {
 	color: black;
 }
 
-.icons_login {
-	margin-top: 0.5rem;
-	height: 3.75rem;
+li {
+	list-style: none;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	font-size: larger;
 }
 
-.icons_home {
-	margin-top: 1.25rem;
-	height: 5.6rem;
-}
-
-
-#registr-main{
+.account-reg-log{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin-bottom: 15rem;
+	align-content: center;
 }
 
-
-.registr-info{
-	font-size: larger;
-	margin: 10px;
-}
-
-#login-div{
-	background-color:#ed9c4a ;
-	height: 3rem;
-	width: 6rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.reg-log-button{
 	text-decoration: none;
 	color: black;
-	border-radius: 2rem;
+	display: flex;
+	justify-content: center;
+	height: 110%;
+	width: 140%;
+	border-radius: 1rem;
+	background-color: #f8dbb0;
+}
+
+#reg-button{
+	margin-bottom: 0.5rem;
+}
+
+.icons_home {
+	height: 50px;
+}
+
+
+
+#form-main{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 5%;
+}
+
+.text{
+	font-size: large;
+}
+
+.search-box{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  min-width: 500px;
+  border-radius: 50px;
+  background-color: white;
+  border: 1px solid black;
+  padding: 1rem 1rem;
+  margin-top: 2%;
+  margin-bottom: 6%;
+  font-size: large;
+}
+
+#reg-button-main{
+	display: flex;
+	justify-content: center;
+	margin-top: 10%;
+}
+
+#send-reg-button{
+	min-width: 200px;
+	border-radius: 50px;
+	background-color: #f3c17e;
+	border: 1px solid black;
+	padding: 0.8rem 0.8rem;
+	margin-bottom: 6%;
+	cursor: pointer;
+	font-size: larger;
 }
 
 .footer{

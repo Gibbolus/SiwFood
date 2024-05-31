@@ -77,11 +77,6 @@ public class RecipeController {
 		return "formContact.html";
 	}	
 	
-	@GetMapping(value = "/formSearchRecipes")
-	public String SearchRecipes() {
-		return "formSearchRecipes.html";
-	}
-	
 	@PostMapping(value = "/formSearchRecipes")
 	public String searchRecipes(Model model, @RequestParam String name) {
 		model.addAttribute("recipes", this.recipeRepository.findByName(name));
