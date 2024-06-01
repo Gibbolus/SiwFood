@@ -10,11 +10,11 @@
 
 <body>
 	<nav class="nav-bar">
-		<div>
+		<li>
 			<a href="/">
 				<img class="icons_home" src="/images/home.svg"></img>
 			</a>
-		</div>
+		</li>
 		<li>
 			<a class="ali" href="/recipes">Ricette</a>
 		</li>
@@ -24,29 +24,19 @@
 		<li>
 			<a class="ali" href="/ingredients">Ingredienti</a>
 		</li>
-
-		<div>
-			<a href="/login">
-				<img class="icons_login" src="/images/account.svg"></img>
-			</a>
-		</div>
-
+		<li>
+			<div class="account-reg-log">
+				<a id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+				<a class="reg-log-button" href="/login"> Login </a>
+			</div>
+		</li>
 	</nav>
+	
 	<div id="mainDiv">
 		<div class="search-box">
-			<h1 class="menusText"> Cerca un cuoco </h1>
-			<form class="search-bar" th:action="@{/formSearchCooks}" method="post">
-				<input type="text" th:value="${name}" name="name" placeholder="Cuochi..." />
-			</form>
-			<br>
-			<a class="main-div-search">
-				<img class="indexPhotos" src="/images/searchCooks.png"></img>
-			</a>
-		</div>
-		<div class="search-box">
-			<h1 class="menusText"> Cerca una ricetta </h1>
+			<h2 class="menusText"> Cerca una ricetta </h2>
 			<form th:action="@{/formSearchRecipes}" method="post">
-				<input type="text" th:value="${name}" name="name" placeholder="Ricette..." />
+				<input class="search-bar" type="text" th:value="${name}" name="name" placeholder="Ricette..." />
 			</form>
 			<br>
 			<a class="main-div-search">
@@ -54,9 +44,19 @@
 			</a>
 		</div>
 		<div class="search-box">
-			<h1 class="menusText"> Cerca un ingrediente </h1>
+			<h2 class="menusText"> Cerca un cuoco </h2>
+			<form th:action="@{/formSearchCooks}" method="post">
+				<input class="search-bar" type="text" th:value="${name}" name="name" placeholder="Cuochi..." />
+			</form>
+			<br>
+			<a class="main-div-search">
+				<img class="indexPhotos" src="/images/searchCooks.png"></img>
+			</a>
+		</div>
+		<div class="search-box">
+			<h2 class="menusText"> Cerca un ingrediente </h2>
 			<form th:action="@{/formSearchIngredients}" method="post">
-				<input type="text" th:value="${name}" name="name" placeholder="Ingredienti..." />
+				<input class="search-bar" type="text" th:value="${name}" name="name" placeholder="Ingredienti..." />
 			</form>
 			<br>
 			<a class="main-div-search">
@@ -66,14 +66,14 @@
 	</div>
 
 	<div id="add-menu" th:if="${userDetails != null}">
-		<a class="add-menu-texts"  href="/cookUser/manageRecipes">
+		<a class="add-menu-texts" href="/cookUser/manageRecipes">
 			<div class="add-menu-container">
 				<span>Gestisci le tue ricette</span>
 			</div>
 		</a>
 		<a class="add-menu-texts" th:href="@{'/cookUser/formNewRecipe' + '/' + ${userDetails.username}}">
 			<div class="add-menu-container">
-				 <span>Aggiungi una ricetta</span>
+				<span>Aggiungi una ricetta</span>
 			</div>
 		</a>
 		<a class="add-menu-texts" href="/cookUser/formNewIngredient">

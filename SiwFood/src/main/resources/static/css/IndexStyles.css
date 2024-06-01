@@ -177,10 +177,6 @@ p{
 }
 
 
-.per ora bho{}
-
-
-
 @media(max-width: 768px){
 	
 	
@@ -200,7 +196,6 @@ p{
 		align-items: center;
 		gap: 60px;
 	}
-	
 	
 	.nav-link{
 		transition: 0.7s ease;
@@ -254,6 +249,13 @@ p{
 	
 	.nav-menu.active{
 		left: 44%;
+	}
+	
+	
+	
+	
+	#map{
+		display: none;
 	}
 	
 	.nav-bar{

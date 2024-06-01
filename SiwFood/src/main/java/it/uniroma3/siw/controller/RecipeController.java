@@ -30,36 +30,31 @@ import it.uniroma3.siw.repository.RecipeRepository;
 import it.uniroma3.siw.service.CookService;
 import it.uniroma3.siw.service.IngredientService;
 import it.uniroma3.siw.service.RecipeService;
-
+import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 
 @Controller
 public class RecipeController {
 
-	@Autowired
-	RecipeRepository recipeRepository;
+	@Autowired RecipeRepository recipeRepository;
 
-	@Autowired
-	RecipeService recipeService;
+	@Autowired RecipeService recipeService;
 
-	@Autowired
-	RecipeValidator recipeValidator;
+	@Autowired RecipeValidator recipeValidator;
 
-	@Autowired
-	CookService cookService;
+	@Autowired CookService cookService;
 	
-	@Autowired
-	IngredientService ingredientService;
+	@Autowired IngredientService ingredientService;
 
-	@Autowired
-	CookRepository cookRepository;
+	@Autowired CookRepository cookRepository;
 
-	@Autowired
-	IngredientRepository ingredientRepository;
+	@Autowired IngredientRepository ingredientRepository;
 
-	@Autowired
-	CredentialsRepository credentialsRepository;
+	@Autowired CredentialsRepository credentialsRepository;
 
+	@Autowired EntityManager entityManager;
+	
+	
 	@GetMapping(value = "/recipe/{id}")
 	public String getRecipe(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("recipe", this.recipeRepository.findById(id).get());
@@ -79,19 +74,28 @@ public class RecipeController {
 	
 	@PostMapping(value = "/formSearchRecipes")
 	public String searchRecipes(Model model, @RequestParam String name) {
-		model.addAttribute("recipes", this.recipeRepository.findByName(name));
+		String nameLowerCase = name.toLowerCase();
+		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		List<Recipe> recipes = this.entityManager.createQuery(query, Recipe.class).getResultList();
+		model.addAttribute("recipes", recipes);
 		return "recipes.html";
 	}
 
 	@PostMapping(value = "admin/formSearchRecipes")
 	public String searchRecipesAdmin(Model model, @RequestParam String name) {
-		model.addAttribute("recipes", this.recipeRepository.findByName(name));
+		String nameLowerCase = name.toLowerCase();
+		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		List<Recipe> recipes = this.entityManager.createQuery(query, Recipe.class).getResultList();
+		model.addAttribute("recipes", recipes);
 		return "/admin/manageRecipes.html";
 	}
 
 	@PostMapping(value = "cookUser/formSearchRecipes")
 	public String searchRecipesCook(Model model, @RequestParam String name) {
-		model.addAttribute("recipes", this.recipeRepository.findByName(name));
+		String nameLowerCase = name.toLowerCase();
+		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		List<Recipe> recipes = this.entityManager.createQuery(query, Recipe.class).getResultList();
+		model.addAttribute("recipes", recipes);
 		return "/cookUser/manageRecipes.html";
 	}
 

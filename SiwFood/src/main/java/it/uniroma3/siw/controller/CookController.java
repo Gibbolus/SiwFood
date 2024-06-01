@@ -1,5 +1,7 @@
 package it.uniroma3.siw.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.model.Cook;
 import it.uniroma3.siw.repository.CookRepository;
 import it.uniroma3.siw.service.CookService;
+import jakarta.persistence.EntityManager;
 
 @Controller
 public class CookController {
@@ -19,6 +22,8 @@ public class CookController {
 	@Autowired CookRepository cookRepository;
 	
 	@Autowired CookService cookService;
+
+	@Autowired EntityManager entityManager;
 	
 	
 	@GetMapping(value = "/cook/{id}")
@@ -57,13 +62,19 @@ public class CookController {
 	
 	@PostMapping(value = "/formSearchCooks")
 	public String searchCooks(Model model, @RequestParam String name) {
-		model.addAttribute("cooks", this.cookRepository.findByName(name));
+		String nameLowerCase = name.toLowerCase();
+		String query = "SELECT c FROM Cook c WHERE LOWER(c.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		List<Cook> cooks = this.entityManager.createQuery(query, Cook.class).getResultList();
+		model.addAttribute("cooks", cooks);
 		return "cooks.html";
 	}
 	
 	@PostMapping(value = "admin/formSearchCooks")
 	public String searchCooksAdmin(Model model, @RequestParam String name) {
-		model.addAttribute("cooks", this.cookRepository.findByName(name));
+		String nameLowerCase = name.toLowerCase();
+		String query = "SELECT c FROM Cook c WHERE LOWER(c.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		List<Cook> cooks = this.entityManager.createQuery(query, Cook.class).getResultList();
+		model.addAttribute("cooks", cooks);
 		return "/admin/manageCooks.html";
 	}
 	

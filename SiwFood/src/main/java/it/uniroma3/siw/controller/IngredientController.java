@@ -1,5 +1,7 @@
 package it.uniroma3.siw.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.siw.model.Ingredient;
 import it.uniroma3.siw.repository.IngredientRepository;
 import it.uniroma3.siw.service.IngredientService;
+import jakarta.persistence.EntityManager;
 
 
 @Controller
@@ -20,6 +23,9 @@ public class IngredientController {
 	@Autowired IngredientRepository ingredientRepository;
 	
 	@Autowired IngredientService ingredientService;
+	
+	@Autowired EntityManager entityManager;
+	
 	
 	
 	@GetMapping(value = "/ingredient/{id}")
@@ -41,13 +47,19 @@ public class IngredientController {
 	
 	@PostMapping(value = "/formSearchIngredients")
 	public String searchIngredients(Model model, @RequestParam String name) {
-		model.addAttribute("ingredients", this.ingredientRepository.findByName(name));
+		String nameLowerCase = name.toLowerCase();
+		String query = "SELECT i FROM Ingredient i WHERE LOWER(i.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		List<Ingredient> ingredients = this.entityManager.createQuery(query, Ingredient.class).getResultList();
+		model.addAttribute("ingredients", ingredients);
 		return "ingredients.html";
 	}
 	
 	@PostMapping(value = "admin/formSearchIngredients")
 	public String searchIngredientsAdmin(Model model, @RequestParam String name) {
-		model.addAttribute("ingredients", this.ingredientRepository.findByName(name));
+		String nameLowerCase = name.toLowerCase();
+		String query = "SELECT i FROM Ingredient i WHERE LOWER(i.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		List<Ingredient> ingredients = this.entityManager.createQuery(query, Ingredient.class).getResultList();
+		model.addAttribute("ingredients", ingredients);
 		return "/admin/manageIngredients.html";
 	}
 
