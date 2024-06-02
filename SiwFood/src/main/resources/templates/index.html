@@ -6,6 +6,7 @@
 	<meta charset="utf-8">
 	<title>SiwFood - Homepage</title>
 	<link rel="stylesheet" href="/css/IndexStyles.css?v=5.5" />
+
 </head>
 
 <body>
@@ -34,7 +35,7 @@
 	</nav>
 	
 	
-	<!--<nav class="navbar">
+	<nav class="navbar">
 		<a href="/">
 			<img class="icons_home" src="/images/home.svg"></img>
 		</a>
@@ -54,7 +55,7 @@
 			<span class="bar"></span>
 			<span class="bar"></span>
 		</div>
-	</nav>-->
+	</nav>
 
 	<div id="mainDiv">
 		<div class="search-box">
@@ -138,7 +139,20 @@
 			</a>
 		</div>
 	</footer>
-
+	
+	
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
 </body>
 
 </html>

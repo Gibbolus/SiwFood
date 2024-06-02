@@ -192,9 +192,6 @@ p{
 	
 	.nav-menu{
 		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		gap: 60px;
 	}
 	
 	.nav-link{
@@ -220,7 +217,6 @@ p{
 		background-color: black;
 	}
 	
-	
 	.hamburger.active .bar:nth-child(2){
 		opacity: 0;
 	}
@@ -232,25 +228,28 @@ p{
 	}
 	
 	.nav-menu{
-		position: fixed;
-		left: 0;
+		position: absolute;
+		padding: 0;
+		right: -25%;
 		top: 56px;
-		gap: 0;
 		flex-direction: column;
-		background-color: white;
-		width: 50%;
-		text-align: center;
+		background-color: #f8dbb0;
+		width: 25%;
 		transition: 0.3s;
 	}
 	
 	.nav-item{
-		margin: 16px 0;
+		margin: 20px auto;
 	}
 	
 	.nav-menu.active{
-		left: 44%;
+		right: -2%;
 	}
 	
+	.nav-link{
+		text-decoration: none;
+		color: black;
+	}
 	
 	
 	
