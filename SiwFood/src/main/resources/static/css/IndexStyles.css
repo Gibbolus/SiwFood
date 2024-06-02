@@ -179,6 +179,11 @@ p{
 	white-space: wrap;
 }
 
+@media(max-width: 605px){
+	#search-box2{
+		margin-top: -90px;
+	}
+}
 
 @media(max-width: 768px){
 	
@@ -279,10 +284,14 @@ p{
 		margin-top: -90px;
 	}
 	
-	@media(max-width: 600px){
-		#search-box2{
-			margin-top: -90px;
-		}
+	.contact-text{
+		font-size: medium;
+	}
+	
+	#accountform-text{
+		width: 200px;
+		padding-left: 15px;
+		margin: auto 0;
 	}
 
 	#map{
@@ -298,9 +307,8 @@ p{
 	
 	.socials{
 		width: 100px;
-	
-		
 	}
+	
 	.socialsFonts{
 		text-align: center;
 		font-size: small;
