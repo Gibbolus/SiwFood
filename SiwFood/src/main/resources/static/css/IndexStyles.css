@@ -15,6 +15,10 @@ body {
   	margin-bottom: 2%;
 }
 
+.navbar{
+	display: none;
+}
+
 .ali {
 	text-decoration: none;
 	color: black;
@@ -55,7 +59,6 @@ li {
 #mainDiv{
 	display: flex;
 	flex-direction: row;
-	flex-wrap: nowrap;
 }
 
 #hamburger{
@@ -179,6 +182,10 @@ p{
 
 @media(max-width: 768px){
 	
+		
+	.nav-bar{
+		display: none;
+	}
 	
 	.navbar{
 		min-height: 70px;
@@ -188,10 +195,6 @@ p{
 		justify-content: space-between;
 		align-items: center;
 		padding: 0 24px;
-	}
-	
-	.nav-menu{
-		display: flex;
 	}
 	
 	.nav-link{
@@ -228,14 +231,16 @@ p{
 	}
 	
 	.nav-menu{
-		position: absolute;
-		padding: 0;
-		right: -25%;
-		top: 56px;
+		display: flex;
+		position: fixed;
+		padding: 0 50px 20px 0;
+		right: -35%;
+		top: 71px;
 		flex-direction: column;
 		background-color: #f8dbb0;
 		width: 25%;
 		transition: 0.3s;
+		border-radius: 50px;
 	}
 	
 	.nav-item{
@@ -243,7 +248,7 @@ p{
 	}
 	
 	.nav-menu.active{
-		right: -2%;
+		right: -9%;
 	}
 	
 	.nav-link{
@@ -251,22 +256,58 @@ p{
 		color: black;
 	}
 	
+	.reg-log-button{
+		height: 140%;
+		margin: 5px;
+		width: 80%;
+		background-color: #f3c17e;
+	}
 	
 	
+	#mainDiv{
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+		gap: 50px;
+	}
+	
+	.indexPhotos{
+		width: 150px;
+	}
+	
+	
+	#search-box1{
+		margin-top: -90px;
+	}
+	
+	@media(max-width: 600px){
+		#search-box2{
+			margin-top: -90px;
+		}
+	}
+
 	#map{
 		display: none;
 	}
+
 	
-	.nav-bar{
-		display: none;
-	}
-	
-	#mainDiv{
-		display: none;
-	}
 	
 	.footer{
-		display: none;
+		height: 150px;
+		gap: 15px;
+	}
+	
+	.socials{
+		width: 100px;
+	
+		
+	}
+	.socialsFonts{
+		text-align: center;
+		font-size: small;
+	}
+	
+	.socials-img{
+		width: 60px;
 	}
 }
 
