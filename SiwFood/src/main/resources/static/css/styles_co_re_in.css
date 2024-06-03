@@ -326,7 +326,7 @@ p {
 		position: fixed;
 		padding: 0 50px 20px 0;
 		right: -35%;
-		top: 71px;
+		top: 56px;
 		flex-direction: column;
 		background-color: #f8dbb0;
 		width: 25%;
@@ -369,6 +369,18 @@ p {
 	.img-recipe-ingredient {
 		height: 150px;
 		width: auto;
+		margin: auto;
+		margin-top: 15px;
+	}
+	
+	.img-cooks{
+		width: 200px;
+		height: auto;
+		margin-top: 15px;
+	}
+	
+	.text{
+		text-align: center;
 	}
 
 	.info {

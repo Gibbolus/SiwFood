@@ -67,7 +67,8 @@
 			</li>
 			<li>
 				<div class="account-reg-log">
-					<a id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
 					<a class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>

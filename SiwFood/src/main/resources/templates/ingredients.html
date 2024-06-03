@@ -42,6 +42,44 @@
 		</li>
 	</nav>
 
+	<!-- NAV BAR MAX-WIDTH = 768PX -->
+	<nav class="navbar">
+		<a href="/">
+			<img class="icons_home" src="/images/home.svg"></img>
+		</a>
+		<div class="search-bar">
+			<div class="search-box">
+				<form th:action="@{/formSearchIngredients}" method="post">
+					<input id="search-input" type="text" th:value="${name}" name="name"
+						placeholder="Cerca un ingrediente..." />
+				</form>
+			</div>
+		</div>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="nav-link" href="/recipes">Ricette</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/cooks">Cuochi</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/ingredients">Ingredienti</a>
+			</li>
+			<li>
+				<div class="account-reg-log">
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a class="reg-log-button" href="/login"> Login </a>
+				</div>
+			</li>
+		</ul>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+	</nav>
+
 	<h1>Ingredienti</h1>
 	<div th:if="${ingredients.isEmpty()}">Non ci sono ingredienti nel sistema</div>
 
@@ -62,8 +100,8 @@
 	<footer class="footer">
 		<div id="accountForm">
 			<div id="accountform-text">
-				<h3>Problemi con il sito?</h4>
-					<p>
+				<h3 class="contact-text">Problemi con il sito?</h4>
+					<p class="contact-text">
 						Puoi contattarci cliccando
 						<a href="/formContact" style="color: black;">qui</a>
 					</p>
@@ -72,24 +110,35 @@
 		<div class="socials">
 			<p class="socialsFonts">Seguici su Instagram</p>
 			<a href="https://www.instagram.com">
-				<img src="/images/logoInstagram.png"></img>
+				<img class="socials-img" src="/images/logoInstagram.png"></img>
 			</a>
 		</div>
 		<div class="socials">
 			<p class="socialsFonts">Seguici su Youtube</p>
 			<a href="https://www.youtube.com">
-				<img src="/images/logoYoutube.png"></img>
+				<img class="socials-img" src="/images/logoYoutube.png"></img>
 			</a>
 		</div>
 		<div class="socials">
 			<p class="socialsFonts">Seguici su X</p>
 			<a href="https://www.x.com">
-				<img src="/images/logoX.png"></img>
+				<img class="socials-img" src="/images/logoX.png"></img>
 			</a>
 		</div>
 	</footer>
 
-
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
 </body>
 
 </html>
