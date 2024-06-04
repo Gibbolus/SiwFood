@@ -53,8 +53,8 @@
 			<span th:unless="${recipe.cook != null}">Non disponibile</span>
 		</div>
 		<span>
-			<img class="img-recipe-ingredient" th:if="${recipe.urlImage.startsWith('https')}" th:src="${recipe.urlImage}">
-			<img class="img-recipe-ingredient" th:unless="${recipe.urlImage.startsWith('https')}" th:src="@{/images/__${recipe.urlImage}__}">
+			<img class="img-recipe" th:if="${recipe.urlImage.startsWith('https')}" th:src="${recipe.urlImage}">
+			<img class="img-recipe" th:unless="${recipe.urlImage.startsWith('https')}" th:src="@{/images/__${recipe.urlImage}__}">
 		</span>
 		<strong>Lista degli ingredienti:</strong>
 		<ul>

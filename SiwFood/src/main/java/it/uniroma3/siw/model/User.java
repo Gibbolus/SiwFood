@@ -10,57 +10,71 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "users")	// in postgres user è una parola riservata
+@Table(name = "users")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String name;
+
 	private String surname;
+
 	private LocalDate year;
+
 	private String email;
+
 	public String urlImage;
-	
-	
+
 	public String getUrlImage() {
 		return urlImage;
 	}
+
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
 	}
+
 	public LocalDate getYear() {
 		return year;
 	}
+
 	public void setYear(LocalDate year) {
 		this.year = year;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getSurname() {
 		return surname;
 	}
+
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -98,5 +112,4 @@ public class User {
 		return true;
 	}
 
-	
 }

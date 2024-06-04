@@ -29,7 +29,7 @@
 			<div class="search-box">
 				<form th:action="@{/formSearchIngredients}" method="post">
 					<input id="search-input" type="text" th:value="${name}" name="name"
-						placeholder="Cerca un ingredienti..." />
+						placeholder="Cerca un ingrediente..." />
 				</form>
 			</div>
 		</div>
@@ -84,15 +84,15 @@
 	<div th:if="${ingredients.isEmpty()}">Non ci sono ingredienti nel sistema</div>
 
 	<div class="container" th:if="${!ingredients.isEmpty()}">
-		<div class="div_princ" th:each="ingredient : ${ingredients}">
+		<div id="div-princ-ingredients" class="div_princ" th:each="ingredient : ${ingredients}">
 			<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}">
-				<img class="img-recipe-ingredient" th:if="${ingredient.urlImage.startsWith('https')}"
+				<img class="img-ingredient" th:if="${ingredient.urlImage.startsWith('https')}"
 					th:src="${ingredient.urlImage}">
-				<img class="img-recipe-ingredient" th:unless="${ingredient.urlImage.startsWith('https')}"
+				<img class="img-ingredient" th:unless="${ingredient.urlImage.startsWith('https')}"
 					th:src="@{/images/__${ingredient.urlImage}__}">
 			</a>
 
-			<h2 class="text" th:text="${ingredient.name}"></h2>
+			<h2 style="text-align: center;" class="text" th:text="${ingredient.name}"></h2>
 
 		</div> <!-- class div_princ -->
 	</div> <!-- class container -->

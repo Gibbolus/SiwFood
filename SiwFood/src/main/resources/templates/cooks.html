@@ -85,15 +85,16 @@
 	<div th:if="${cooks.isEmpty()}">Non ci sono cuochi nel sistema</div>
 
 	<div class="container">
-		<div class="div_princ" th:each="cook : ${cooks}">
-
-			<a th:href="@{'/cook' + '/' + ${cook.id}}">
-				<img class="img-cooks" th:if="${cook.urlImage.startsWith('https')}" th:src="${cook.urlImage}">
-				<img class="img-cooks" th:unless="${cook.urlImage.startsWith('https')}"
-					th:src="@{/images/__${cook.urlImage}__}">
-			</a>
-
-			<h2 class="text" th:text="${cook.name} + ' ' + ${cook.surname}"></h2>
+		<div id="div-princ-cooks" class="div_princ" th:each="cook : ${cooks}">
+			<div>
+				<a th:href="@{'/cook' + '/' + ${cook.id}}">
+					<img class="img-cooks" th:if="${cook.urlImage.startsWith('https')}" th:src="${cook.urlImage}">
+					<img class="img-cooks" th:unless="${cook.urlImage.startsWith('https')}"
+						th:src="@{/images/__${cook.urlImage}__}">
+				</a>
+				<h2 style="text-align: center;" class="text" th:text="${cook.name} + ' ' + ${cook.surname}"></h2>
+			</div>
+			<p style="text-align: left; margin-right: 15px;" th:text="${cook.description}"></p>
 		</div> <!-- class div_princ -->
 	</div> <!-- class container -->
 

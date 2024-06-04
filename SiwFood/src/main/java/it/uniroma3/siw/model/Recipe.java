@@ -19,7 +19,7 @@ public class Recipe {
 	private long id;
 
 	private String name;
-	/* poi va modificata come lista di immagini */
+
 	private String urlImage;
 
 	@Column(length = 2000)
@@ -85,21 +85,6 @@ public class Recipe {
 		this.id = id;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(name, cook);
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		Recipe r = (Recipe) o;
-		return Objects.equals(name, r.name) && Objects.equals(cook, r.cook);
-	}
-
 	public Integer getCookTime() {
 		return cookTime;
 	}
@@ -122,6 +107,21 @@ public class Recipe {
 
 	public void setRecipeType(String recipeType) {
 		this.recipeType = recipeType;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, cook);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Recipe r = (Recipe) o;
+		return Objects.equals(name, r.name) && Objects.equals(cook, r.cook);
 	}
 
 }
