@@ -11,40 +11,7 @@
 
 <body>
 	<nav class="nav-bar">
-		<li>
-			<a href="/">
-				<img class="icons_home" src="/images/home.svg"></img>
-			</a>
-		</li>
-		<li>
-			<a class="ali" href="/recipes">Ricette</a>
-		</li>
-		<li>
-			<a class="ali" href="/cooks">Cuochi</a>
-		</li>
-		<li>
-			<a class="ali" href="/ingredients">Ingredienti</a>
-		</li>
-		<div class="search-bar">
-			<div class="search-box">
-				<form th:action="@{/formSearchRecipes}" method="post">
-					<input id="search-input" type="text" th:value="${name}" name="name"
-						placeholder="Cerca un ricetta..." />
-				</form>
-			</div>
-		</div>
-		<li>
-			<div class="account-reg-log">
-				<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
-				<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
-				<a class="reg-log-button" href="/login"> Login </a>
-			</div>
-		</li>
-	</nav>
-
-	<!-- NAV BAR MAX-WIDTH = 768PX -->
-	<nav class="navbar">
-		<a href="/">
+		<a id="home-button" href="/">
 			<img class="icons_home" src="/images/home.svg"></img>
 		</a>
 		<div class="search-bar">
@@ -57,15 +24,15 @@
 		</div>
 		<ul class="nav-menu">
 			<li class="nav-item">
-				<a class="nav-link" href="/recipes">Ricette</a>
+				<a class="ali" href="/recipes">Ricette</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/cooks">Cuochi</a>
+				<a class="ali" href="/cooks">Cuochi</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/ingredients">Ingredienti</a>
+				<a class="ali" href="/ingredients">Ingredienti</a>
 			</li>
-			<li>
+			<li class="nav-item">
 				<div class="account-reg-log">
 					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
 					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
@@ -80,16 +47,14 @@
 		</div>
 	</nav>
 
-
 	<h1>Ricette</h1>
 	<div th:if="${recipes.isEmpty()}">Non ci sono ricette nel sistema</div>
 
 	<div class="container">
-		<div class="div_princ" th:each="recipe : ${recipes}">
+		<div class="div-princ" th:each="recipe : ${recipes}">
 
 			<a th:href="@{'/recipe' + '/' + ${recipe.id}}">
-				<img class="img-recipe" th:if="${recipe.urlImage.startsWith('https')}"
-					th:src="${recipe.urlImage}">
+				<img class="img-recipe" th:if="${recipe.urlImage.startsWith('https')}" th:src="${recipe.urlImage}">
 				<img class="img-recipe" th:unless="${recipe.urlImage.startsWith('https')}"
 					th:src="@{/images/__${recipe.urlImage}__}">
 			</a>
@@ -103,15 +68,15 @@
 			</div>
 
 			<div class="info">
-				<div class="div_int">
+				<div class="div-int">
 					<img class="icons" src="/images/clock.svg"></img>
 					<p class="icon_info" th:text="${recipe.cookTime} + ' min'"></p>
 				</div>
-				<div class="div_int">
+				<div class="div-int">
 					<img class="icons" src="/images/plate.svg"></img>
 					<p class="icon_info" th:text="${recipe.recipeType}"></p>
 				</div>
-				<div class="div_int">
+				<div class="div-int">
 					<img class="icons" src="/images/puzzle.svg"></img>
 					<p class="icon_info" th:text="${recipe.difficulty}"></p>
 				</div>
@@ -122,7 +87,7 @@
 
 
 	<footer class="footer">
-		<div id="accountForm">
+		<div id="account-form">
 			<div id="accountform-text">
 				<h3 class="contact-text">Problemi con il sito?</h4>
 					<p class="contact-text">
@@ -132,19 +97,19 @@
 			</div>
 		</div>
 		<div class="socials">
-			<p class="socialsFonts">Seguici su Instagram</p>
+			<p class="socials-fonts">Seguici su Instagram</p>
 			<a href="https://www.instagram.com">
 				<img class="socials-img" src="/images/logoInstagram.png"></img>
 			</a>
 		</div>
 		<div class="socials">
-			<p class="socialsFonts">Seguici su Youtube</p>
+			<p class="socials-fonts">Seguici su Youtube</p>
 			<a href="https://www.youtube.com">
 				<img class="socials-img" src="/images/logoYoutube.png"></img>
 			</a>
 		</div>
 		<div class="socials">
-			<p class="socialsFonts">Seguici su X</p>
+			<p class="socials-fonts">Seguici su X</p>
 			<a href="https://www.x.com">
 				<img class="socials-img" src="/images/logoX.png"></img>
 			</a>

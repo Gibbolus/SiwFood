@@ -83,7 +83,7 @@ li {
 	justify-content: space-evenly;
 }
 
-.socialsFonts{
+.socials-fonts{
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	display: flex;
 	justify-content: center;
@@ -97,7 +97,7 @@ li {
 	justify-content: center;
 }
 
-#accountForm{
+#account-form{
 	display: flex;
 	flex-direction: column;
 	align-content: space-between;

@@ -18,13 +18,9 @@
 	<div th:if="${recipe.cook}">
 		<br>
 		<p>Cuoco: <span th:text="${recipe.cook.name} + ' ' + ${recipe.cook.surname}"></span></p>
-		<!--											<a th:href="@{'/admin/addCook' + '/' + ${recipe.id}}">-->
-		<!--												<button type="button">Modifica cuoco</button> </a>-->
 	</div>
 	<div th:unless="${recipe.cook}">
 		<p>Non c'è nessun cuoco per questa ricetta.</p>
-		<!--											<a th:href="@{'/admin/addCook' + '/' + ${recipe.id}}">-->
-		<!--												<button type="button">Aggiungi cuoco</button> </a> -->
 	</div>
 	<strong>Lista degli ingredienti:</strong>
 	<ul>

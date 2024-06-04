@@ -4,18 +4,30 @@ body {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.navbar {
-	display: none;
-}
-
 .nav-bar {
 	background-color: #f3c17e;
 	box-shadow: 0 2px black;
 	position: sticky;
 	height: 75px;
 	display: flex;
+  	align-items: center;
+  	margin-bottom: 2%;
+  	padding-left: 10%;
+}
+
+#home-button{
+	margin: 0 80px 0 -50px;
+}
+
+.icons_home {
+	height: 50px;
+}
+
+.nav-menu{
+	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
+	width: 100%;
 }
 
 .ali {
@@ -23,43 +35,10 @@ body {
 	color: black;
 }
 
-.searchBar {
-	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-	font-size: larger;
-	display: flex;
-	align-items: center;
-}
-
-.account-reg-log {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	align-content: center;
-}
-
-.reg-log-button {
-	text-decoration: none;
-	color: black;
-	display: flex;
-	justify-content: center;
-	height: 110%;
-	width: 140%;
-	border-radius: 1rem;
-	background-color: #f8dbb0;
-}
-
-#reg-button {
-	margin-bottom: 0.5rem;
-}
-
 li {
 	list-style: none;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	font-size: larger;
-}
-
-.icons_home {
-	height: 50px;
 }
 
 .search-bar {
@@ -71,15 +50,15 @@ li {
 	border: 1px solid black;
 }
 
-#search-input {
-	width: 625px;
-}
-
 .search-box {
 	display: flex;
 	align-items: center;
 	padding: 0.3rem 1rem 0.3rem 1rem;
 	width: 100%;
+}
+
+#search-input {
+	width: 625px;
 }
 
 .search-box input {
@@ -101,6 +80,34 @@ li {
 	font-weight: 500;
 }
 
+.account-reg-log{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
+}
+
+#reg-button {
+	margin-bottom: 0.5rem;
+}
+
+.reg-log-button {
+	text-decoration: none;
+	color: black;
+	display: flex;
+	justify-content: center;
+	height: 110%;
+	width: 140%;
+	border-radius: 1rem;
+	background-color: #f8dbb0;
+}
+
+
+
+.hamburger{
+	display: none;
+}
+
 
 .container {
 	display: flex;
@@ -108,7 +115,7 @@ li {
 	padding-bottom: 6.25rem;
 }
 
-.div_princ {
+.div-princ {
 	margin: auto;
 	background-color: #f8dbb0;
 	margin-top: 3.75rem;
@@ -116,16 +123,6 @@ li {
 	width: 450px;
 	border-radius: 50px;
 	box-shadow: #74361a 4px 4px 30px;
-}
-
-#div-princ-cooks {
-	display: flex;
-	justify-content: space-evenly;
-}
-
-#div-princ-ingredients {
-	height: 19rem;
-	width: 23rem;
 }
 
 .img-recipe {
@@ -152,6 +149,16 @@ li {
 	box-shadow: black 1px 1px 5px;
 }
 
+.text {
+	margin: 5px 25px -5px 25px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.subtext {
+	margin: 0px 25px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 .info {
 	margin-top: 20px;
 	height: 6.25rem;
@@ -160,7 +167,7 @@ li {
 	align-items: center;
 }
 
-.div_int {
+.div-int {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -181,23 +188,37 @@ li {
 }
 
 
+
+
+
+
+
+#div-princ-cooks {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+#div-princ-ingredients {
+	height: 19rem;
+	width: 23rem;
+}
+
+
+
+
+
+
+
+
 .type {
 	font-size: larger;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	text-align: center;
 }
 
-.text {
-	margin: 5px 25px -5px 25px;
-	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
 
-.subtext {
-	margin: 0px 25px;
-	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
 
-#mainDiv {
+#main-div {
 	display: flex;
 	flex-direction: row;
 }
@@ -210,12 +231,12 @@ li {
 	margin-bottom: 300px;
 }
 
-.menusText {
+.menus-text {
 	color: black;
 }
 
 
-.indexPhotos {
+.index-photos {
 	display: flex;
 	justify-content: space-around;
 	width: 70%;
@@ -229,7 +250,7 @@ li {
 	margin: 50px auto 5rem auto;
 }
 
-.textmap {
+.text-map {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -259,7 +280,7 @@ p {
 	justify-content: space-evenly;
 }
 
-.socialsFonts {
+.socials-fonts {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	display: flex;
 	justify-content: center;
@@ -273,7 +294,7 @@ p {
 	justify-content: center;
 }
 
-#accountForm {
+#account-form {
 	display: flex;
 	flex-direction: column;
 	align-content: space-between;
@@ -290,11 +311,7 @@ p {
 @media(max-width: 768px) {
 
 
-	.nav-bar {
-		display: none;
-	}
-
-	.navbar {
+	.nav-bar{
 		min-height: 70px;
 		background-color: #f3c17e;
 		box-shadow: 0 2px black;
@@ -303,21 +320,24 @@ p {
 		align-items: center;
 		padding: 0 24px;
 	}
-
-	.nav-link {
+	#home-button{
+		margin: 0;
+	}
+	
+	.ali{
 		transition: 0.7s ease;
 	}
-
-	.nav-link:hover {
+	
+	.ali:hover{
 		color: aliceblue;
 	}
-
-	.hamburger {
+	
+	.hamburger{
 		display: block;
 		cursor: pointer;
 	}
-
-	.bar {
+	
+	.bar{
 		display: block;
 		width: 25px;
 		height: 3px;
@@ -326,41 +346,39 @@ p {
 		transition: all 0.3s ease-in-out;
 		background-color: black;
 	}
-
-	.hamburger.active .bar:nth-child(2) {
+	
+	.hamburger.active .bar:nth-child(2){
 		opacity: 0;
 	}
-
-	.hamburger.active .bar:nth-child(1) {
+	.hamburger.active .bar:nth-child(1){
 		transform: translateY(8px) rotate(45deg);
 	}
-
-	.hamburger.active .bar:nth-child(3) {
+	.hamburger.active .bar:nth-child(3){
 		transform: translateY(-8px) rotate(-45deg);
 	}
-
-	.nav-menu {
+	
+	.nav-menu{
 		display: flex;
 		position: fixed;
 		padding: 0 50px 20px 0;
 		right: -35%;
-		top: 56px;
+		top: 71px;
 		flex-direction: column;
 		background-color: #f8dbb0;
 		width: 25%;
 		transition: 0.3s;
 		border-radius: 50px;
 	}
-
+	
 	.nav-item {
 		margin: 20px auto;
 	}
 
-	.nav-menu.active {
+	.nav-menu.active{
 		right: -9%;
 	}
-
-	.nav-link {
+	
+	.ali{
 		text-decoration: none;
 		color: black;
 	}
@@ -368,11 +386,11 @@ p {
 	.reg-log-button {
 		height: 140%;
 		margin: 5px;
-		width: 80%;
+		width: 140%;
 		background-color: #f3c17e;
 	}
 
-	.div_princ {
+	.div-princ {
 		height: 350px;
 		width: 300px;
 		display: flex;
@@ -380,7 +398,7 @@ p {
 		align-items: center;
 	}
 
-	.div_int {
+	.div-int {
 		margin-top: 70px;
 	}
 
@@ -433,7 +451,7 @@ p {
 		width: 100px;
 	}
 
-	.socialsFonts {
+	.socials-fonts {
 		text-align: center;
 		font-size: small;
 	}

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
- 
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,35 +12,32 @@
 <body>
 
 	<nav class="nav-bar">
-		<li>
-			<a href="/">
-				<img class="icons_home" src="/images/home.svg"></img>
-			</a>
-		</li>
-		<li>
-			<a class="ali" href="/recipes">Ricette</a>
-		</li>
-		<li>
-			<a class="ali" href="/cooks">Cuochi</a>
-		</li>
-		<li>
-			<a class="ali" href="/ingredients">Ingredienti</a>
-		</li>
-		<div class="search-bar">
-			<div class="search-box">
-				<form th:action="@{/formSearchRecipes}" method="post">
-					<input id="search-input" type="text" th:value="${name}" name="name"
-						placeholder="Cerca un ricetta..." />
-				</form>
-			</div>
+		<a href="/">
+			<img class="icons_home" src="/images/home.svg"></img>
+		</a>
+		<h3 style="font-weight: 500; font-size: x-large; display: none;"> SiwFood </h3>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/recipes">Ricette</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/cooks">Cuochi</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/ingredients">Ingredienti</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a class="reg-log-button" href="/login"> Login </a>
+				</div>
+			</li>
+		</ul>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
 		</div>
-		<li>
-			<div class="account-reg-log">
-				<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
-				<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
-				<a class="reg-log-button" href="/login"> Login </a>
-			</div>
-		</li>
 	</nav>
 
 	<div th:if="${recipe}">
@@ -54,7 +50,8 @@
 		</div>
 		<span>
 			<img class="img-recipe" th:if="${recipe.urlImage.startsWith('https')}" th:src="${recipe.urlImage}">
-			<img class="img-recipe" th:unless="${recipe.urlImage.startsWith('https')}" th:src="@{/images/__${recipe.urlImage}__}">
+			<img class="img-recipe" th:unless="${recipe.urlImage.startsWith('https')}"
+				th:src="@{/images/__${recipe.urlImage}__}">
 		</span>
 		<strong>Lista degli ingredienti:</strong>
 		<ul>
@@ -76,7 +73,7 @@
 	<div th:unless="${recipe}">Non esiste</div>
 	 
 	<footer class="footer">
-		<div id="accountForm">
+		<div id="account-form">
 			<div id="accountform-text">
 				<h3>Problemi con il sito?</h4>
 					<p id="email-contact">
@@ -86,19 +83,19 @@
 			</div>
 		</div>
 		<div class="socials">
-			<p class="socialsFonts">Seguici su Instagram</p>
+			<p class="socials-fonts">Seguici su Instagram</p>
 			<a href="https://www.instagram.com">
 				<img src="/images/logoInstagram.png"></img>
 			</a>
 		</div>
 		<div class="socials">
-			<p class="socialsFonts">Seguici su Youtube</p>
+			<p class="socials-fonts">Seguici su Youtube</p>
 			<a href="https://www.youtube.com">
 				<img src="/images/logoYoutube.png"></img>
 			</a>
 		</div>
 		<div class="socials">
-			<p class="socialsFonts">Seguici su X</p>
+			<p class="socials-fonts">Seguici su X</p>
 			<a href="https://www.x.com">
 				<img src="/images/logoX.png"></img>
 			</a>

@@ -11,13 +11,23 @@ body {
 	height: 75px;
 	display: flex;
   	align-items: center;
-  	justify-content: space-evenly;
   	margin-bottom: 2%;
+  	padding-left: 10%;
 }
 
-.navbar{
+.siwfood-text{
+	font-weight: 500;
+	font-size: x-large;
 	display: none;
 }
+
+.nav-menu{
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+}
+
 
 .ali {
 	text-decoration: none;
@@ -37,6 +47,10 @@ li {
 	align-content: center;
 }
 
+#reg-button{
+	margin-bottom: 0.5rem;
+}
+
 .reg-log-button{
 	text-decoration: none;
 	color: black;
@@ -48,21 +62,17 @@ li {
 	background-color: #f8dbb0;
 }
 
-#reg-button{
-	margin-bottom: 0.5rem;
+.hamburger{
+	display: none;
 }
 
 .icons_home {
 	height: 50px;
 }
 
-#mainDiv{
+#main-div{
 	display: flex;
 	flex-direction: row;
-}
-
-#hamburger{
-	display: none;
 }
 
 .search-box{
@@ -82,7 +92,6 @@ li {
   
 }
 
-
 .main-div-search{
 	display: flex;
 	flex-direction: column;
@@ -91,11 +100,11 @@ li {
 	margin-bottom: 3.75rem;
 }
 
-.menusText{
+.menus-text{
 	color: black;
 }
 
-.indexPhotos{
+.index-photos{
 	display: flex;
 	justify-content: space-around;
 	width: 70%;
@@ -132,7 +141,7 @@ li {
 	margin: 50px auto 5rem auto;
 }
 
-.textmap{
+.text-map{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -152,7 +161,7 @@ p{
 	justify-content: space-evenly;
 }
 
-.socialsFonts{
+.socials-fonts{
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	display: flex;
 	justify-content: center;
@@ -166,7 +175,7 @@ p{
 	justify-content: center;
 }
 
-#accountForm{
+#account-form{
 	display: flex;
 	flex-direction: column;
 	align-content: space-between;
@@ -187,12 +196,7 @@ p{
 
 @media(max-width: 768px){
 	
-		
 	.nav-bar{
-		display: none;
-	}
-	
-	.navbar{
 		min-height: 70px;
 		background-color: #f3c17e;
 		box-shadow: 0 2px black;
@@ -202,11 +206,11 @@ p{
 		padding: 0 24px;
 	}
 	
-	.nav-link{
+	.ali{
 		transition: 0.7s ease;
 	}
 	
-	.nav-link:hover{
+	.ali:hover{
 		color: aliceblue;
 	}
 	
@@ -248,6 +252,10 @@ p{
 		border-radius: 50px;
 	}
 	
+	.siwfood-text{
+		display: flex;
+	}
+	
 	.nav-item{
 		margin: 20px auto;
 	}
@@ -256,7 +264,7 @@ p{
 		right: -9%;
 	}
 	
-	.nav-link{
+	.ali{
 		text-decoration: none;
 		color: black;
 	}
@@ -264,18 +272,18 @@ p{
 	.reg-log-button{
 		height: 140%;
 		margin: 5px;
-		width: 80%;
+		width: 130%;
 		background-color: #f3c17e;
 	}
 	
 	
-	#mainDiv{
+	#main-div{
 		flex-wrap: wrap;
 		justify-content: space-evenly;
 		gap: 50px;
 	}
 	
-	.indexPhotos{
+	.index-photos{
 		width: 150px;
 	}
 	
@@ -309,7 +317,7 @@ p{
 		width: 100px;
 	}
 	
-	.socialsFonts{
+	.socials-fonts{
 		text-align: center;
 		font-size: small;
 	}
