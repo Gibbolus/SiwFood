@@ -104,10 +104,13 @@ public class RecipeController {
 		model.addAttribute("recipes", this.recipeService.findAll());
 		return "/admin/manageRecipes.html";
 	}
-
-	@GetMapping(value = "/cookUser/manageRecipes")
-	public String ShowRecipeCook(Model model) {
-		model.addAttribute("recipes", this.recipeService.findAll());
+	
+	@GetMapping(value = "/cookUser/manageRecipes/{username}")
+	public String ShowRecipeCook(@PathVariable("username") String username, Model model) {
+	    Credentials tempUser = credentialsRepository.findByUsername(username);
+	    User currentUser = tempUser.getUser();
+	    Cook currentCook = this.cookRepository.findByNameAndSurname(currentUser.getName(), currentUser.getSurname());
+		model.addAttribute("recipes", currentCook.getRecipes());
 		return "/cookUser/manageRecipes.html";
 	}
 
@@ -150,7 +153,6 @@ public class RecipeController {
 		User currentUser = tempUser.getUser();
 		Cook currentCook = this.cookRepository.findByNameAndSurname(currentUser.getName(), currentUser.getSurname());
 		recipe.setCook(currentCook);
-
 		this.recipeValidator.validate(recipe, bindingResult);
 		if (!bindingResult.hasErrors()) {
 			this.recipeRepository.save(recipe);
@@ -181,16 +183,13 @@ public class RecipeController {
 		// Recupera l'utente dal repository
 		Credentials tempUser = credentialsRepository.findByUsername(username);
 		User currentUser = tempUser.getUser();
-
 		// Recupera la recipe dal repository
 		Recipe recipe = recipeRepository.findById(id).orElse(null);
-
 		if (recipe == null || recipe.getCook() == null || !recipe.getCook().getName().equals(currentUser.getName())
 				|| !recipe.getCook().getSurname().equals(currentUser.getSurname())) {
 			redirectAttributes.addFlashAttribute("messaggioErrore", "Non puoi modificare questa recipe perché non ti appartiene!");
 			return "redirect:/cookUser/manageRecipes";
 		}
-
 		// Aggiungi la recipe al modello e restituisci la vista
 		model.addAttribute("recipe", recipe);
 		return "cookUser/formUpdateRecipe.html";
@@ -199,33 +198,27 @@ public class RecipeController {
 	@GetMapping(value = "/admin/setCookToRecipe/{cookId}/{recipeId}")
 	public String setCookToRecipe(@PathVariable("cookId") Long cookId, @PathVariable("recipeId") Long recipeId,
 			Model model) {
-
 		Cook cook = this.cookService.findById(cookId);
 		Recipe recipe = this.recipeRepository.findById(recipeId).get();
 		recipe.setCook(cook);
 		this.recipeRepository.save(recipe);
-
 		model.addAttribute("recipe", recipe);
 		return "admin/formUpdateRecipe.html";
 	}
 
 	@GetMapping(value = "/admin/updateIngredients/{id}")
 	public String updateIngredients(@PathVariable("id") Long id, Model model) {
-
 		List<Ingredient> ingredientsToAdd = this.ingredientsToAdd(id);
 		model.addAttribute("ingredientsToAdd", ingredientsToAdd);
 		model.addAttribute("recipe", this.recipeRepository.findById(id).get());
-
 		return "admin/addIngredient.html";
 	}
 
 	@GetMapping(value = "/cookUser/updateIngredients/{id}")
 	public String updateIngredientsCook(@PathVariable("id") Long id, Model model) {
-
 		List<Ingredient> ingredientsToAdd = this.ingredientsToAdd(id);
 		model.addAttribute("ingredientsToAdd", ingredientsToAdd);
 		model.addAttribute("recipe", this.recipeRepository.findById(id).get());
-
 		return "cookUser/addIngredient.html";
 	}
 
@@ -296,7 +289,6 @@ public class RecipeController {
 
 		return "cookUser/addIngredient.html";
 	}
-
 	private List<Ingredient> ingredientsToAdd(Long recipeId) {
 		List<Ingredient> ingredientsToAdd = new ArrayList<>();
 
@@ -382,7 +374,6 @@ public class RecipeController {
 			throw new RuntimeException("Ingrediente o Ricetta non trovati");
 		}
 	}
-	
 	
 
 	@GetMapping(value = "/admin/deleteRecipe/{recipeId}")
