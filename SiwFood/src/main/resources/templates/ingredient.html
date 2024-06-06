@@ -16,7 +16,7 @@
 		<a href="/">
 			<img class="icons_home" src="/images/home.svg"></img>
 		</a>
-		<h3 style="font-weight: 500; font-size: x-large; display: none;"> SiwFood </h3>
+		<h3 class="siwfood-text"> SiwFood </h3>
 		<ul class="nav-menu">
 			<li class="nav-item">
 				<a class="ali" href="/recipes">Ricette</a>
@@ -29,8 +29,9 @@
 			</li>
 			<li class="nav-item">
 				<div class="account-reg-log">
-					<a id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
-					<a class="reg-log-button" href="/login"> Login </a>
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati</a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>
 		</ul>

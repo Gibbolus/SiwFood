@@ -33,24 +33,27 @@
 					<span th:text="${ingredient.name}"></span>		
 				</div>
 				<form th:action="@{/cookUser/updateQuantity}" method="POST">
+					
 					<input type="hidden" name="recipeId" th:value="${recipe.id}" />
 					<input type="hidden" name="ingredientId" th:value="${ingredient.id}" />
-					<input type="number" id="quantityValue" name="quantityValue" required
-						th:value="${ingredient.quantityToRecipe[recipe.id]}" min="0">
+					<input type="number" name="quantityValue" required th:value="${ingredient.quantityToRecipe[recipe.id]}" min="0">
 					<select name="quantityUnit" required>
+						<option value="">Unità</option>
 						<option value="grammi">Grammi</option>
+						<option value="etti">Etti</option>
+						<option value="litri">Litri</option>
 						<option value="millilitri">Millilitri</option>
 						<option value="cucchiai">Cucchiai</option>
+						<option value="spicchi">Spicchi</option>
+						<option value="">Unità</option>
 					</select>
+					
 					<a th:href="@{'/cookUser/formUpdateRecipe/'+ ${recipe.id} + '/' + ${userDetails.username}}">
 						<button type="submit">Fine</button></a>
 				</form>
 			</li>
 		</div>
 	</ul>
-	<a th:href="@{'/cookUser/formUpdateRecipe/'+ ${recipe.id} + '/' + ${userDetails.username}}">
-		<button type="button">Modifica</button>
-	</a>
 
 	<div>
 		<span th:text="${recipe.description}"></span>

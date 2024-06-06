@@ -50,11 +50,6 @@ public class CookController {
 		return "/admin/manageCooks.html";
 	}
 	
-	@GetMapping(value="/admin/indexCuco")
-	public String indexCook() {
-		return "admin/indexCook.html";
-	}
-	
 	@GetMapping(value = "/formSearchCooks")
 	public String SearchCooks() {
 		return "formSearchCooks.html";

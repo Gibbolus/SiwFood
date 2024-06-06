@@ -322,7 +322,7 @@ public class RecipeController {
 			quantityToRecipe.put(recipe.getId(), quantityValue);
 			ingredient.setUnitOfMeasure(quantityUnit);
 			ingredient.setQuantityToRecipe(quantityToRecipe);
-			ingredientRepository.save(ingredient); 		// Aggiorna l'ingrediente nel database
+			ingredientRepository.save(ingredient);
 			model.addAttribute("recipe", recipeRepository.findById(recipeId).get());
 			model.addAttribute("ingredient", ingredientRepository.findById(ingredientId).get());
 			model.addAttribute("quantityValue", quantityValue);

@@ -2,52 +2,50 @@
 <html lang="it">
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>SiwFood - Homepage</title>
+	<title>SiwFood - Homepage Admin</title>
 	<link rel="stylesheet" href="/css/IndexStyles.css?v=5.2" />
 	<link rel="icon" href="/images/favicon.ico">
 </head>
 
 <body>
 	<nav class="nav-bar">
-		<div>
-			<a href="/">
-				<img class="icons_home" src="/images/home.svg"></img>
-			</a>
+		<a href="/">
+			<img class="icons_home" src="/images/home.svg"></img>
+		</a>
+		<h3 class="siwfood-text"> SiwFood </h3>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/recipes">Ricette</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/cooks">Cuochi</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/ingredients">Ingredienti</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
+				</div>
+			</li>
+		</ul>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
 		</div>
-		<li>
-			<a class="ali" href="/recipes">Ricette</a>
-		</li>
-		<li>
-			<a class="ali" href="/cooks">Cuochi</a>
-		</li>
-		<li>
-			<a class="ali" href="/ingredients">Ingredienti</a>
-		</li>
-
-		<div>
-			<a href="/login">
-				<img class="icons_login" src="/images/account.svg"></img>
-			</a>
-		</div>
-
 	</nav>
+	
+	
 	<div id="main-div">
 		<div class="search-box">
-			<h1 class="menus-text"> Cerca un cuoco </h1>
-			<form class="search-bar" th:action="@{/formSearchCooks}" method="post">
-				<input type="text" th:value="${name}" name="name" placeholder="Cuochi..." />
-			</form>
-			<br>
-			<a class="main-div-search">
-				<img class="index-photos" src="/images/searchCooks.png"></img>
-			</a>
-		</div>
-		<div class="search-box">
-			<h1 class="menus-text"> Cerca una ricetta </h1>
+			<h2 class="menus-text"> Cerca una ricetta </h2>
 			<form th:action="@{/formSearchRecipes}" method="post">
-				<input type="text" th:value="${name}" name="name" placeholder="Ricette..." />
+				<input class="search-bar" type="text" th:value="${name}" name="name" placeholder="Ricette..." />
 			</form>
 			<br>
 			<a class="main-div-search">
@@ -55,9 +53,19 @@
 			</a>
 		</div>
 		<div class="search-box">
-			<h1 class="menus-text"> Cerca un ingrediente </h1>
+			<h2 class="menus-text"> Cerca un cuoco </h2>
+			<form th:action="@{/formSearchCooks}" method="post">
+				<input class="search-bar" type="text" th:value="${name}" name="name" placeholder="Cuochi..." />
+			</form>
+			<br>
+			<a class="main-div-search">
+				<img class="index-photos" src="/images/searchCooks.png"></img>
+			</a>
+		</div>
+		<div class="search-box">
+			<h2 class="menus-text"> Cerca un ingrediente </h2>
 			<form th:action="@{/formSearchIngredients}" method="post">
-				<input type="text" th:value="${name}" name="name" placeholder="Ingredienti..." />
+				<input class="search-bar" type="text" th:value="${name}" name="name" placeholder="Ingredienti..." />
 			</form>
 			<br>
 			<a class="main-div-search">
@@ -72,7 +80,7 @@
 				<span> Aggiungi un cuoco</span>
 			</div>
 		</a>
-		<a class="add-menu-texts" th:href="/admin/manageCooks">
+		<a class="add-menu-texts" href="/admin/manageCooks">
 			<div class="add-menu-container">
 				 <span> Gestisci i cuochi</span>
 			</div>
@@ -100,67 +108,18 @@
 	</div>
 
 
-
-	<div id="map">
-		<div class="text-map">
-
-			<h1>Vienici a trovare!</h1>
-			<p>
-				SiwFood è arrivato a Via della Vasca Navale 79 per deliziare il tuo palato con piatti squisiti preparati
-				con ingredienti freschi e di stagione.
-				Vieni a scoprire un menu ricco di sapori che saprà conquistarti fin dal primo assaggio.<br />
-				Cosa aspetti?<br />
-				Ti aspettiamo a SiwFood per un pranzo o una cena indimenticabili!<br />
-			</p>
-
-
-
-		</div>
-
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1020.7612055854265!2d12.4686253787241!3d41
-			.85523823216099!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13258a922b3edaeb%3A0xd7c19908
-			33e3ea29!2sIngegneria%20Informatica%20-%20Universit%C3%A0%20Roma%20Tre!5e0!3m2!1sit!2sit!4v171691
-			6328047!5m2!1sit!2sit" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-			referrerpolicy="no-referrer-when-downgrade">
-		</iframe>
-	</div>
-
-	<footer class="footer">
-		<div id="account-form">
-			<h4 class="accountform-text">Vuoi aggiungere una ricetta?</h4>
-			<a href="/register"> Registrati qui! </a>
-			<h4 class="accountform-text">Oppure esegui il login!</h4>
-			<a href="/login"> Login qui! </a>
-		</div>
-		<div class="socials">
-			<p class="socials-fonts">Seguici su Instagram</p>
-			<a href="https://www.instagram.com">
-				<img src="/images/logoInstagram.png"></img>
-			</a>
-		</div>
-		<div class="socials">
-			<p class="socials-fonts">Seguici su Youtube</p>
-			<a href="https://www.youtube.com">
-				<img src="/images/logoYoutube.png"></img>
-			</a>
-		</div>
-		<div class="socials">
-			<p class="socials-fonts">Seguici su X</p>
-			<a href="https://www.x.com">
-				<img src="/images/logoX.png"></img>
-			</a>
-
-		</div>
-
-	</footer>
-	<div id="contact-info">
-		<p class="contact-text"> Hai qualche problema con il nostro sito? </p>
-		<address>
-			<a class="contact-text" href="tel:+393359487551">Scrivi al nostro numero dedicato: (+39) 3359487551 ☏</a>
-		</address>
-		<a class="contact-text" href="">Contattaci via mail</a>
-	</div>
-
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
 
 </body>
 

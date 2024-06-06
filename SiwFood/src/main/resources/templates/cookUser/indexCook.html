@@ -4,7 +4,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>SiwFood - Homepage</title>
+	<title>SiwFood - Homepage CookUser</title>
 	<link rel="stylesheet" href="/css/IndexStyles.css?v=5.2" />
 	<link rel="icon" href="/images/favicon.ico">
 </head>
@@ -27,7 +27,8 @@
 			</li>
 			<li class="nav-item">
 				<div class="account-reg-log">
-					<a id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
 					<a class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>
@@ -118,33 +119,46 @@
 
 	<footer class="footer">
 		<div id="account-form">
-			<h4 class="accountform-text">Vuoi aggiungere una ricetta?</h4>
-			<a href="/register"> Registrati qui! </a>
-			<h4 class="accountform-text">Oppure esegui il login!</h4>
-			<a href="/login"> Login qui! </a>
+			<div id="accountform-text">
+				<h3 class="contact-text">Problemi con il sito?</h3>
+					<p class="contact-text">
+						Puoi contattarci cliccando
+						<a href="/formContact" style="color: black;">qui</a>
+					</p>
+			</div>
 		</div>
 		<div class="socials">
 			<p class="socials-fonts">Seguici su Instagram</p>
 			<a href="https://www.instagram.com">
-				<img src="/images/logoInstagram.png"></img>
+				<img class="socials-img" src="/images/logoInstagram.png"></img>
 			</a>
 		</div>
 		<div class="socials">
 			<p class="socials-fonts">Seguici su Youtube</p>
 			<a href="https://www.youtube.com">
-				<img src="/images/logoYoutube.png"></img>
+				<img class="socials-img" src="/images/logoYoutube.png"></img>
 			</a>
 		</div>
 		<div class="socials">
 			<p class="socials-fonts">Seguici su X</p>
 			<a href="https://www.x.com">
-				<img src="/images/logoX.png"></img>
+				<img class="socials-img" src="/images/logoX.png"></img>
 			</a>
-
 		</div>
-
 	</footer>
 
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
 
 </body>
 

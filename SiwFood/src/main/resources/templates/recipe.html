@@ -28,8 +28,9 @@
 			</li>
 			<li class="nav-item">
 				<div class="account-reg-log">
-					<a id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
-					<a class="reg-log-button" href="/login"> Login </a>
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati</a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>
 		</ul>
@@ -69,7 +70,8 @@
 		<span th:text="${recipe.description}"></span>
 		<span th:if="${recipe.description == null}"> Non disponibile </span>
 	</div>
-	 
+	<a th:href="@{'/admin/deleteRecipe/' + ${recipe.id}}">(Elimina)</a> 
+	
 	<div th:unless="${recipe}">Non esiste</div>
 	 
 	<footer class="footer">
@@ -101,7 +103,7 @@
 			</a>
 		</div>
 	</footer>
-
+	
 
 </body>
 
