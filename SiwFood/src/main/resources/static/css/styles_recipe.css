@@ -4,6 +4,7 @@ body {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+
 .nav-bar {
 	background-color: #f3c17e;
 	box-shadow: 0 2px black;
@@ -11,16 +12,30 @@ body {
 	height: 75px;
 	display: flex;
   	align-items: center;
-  	justify-content: space-evenly;
-}
-
-.ali {
-	text-decoration:none;
-	color: black;
+  	margin-bottom: 2%;
+  	padding-left: 10%;
 }
 
 .icons_home {
 	height: 50px;
+}
+
+.siwfood-text{
+	font-weight: 500;
+	font-size: x-large;
+	display: none;
+}
+
+.nav-menu{
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+}
+
+.ali {
+	text-decoration: none;
+	color: black;
 }
 
 li {
@@ -29,49 +44,15 @@ li {
 	font-size: larger;
 }
 
-.search-bar {
-  display: flex;
-  align-items: center;
-  min-width: 700px;
-  border-radius: 50px;
-  background-color: white;
-  border: 1px solid black;
-}
-
-#search-input{
-	width: 625px;
-}
-
-.search-box {
-  display: flex;
-  align-items: center;
-  padding: 0.3rem 1rem 0.3rem 1rem;
-  width: 100%;
-}
-
-.search-box input {
-  padding: 1rem;
-  width: 100%;
-  font-size: 1rem;
-  font-weight: 500;
-  border: 0;
-  outline: 0;
-}
-
-.search-box i {
-  font-size: 1.3rem;
-  cursor: pointer;
-}
-
-.search-box input::placeholder {
-  font-size: 1rem;
-}
-
 .account-reg-log{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	align-content: center;
+}
+
+#reg-button{
+	margin-bottom: 0.5rem;
 }
 
 .reg-log-button{
@@ -85,16 +66,87 @@ li {
 	background-color: #f8dbb0;
 }
 
-#reg-button{
-	margin-bottom: 0.5rem;
+.hamburger{
+	display: none;
+}
+
+#name-text{
+	margin: 2% 0 2% 10%;
+}
+
+.photo-and-text{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
 }
 
 .img-recipe {
-	margin: 0.5rem 0 0 0.5rem;
-	height: 12rem;
-	width: 20rem;
+	margin: 0 auto auto 3rem;
+	height: auto;
+	width: 45rem;
 	border-radius: 50px;
 	box-shadow: black 1px 1px 5px;
+}
+
+.desctipion{
+	display: flex;
+	flex-direction: column;
+	font-size: larger;
+	font-weight: 700;
+}
+
+.desctipion-span{
+	width: 50rem;
+	font-weight: 500;
+}
+
+#recipe-infos{
+	margin: 2rem 0; 
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.icons {
+	height: 50px;
+	width: 50px;
+}
+
+.icon_info {
+	margin-top: 5px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	font-size: larger;
+}
+
+
+#ingredients-text{
+	margin: 5% 0 2% 0;
+	font-size: larger;
+	font-weight: 700;
+}
+
+.ingredients-list{
+	font-size: large;
+	font-weight: 500;
+	list-style: disc;
+}
+
+.ingredients-list a{
+	color: black;
+}
+
+#cook-text{
+	margin: 2% 0 2% 10%;
+	font-size: larger;
+	font-weight: 700;
 }
 
 .footer{
@@ -135,14 +187,161 @@ li {
 
 
 
+@media(max-width: 768px){
+	
+	.nav-bar{
+		min-height: 70px;
+		background-color: #f3c17e;
+		box-shadow: 0 2px black;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 24px;
+	}
+	
+	.ali{
+		transition: 0.7s ease;
+	}
+	
+	.ali:hover{
+		color: aliceblue;
+	}
+	
+	.hamburger{
+		display: block;
+		cursor: pointer;
+	}
+	
+	.bar{
+		display: block;
+		width: 25px;
+		height: 3px;
+		margin: 5px auto;
+		-webkit-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+		background-color: black;
+	}
+	
+	.hamburger.active .bar:nth-child(2){
+		opacity: 0;
+	}
+	.hamburger.active .bar:nth-child(1){
+		transform: translateY(8px) rotate(45deg);
+	}
+	.hamburger.active .bar:nth-child(3){
+		transform: translateY(-8px) rotate(-45deg);
+	}
+	
+	.nav-menu{
+		display: flex;
+		position: fixed;
+		padding: 0 50px 20px 0;
+		right: -35%;
+		top: 61px;
+		flex-direction: column;
+		background-color: #f8dbb0;
+		width: 25%;
+		transition: 0.3s;
+		border-radius: 50px;
+	}
+	
+	.siwfood-text{
+		display: flex;
+	}
+	
+	.nav-item{
+		margin: 20px auto;
+	}
+	
+	.nav-menu.active{
+		right: -9%;
+	}
+	
+	.ali{
+		text-decoration: none;
+		color: black;
+	}
+	
+	.reg-log-button{
+		height: 140%;
+		margin: 5px;
+		width: 130%;
+		background-color: #f3c17e;
+	}
+	
+	.photo-and-text{
+		justify-content: start;
+	}
+	
+	.img-recipe{
+		width: 25rem;
+		margin-bottom: 5%;
+	}
+	
+	.desctipion{
+		margin-left: 10%;
+		flex-wrap: wrap;
+	}
+	
+	.desctipion-span{
+		width: 35rem;
+	}
+	
+	#ingredients-text{
+		font-size: large;
+	}
+	
+	#cook-text{
+		font-size: large;
+	}
+	
+	.contact-text {
+		font-size: medium;
+	}
 
+	#accountform-text {
+		width: 200px;
+		padding-left: 15px;
+		margin: auto 0;
+	}
 
+	.footer {
+		height: 150px;
+		gap: 15px;
+	}
 
+	.socials {
+		width: 100px;
+	}
 
+	.socials-fonts {
+		text-align: center;
+		font-size: small;
+	}
 
+	.socials-img {
+		width: 60px;
+	}
+}
 
-
-
-
+@media(max-width: 600px){
+	
+	.nav-menu{
+		width: 30%;
+		right: -40%;
+	}
+	
+	.nav-menu.active{
+		right: -12%;
+	}
+	
+	#name-text{
+		margin: 5% 0 4% 10%;
+	}
+	
+	.desctipion-span{
+		width: 28rem;
+	}
+}
 
 

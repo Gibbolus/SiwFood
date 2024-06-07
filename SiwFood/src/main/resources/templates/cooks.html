@@ -47,22 +47,26 @@
 		</div>
 	</nav>
 
-	<h1>Cuochi</h1>
+	<h1 class="title">Tutti i nostri cuochi</h1>
 	<div th:if="${cooks.isEmpty()}">Non ci sono cuochi nel sistema</div>
 
 	<div class="container">
 		<div id="div-princ-cooks" class="div-princ" th:each="cook : ${cooks}">
-			<div>
+			<div style="width: 16rem;">
 				<a th:href="@{'/cook' + '/' + ${cook.id}}">
 					<img class="img-cooks" th:if="${cook.urlImage.startsWith('https')}" th:src="${cook.urlImage}">
 					<img class="img-cooks" th:unless="${cook.urlImage.startsWith('https')}"
 						th:src="@{/images/__${cook.urlImage}__}">
 				</a>
-				<h2 style="text-align: center;" class="text" th:text="${cook.name} + ' ' + ${cook.surname}"></h2>
+				<h2 class="text" th:text="${cook.name} + ' ' + ${cook.surname}"></h2>
 			</div>
-			<p style="text-align: left; margin-right: 15px;" th:text="${cook.description}"></p>
-		</div> <!-- class div-princ -->
-	</div> <!-- class container -->
+			<div>
+				<br>
+				<div style="font-size: larger;">Nato nel:</div>
+				<span th:text="${#temporals.format(cook.year, 'dd-MM-yyyy')}"></span>
+			</div>
+		</div>
+	</div>
 
 	<footer class="footer">
 		<div id="account-form">

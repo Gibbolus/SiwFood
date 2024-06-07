@@ -10,12 +10,12 @@ body {
 	position: sticky;
 	height: 75px;
 	display: flex;
-  	align-items: center;
-  	margin-bottom: 2%;
-  	padding-left: 10%;
+	align-items: center;
+	margin-bottom: 2%;
+	padding-left: 10%;
 }
 
-#home-button{
+#home-button {
 	margin: 0 80px 0 -50px;
 }
 
@@ -23,7 +23,7 @@ body {
 	height: 50px;
 }
 
-.nav-menu{
+.nav-menu {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
@@ -80,7 +80,7 @@ li {
 	font-weight: 500;
 }
 
-.account-reg-log{
+.account-reg-log {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -102,11 +102,16 @@ li {
 	background-color: #f8dbb0;
 }
 
-
-
-.hamburger{
+.hamburger {
 	display: none;
 }
+
+.title{
+	text-align: center;
+}
+
+
+
 
 
 .container {
@@ -142,9 +147,9 @@ li {
 }
 
 .img-cooks {
-	margin: 0.5rem 0.8rem 0 0.5rem;
-	max-height: 18rem;
-	max-width: 15rem;
+	margin: 0.5rem 0.8rem 0 0;
+	max-height: 20rem;
+	width: 15rem;
 	border-radius: 50px;
 	box-shadow: black 1px 1px 5px;
 }
@@ -152,6 +157,7 @@ li {
 .text {
 	margin: 5px 25px -5px 25px;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	text-align: center;
 }
 
 .subtext {
@@ -187,15 +193,9 @@ li {
 	font-size: larger;
 }
 
-
-
-
-
-
-
 #div-princ-cooks {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-around;
 }
 
 #div-princ-ingredients {
@@ -203,20 +203,17 @@ li {
 	width: 23rem;
 }
 
-
-
-
-
-
-
+#div-princ-cooks span{
+	font-size: larger;
+	font-weight: 700;
+	margin: 20px 25px 0 0;
+}
 
 .type {
 	font-size: larger;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	text-align: center;
 }
-
-
 
 #main-div {
 	display: flex;
@@ -311,7 +308,7 @@ p {
 @media(max-width: 768px) {
 
 
-	.nav-bar{
+	.nav-bar {
 		min-height: 70px;
 		background-color: #f3c17e;
 		box-shadow: 0 2px black;
@@ -320,24 +317,25 @@ p {
 		align-items: center;
 		padding: 0 24px;
 	}
-	#home-button{
+
+	#home-button {
 		margin: 0;
 	}
-	
-	.ali{
+
+	.ali {
 		transition: 0.7s ease;
 	}
-	
-	.ali:hover{
+
+	.ali:hover {
 		color: aliceblue;
 	}
-	
-	.hamburger{
+
+	.hamburger {
 		display: block;
 		cursor: pointer;
 	}
-	
-	.bar{
+
+	.bar {
 		display: block;
 		width: 25px;
 		height: 3px;
@@ -346,18 +344,20 @@ p {
 		transition: all 0.3s ease-in-out;
 		background-color: black;
 	}
-	
-	.hamburger.active .bar:nth-child(2){
+
+	.hamburger.active .bar:nth-child(2) {
 		opacity: 0;
 	}
-	.hamburger.active .bar:nth-child(1){
+
+	.hamburger.active .bar:nth-child(1) {
 		transform: translateY(8px) rotate(45deg);
 	}
-	.hamburger.active .bar:nth-child(3){
+
+	.hamburger.active .bar:nth-child(3) {
 		transform: translateY(-8px) rotate(-45deg);
 	}
-	
-	.nav-menu{
+
+	.nav-menu {
 		display: flex;
 		position: fixed;
 		padding: 0 50px 20px 0;
@@ -369,16 +369,16 @@ p {
 		transition: 0.3s;
 		border-radius: 50px;
 	}
-	
+
 	.nav-item {
 		margin: 20px auto;
 	}
 
-	.nav-menu.active{
+	.nav-menu.active {
 		right: -9%;
 	}
-	
-	.ali{
+
+	.ali {
 		text-decoration: none;
 		color: black;
 	}

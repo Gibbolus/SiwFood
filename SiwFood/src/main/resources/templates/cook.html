@@ -51,6 +51,7 @@
 			<span th:if="${cook.year == null}">
 				Non disponibile
 			</span>
+			<span th:text="${cook.description}"></span>
 		</div>
 		<span>
 			<img class="img" th:if="${cook.urlImage.startsWith('https')}" th:src="${cook.urlImage}">

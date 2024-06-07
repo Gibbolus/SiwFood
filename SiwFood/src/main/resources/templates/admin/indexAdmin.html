@@ -52,7 +52,7 @@
 				<img class="index-photos" src="/images/searchRecipes.png"></img>
 			</a>
 		</div>
-		<div class="search-box">
+		<div class="search-box" id="search-box2">
 			<h2 class="menus-text"> Cerca un cuoco </h2>
 			<form th:action="@{/formSearchCooks}" method="post">
 				<input class="search-bar" type="text" th:value="${name}" name="name" placeholder="Cuochi..." />
@@ -62,7 +62,7 @@
 				<img class="index-photos" src="/images/searchCooks.png"></img>
 			</a>
 		</div>
-		<div class="search-box">
+		<div class="search-box" id="search-box1">
 			<h2 class="menus-text"> Cerca un ingrediente </h2>
 			<form th:action="@{/formSearchIngredients}" method="post">
 				<input class="search-bar" type="text" th:value="${name}" name="name" placeholder="Ingredienti..." />
