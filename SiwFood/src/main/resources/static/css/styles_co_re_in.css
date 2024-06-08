@@ -110,14 +110,11 @@ li {
 	text-align: center;
 }
 
-
-
-
-
 .container {
 	display: flex;
 	flex-wrap: wrap;
 	padding-bottom: 6.25rem;
+	gap: 2px
 }
 
 .div-princ {
@@ -158,6 +155,7 @@ li {
 	margin: 5px 25px -5px 25px;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
 
 .subtext {
 	margin: 0px 25px;
@@ -236,30 +234,6 @@ li {
 	display: flex;
 	justify-content: space-around;
 	width: 70%;
-
-}
-
-#map {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	margin: 50px auto 5rem auto;
-}
-
-.text-map {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 500px;
-}
-
-#contact-info {
-	height: 6.25rem;
-	background-color: #74361a;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-evenly;
 
 }
 
@@ -390,11 +364,9 @@ p {
 	}
 
 	.div-princ {
-		height: 350px;
+		height: 380px;
 		width: 300px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+		text-align: center;
 	}
 
 	.div-int {
@@ -404,20 +376,23 @@ p {
 	.img-recipe {
 		height: 150px;
 		width: auto;
-		margin: auto;
-		margin-top: 15px;
+		margin: 15px auto 0 auto;
 	}
 
 	.img-cooks {
-		width: 200px;
+		margin: 0.5rem 0.8rem;
 		height: auto;
-		margin-top: 15px;
+		width: 200px;
 	}
 
 	.text {
 		text-align: center;
 	}
 
+	#nascita{
+		display: none;
+	}
+	
 	.info {
 		height: 35px;
 	}

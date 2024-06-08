@@ -5,17 +5,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title> SiwFood - Login </title>
-	<link rel="stylesheet" href="/css/stile.css" />
+	<link rel="stylesheet" href="/css/register_style.css" />
 	<link rel="icon" href="/images/favicon.ico">
 </head>
 
 <body>
-	
+
 	<nav class="nav-bar">
 		<a href="/">
 			<img class="icons_home" src="/images/home.svg"></img>
 		</a>
-		<h3 style="font-weight: 500; font-size: x-large; display: none;"> SiwFood </h3>
+		<h3 class="siwfood-text"> SiwFood </h3>
 		<ul class="nav-menu">
 			<li class="nav-item">
 				<a class="ali" href="/recipes">Ricette</a>
@@ -39,38 +39,79 @@
 			<span class="bar"></span>
 		</div>
 	</nav>
-	
-	<header>
-		<div th:if="${userDetails}">
-			<span th:text="${userDetails}"></span>
-			<a href="/logout">Logout</a>
-		</div>
-		<div th:unless="${userDetails}">
-			<a href="/login">Login</a>
-		</div>
-	</header>
-	<div th:unless="${userDetails}">
+
+	<div id="form-main" th:unless="${userDetails}">
 		<h1>Login</h1>
 		<form th:action="@{/login}" method="POST">
-				<div>
-					<span>Username:</span>
-					<span><input name="username" type="text" required /></span>
-				</div>
-				<div>
-					<span>Password:</span>
-					<span><input name="password" type="password" required /></span>
-				</div>
-				<div>
-					<span th:if="${param.error != null}">Username o password errati</span>
-				</div>
-				<div>
-					<span><button type="submit">Login</button></span>
-				</div>
+
+
+			<div>
+				<label class="text">Username</label>
+				<span><input class="search-bar" name="username" type="text" required placeholder="Username..." /></span>
+			</div>
+			<div>
+				<label class="text">Password</label>
+				<span><input class="search-bar" name="password" type="password" required
+						placeholder="Password..." /></span>
+			</div>
+			<div>
+				<span th:if="${param.error != null}">Username o password errati</span>
+			</div>
+			<div style="text-align: center;">
+				<input id="submit" type="submit" value="Invia">
+			</div>
 		</form>
-		<div>
-			<a th:href="@{/register}" th:text="Registrati">Registrati</a>
-		</div>
 	</div>
+
+
+
+
+
+
+	<footer class="footer">
+		<div id="account-form">
+			<div id="accountform-text">
+				<h3>Problemi con il sito?</h4>
+					<p>
+						Puoi contattarci cliccando
+						<a href="/formContact" style="color: black;">qui</a>
+					</p>
+			</div>
+		</div>
+		<div class="socials">
+			<p class="socials-fonts">Seguici su Instagram</p>
+			<a href="https://www.instagram.com">
+				<img class="socials-img" src="/images/logoInstagram.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socials-fonts">Seguici su Youtube</p>
+			<a href="https://www.youtube.com">
+				<img class="socials-img" src="/images/logoYoutube.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socials-fonts">Seguici su X</p>
+			<a href="https://www.x.com">
+				<img class="socials-img" src="/images/logoX.png"></img>
+			</a>
+		</div>
+	</footer>
+
+
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
+
 </body>
 
 </html>

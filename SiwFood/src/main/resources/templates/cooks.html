@@ -35,7 +35,8 @@
 			<li class="nav-item">
 				<div class="account-reg-log">
 					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
-					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati</a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register">
+						Registrati</a>
 					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>
@@ -52,7 +53,7 @@
 
 	<div class="container">
 		<div id="div-princ-cooks" class="div-princ" th:each="cook : ${cooks}">
-			<div style="width: 16rem;">
+			<div>
 				<a th:href="@{'/cook' + '/' + ${cook.id}}">
 					<img class="img-cooks" th:if="${cook.urlImage.startsWith('https')}" th:src="${cook.urlImage}">
 					<img class="img-cooks" th:unless="${cook.urlImage.startsWith('https')}"
@@ -60,9 +61,9 @@
 				</a>
 				<h2 class="text" th:text="${cook.name} + ' ' + ${cook.surname}"></h2>
 			</div>
-			<div>
+			<div id="nascita">
 				<br>
-				<div style="font-size: larger;">Nato nel:</div>
+				<div style="font-size: larger; text-align: center;">Nato il:</div>
 				<span th:text="${#temporals.format(cook.year, 'dd-MM-yyyy')}"></span>
 			</div>
 		</div>
@@ -71,11 +72,11 @@
 	<footer class="footer">
 		<div id="account-form">
 			<div id="accountform-text">
-				<h3 class="contact-text">Problemi con il sito?</h4>
-					<p class="contact-text">
-						Puoi contattarci cliccando
-						<a href="/formContact" style="color: black;">qui</a>
-					</p>
+				<h3 class="contact-text">Problemi con il sito?</h3>
+				<p class="contact-text">
+					Puoi contattarci cliccando
+					<a href="/formContact" style="color: black;">qui</a>
+				</p>
 			</div>
 		</div>
 		<div class="socials">
@@ -97,7 +98,7 @@
 			</a>
 		</div>
 	</footer>
-	
+
 	<script>
 		const hamburger = document.querySelector(".hamburger");
 		const navMenu = document.querySelector(".nav-menu");

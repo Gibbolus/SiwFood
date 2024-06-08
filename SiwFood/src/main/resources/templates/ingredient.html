@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title>Ingrediente</title>
-	<link rel="stylesheet" href="/css/styles_recipe.css?v=0.1" />
+	<link rel="stylesheet" href="/css/style_cook_recipe.css?v=0.1" />
 	<link rel="icon" href="/images/favicon.ico">
 </head>
 
@@ -40,18 +40,69 @@
 			<span class="bar"></span>
 		</div>
 	</nav>
-
 	<div th:if="${ingredient}">
-		<img class="img" th:if="${ingredient.urlImage.startsWith('https')}" th:src="${ingredient.urlImage}">
-		<img class="img" th:unless="${ingredient.urlImage.startsWith('https')}"
-			th:src="@{/images/__${ingredient.urlImage}__}">
-		<h1 th:text="${ingredient.name}">Nome ingrediente</h1>
-		<span th:text="${ingredient.description}"></span>
+		<h1 id="name-text" th:text="${ingredient.name}">Nome ingrediente</h1>
+		<div class="photo-and-text">
+			<div>
+				<img class="img-ingredient" th:if="${ingredient.urlImage.startsWith('https')}" th:src="${ingredient.urlImage}">
+				<img class="img-ingredient" th:unless="${ingredient.urlImage.startsWith('https')}"
+				th:src="@{/images/__${ingredient.urlImage}__}">
+			</div>
+			<div class="description"> Descrizione: 
+				<br>
+				<div id="description">
+					<span class="description-span" th:text="${ingredient.description}"></span>
+					<span class="description-span" th:if="${ingredient.description == null}"> Non disponibile </span>
+				</div>
+			</div>
+		</div>
 	</div>
-	<span><img width="15%" th:src=${ingredient.urlImage} /></span>
-	   
-	    <div th:unless="${ingredient}">Non esiste</div>
-	 
+	<div th:unless="${ingredient}">Non esiste</div>
+	
+	
+	<footer class="footer">
+		<div id="account-form">
+			<div id="accountform-text">
+				<h3 class="contact-text">Problemi con il sito?</h4>
+					<p class="contact-text">
+						Puoi contattarci cliccando
+						<a href="/formContact" style="color: black;">qui</a>
+					</p>
+			</div>
+		</div>
+		<div class="socials">
+			<p class="socials-fonts">Seguici su Instagram</p>
+			<a href="https://www.instagram.com">
+				<img class="socials-img" src="/images/logoInstagram.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socials-fonts">Seguici su Youtube</p>
+			<a href="https://www.youtube.com">
+				<img class="socials-img" src="/images/logoYoutube.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socials-fonts">Seguici su X</p>
+			<a href="https://www.x.com">
+				<img class="socials-img" src="/images/logoX.png"></img>
+			</a>
+		</div>
+	</footer>
+
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
+	
 </body>
 
 </html>

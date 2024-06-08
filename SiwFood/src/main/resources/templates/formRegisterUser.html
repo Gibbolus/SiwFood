@@ -30,7 +30,8 @@
 			<li class="nav-item">
 				<div class="account-reg-log">
 					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
-					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati</a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register">
+						Registrati</a>
 					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>
@@ -41,32 +42,36 @@
 			<span class="bar"></span>
 		</div>
 	</nav>
-	
+
 	<div id="form-main">
-		<h1>Registrazione nuovo utente</h1>
+		<h1>Registrazione</h1>
 		<form th:action="@{/register}" method="POST">
 			<div>
 				<label class="text">Nome</label>
-				<span><input class="search-bar" type="text" placeholder="Nome..." required th:field="${user.name}"/></span>
+				<span><input class="search-bar" type="text" placeholder="Nome..." required
+						th:field="${user.name}" /></span>
 				<span th:if="${#fields.hasErrors('user.name')}" th:errors="${user.name}">
 				</span>
 			</div>
 			<div>
 				<label class="text">Cogname</label>
 				<br>
-				<span><input class="search-bar" type="text" placeholder="Cognome..." required th:field="${user.surname}" /></span>
+				<span><input class="search-bar" type="text" placeholder="Cognome..." required
+						th:field="${user.surname}" /></span>
 				<span th:if="${#fields.hasErrors('user.surname')}" th:errors="${user.surname}">
 				</span>
 			</div>
 			<div>
 				<label class="text">Email</label>
-				<span><input class="search-bar" type="text" placeholder="Email..." required th:field="${user.email}" /></span>
+				<span><input class="search-bar" type="text" placeholder="Email..." required
+						th:field="${user.email}" /></span>
 				<span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}">
 				</span>
 			</div>
 			<div>
 				<label class="text">Foto</label>
-				<span><input class="search-bar" type="url" placeholder="Foto..." required th:field="${user.urlImage}" /></span>
+				<span><input class="search-bar" type="url" placeholder="Foto..." required
+						th:field="${user.urlImage}" /></span>
 				<span th:if="${#fields.hasErrors('user.urlImage')}" th:errors="${user.urlImage}">
 				</span>
 			</div>
@@ -79,29 +84,31 @@
 			<div>
 				<label class="text">Username</label>
 				<span>
-					<input class="search-bar" type="text" placeholder="Username..." required th:field="${credentials.username}" />
+					<input class="search-bar" type="text" placeholder="Username..." required
+						th:field="${credentials.username}" />
 				</span>
 				<span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}">
 				</span>
 			</div>
 			<div>
 				<label class="text">Password</label>
-				<span><input class="search-bar" type="password" placeholder="Password..." required th:field="${credentials.password}" />
+				<span><input class="search-bar" type="password" placeholder="Password..." required
+						th:field="${credentials.password}" />
 				</span>
 				<span th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}">
 				</span>
 			</div>
-			<div id="reg-button-main">
-				<button id="send-reg-button" type="submit">Registra</button>
+			<div style="text-align: center;">
+				<input id="submit" type="submit" value="Invia">
 			</div>
 		</form>
 	</div>
-	
-	
-	
-	
-	
-		<footer class="footer">
+
+
+
+
+
+	<footer class="footer">
 		<div id="account-form">
 			<div id="accountform-text">
 				<h3>Problemi con il sito?</h4>
@@ -114,24 +121,36 @@
 		<div class="socials">
 			<p class="socials-fonts">Seguici su Instagram</p>
 			<a href="https://www.instagram.com">
-				<img src="/images/logoInstagram.png"></img>
+				<img class="socials-img" src="/images/logoInstagram.png"></img>
 			</a>
 		</div>
 		<div class="socials">
 			<p class="socials-fonts">Seguici su Youtube</p>
 			<a href="https://www.youtube.com">
-				<img src="/images/logoYoutube.png"></img>
+				<img class="socials-img" src="/images/logoYoutube.png"></img>
 			</a>
 		</div>
 		<div class="socials">
 			<p class="socials-fonts">Seguici su X</p>
 			<a href="https://www.x.com">
-				<img src="/images/logoX.png"></img>
+				<img class="socials-img" src="/images/logoX.png"></img>
 			</a>
 		</div>
 	</footer>
-	
-	
+
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
+
 </body>
 
 </html>

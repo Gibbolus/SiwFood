@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title>Ricetta</title>
-	<link rel="stylesheet" href="/css/styles_recipe.css?v=0.1" />
+	<link rel="stylesheet" href="/css/style_cook_recipe.css?v=0.1" />
 	<link rel="icon" href="/images/favicon.ico">
 </head>
 
@@ -50,10 +50,10 @@
 				<img class="img-recipe" th:unless="${recipe.urlImage.startsWith('https')}"
 					th:src="@{/images/__${recipe.urlImage}__}">
 			</div>
-			<div class="desctipion"> Descrizione:
+			<div class="description"> Descrizione:
 				<br>
-				<span class="desctipion-span" th:text="${recipe.description}"></span>
-				<span class="desctipion-span" th:if="${recipe.description == null}"> Non disponibile </span>
+				<span class="description-span" th:text="${recipe.description}"></span>
+				<span class="description-span" th:if="${recipe.description == null}"> Non disponibile </span>
 				<div id="recipe-infos">
 					<div class="info">
 						<img class="icons" src="/images/clock.svg"></img>
