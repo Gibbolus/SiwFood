@@ -74,8 +74,7 @@ public class RecipeController {
 	
 	@PostMapping(value = "/formSearchRecipes")
 	public String searchRecipes(Model model, @RequestParam String name) {
-		String nameLowerCase = name.toLowerCase();
-		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%"+ name + "%')";
 		List<Recipe> recipes = this.entityManager.createQuery(query, Recipe.class).getResultList();
 		model.addAttribute("recipes", recipes);
 		return "recipes.html";
@@ -83,8 +82,7 @@ public class RecipeController {
 
 	@PostMapping(value = "admin/formSearchRecipes")
 	public String searchRecipesAdmin(Model model, @RequestParam String name) {
-		String nameLowerCase = name.toLowerCase();
-		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%"+ name + "%')";
 		List<Recipe> recipes = this.entityManager.createQuery(query, Recipe.class).getResultList();
 		model.addAttribute("recipes", recipes);
 		return "/admin/manageRecipes.html";
@@ -92,8 +90,7 @@ public class RecipeController {
 
 	@PostMapping(value = "cookUser/formSearchRecipes")
 	public String searchRecipesCook(Model model, @RequestParam String name) {
-		String nameLowerCase = name.toLowerCase();
-		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%"+ name + "%')";
 		List<Recipe> recipes = this.entityManager.createQuery(query, Recipe.class).getResultList();
 		model.addAttribute("recipes", recipes);
 		return "/cookUser/manageRecipes.html";

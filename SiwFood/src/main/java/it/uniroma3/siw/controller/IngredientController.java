@@ -47,8 +47,7 @@ public class IngredientController {
 	
 	@PostMapping(value = "/formSearchIngredients")
 	public String searchIngredients(Model model, @RequestParam String name) {
-		String nameLowerCase = name.toLowerCase();
-		String query = "SELECT i FROM Ingredient i WHERE LOWER(i.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		String query = "SELECT i FROM Ingredient i WHERE LOWER(i.name) LIKE LOWER('%"+ name + "%')";
 		List<Ingredient> ingredients = this.entityManager.createQuery(query, Ingredient.class).getResultList();
 		model.addAttribute("ingredients", ingredients);
 		return "ingredients.html";
@@ -56,8 +55,7 @@ public class IngredientController {
 	
 	@PostMapping(value = "admin/formSearchIngredients")
 	public String searchIngredientsAdmin(Model model, @RequestParam String name) {
-		String nameLowerCase = name.toLowerCase();
-		String query = "SELECT i FROM Ingredient i WHERE LOWER(i.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		String query = "SELECT i FROM Ingredient i WHERE LOWER(i.name) LIKE LOWER('%"+ name + "%')";
 		List<Ingredient> ingredients = this.entityManager.createQuery(query, Ingredient.class).getResultList();
 		model.addAttribute("ingredients", ingredients);
 		return "/admin/manageIngredients.html";

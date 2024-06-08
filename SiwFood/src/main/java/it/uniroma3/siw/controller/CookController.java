@@ -57,8 +57,7 @@ public class CookController {
 	
 	@PostMapping(value = "/formSearchCooks")
 	public String searchCooks(Model model, @RequestParam String name) {
-		String nameLowerCase = name.toLowerCase();
-		String query = "SELECT c FROM Cook c WHERE LOWER(c.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		String query = "SELECT c FROM Cook c WHERE LOWER(c.name) LIKE LOWER('%"+ name + "%')";
 		List<Cook> cooks = this.entityManager.createQuery(query, Cook.class).getResultList();
 		model.addAttribute("cooks", cooks);
 		return "cooks.html";
@@ -66,8 +65,7 @@ public class CookController {
 	
 	@PostMapping(value = "admin/formSearchCooks")
 	public String searchCooksAdmin(Model model, @RequestParam String name) {
-		String nameLowerCase = name.toLowerCase();
-		String query = "SELECT c FROM Cook c WHERE LOWER(c.name) LIKE LOWER('%"+ nameLowerCase + "%')";
+		String query = "SELECT c FROM Cook c WHERE LOWER(c.name) LIKE LOWER('%"+ name + "%')";
 		List<Cook> cooks = this.entityManager.createQuery(query, Cook.class).getResultList();
 		model.addAttribute("cooks", cooks);
 		return "/admin/manageCooks.html";
