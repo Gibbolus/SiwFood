@@ -1,5 +1,11 @@
+html, body{
+	height: 100%;
+    width: 100%;
+    margin: 0;
+    display: table;
+}
+
 body {
-	margin: 0;
 	background-color: #fceec9;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -11,12 +17,25 @@ body {
 	height: 75px;
 	display: flex;
   	align-items: center;
-  	justify-content: space-evenly;
   	margin-bottom: 2%;
+  	padding-left: 10%;
 }
 
 .icons_home {
 	height: 50px;
+}
+
+.siwfood-text{
+	font-weight: 500;
+	font-size: x-large;
+	display: none;
+}
+
+.nav-menu{
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
 }
 
 .ali {
@@ -26,6 +45,7 @@ body {
 
 li {
 	list-style: none;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	font-size: larger;
 }
 
@@ -34,6 +54,10 @@ li {
 	flex-direction: column;
 	align-items: center;
 	align-content: center;
+}
+
+#reg-button{
+	margin-bottom: 0.5rem;
 }
 
 .reg-log-button{
@@ -47,8 +71,8 @@ li {
 	background-color: #f8dbb0;
 }
 
-#reg-button{
-	margin-bottom: 0.5rem;
+.hamburger{
+	display: none;
 }
 
 #registr-main{
@@ -109,3 +133,122 @@ li {
 	margin: 35px auto auto 0;
 	white-space: wrap;
 }
+
+
+@media(max-width: 768px){
+	
+	.nav-bar{
+		min-height: 70px;
+		background-color: #f3c17e;
+		box-shadow: 0 2px black;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 24px;
+	}
+	
+	.ali{
+		transition: 0.7s ease;
+	}
+	
+	.ali:hover{
+		color: aliceblue;
+	}
+	
+	.hamburger{
+		display: block;
+		cursor: pointer;
+	}
+	
+	.bar{
+		display: block;
+		width: 25px;
+		height: 3px;
+		margin: 5px auto;
+		-webkit-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+		background-color: black;
+	}
+	
+	.hamburger.active .bar:nth-child(2){
+		opacity: 0;
+	}
+	.hamburger.active .bar:nth-child(1){
+		transform: translateY(8px) rotate(45deg);
+	}
+	.hamburger.active .bar:nth-child(3){
+		transform: translateY(-8px) rotate(-45deg);
+	}
+	
+	.nav-menu{
+		display: flex;
+		position: fixed;
+		padding: 0 50px 20px 0;
+		right: -35%;
+		top: 71px;
+		flex-direction: column;
+		background-color: #f8dbb0;
+		width: 25%;
+		transition: 0.3s;
+		border-radius: 50px;
+	}
+	
+	.siwfood-text{
+		display: flex;
+	}
+	
+	.nav-item{
+		margin: 20px auto;
+	}
+	
+	.nav-menu.active{
+		right: -9%;
+	}
+	
+	.ali{
+		text-decoration: none;
+		color: black;
+	}
+	
+	.reg-log-button{
+		height: 140%;
+		margin: 5px;
+		width: 130%;
+		background-color: #f3c17e;
+	}
+	
+	
+	
+	.footer{
+		height: 150px;
+		gap: 15px;
+	}
+	
+	.socials{
+		width: 100px;
+	}
+	
+	.socials-fonts{
+		text-align: center;
+		font-size: small;
+	}
+	
+	.socials-img{
+		width: 60px;
+	}
+
+
+	.contact-text{
+		font-size: medium;
+	}
+	
+	#accountform-text{
+		width: 200px;
+		padding-left: 15px;
+		margin: auto 0;
+	}
+
+}
+
+
+

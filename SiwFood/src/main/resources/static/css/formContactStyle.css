@@ -1,5 +1,11 @@
+html, body{
+	height: 100%;
+    width: 100%;
+    margin: 0;
+    display: table;
+}
+
 body {
-	margin: 0;
 	background-color: #fceec9;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -139,7 +145,7 @@ label{
 }
 
 #submit {
-	margin-left: 5rem;
+	margin:0 0 5rem 5rem;
 	height: 50px;
 	width: 200px;
   	background-color: #f3c17e;
@@ -148,6 +154,44 @@ label{
   	border-radius: 15px;
   	box-shadow: 0 1px black;
   	cursor: pointer;
+}
+
+.footer{
+	position: static;
+	bottom: 0;
+	width: 100%;
+	height: 12.5rem;
+	background-color: #f3c17e;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.socials-fonts{
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	display: flex;
+	justify-content: center;
+	font-weight: 600;
+}
+
+.socials{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#account-form{
+	display: flex;
+	flex-direction: column;
+	align-content: space-between;
+	justify-content: center;
+}
+
+#accountform-text{
+	width: 22rem;
+	margin: 35px auto auto 0;
+	white-space: wrap;
 }
 
 
@@ -252,6 +296,36 @@ label{
 		margin-right: 15px;		
 		margin-left: -40px;
 	}
+	
+	.footer{
+		height: 150px;
+		gap: 15px;
+	}
+	
+	.socials{
+		width: 100px;
+	}
+	
+	.socials-fonts{
+		text-align: center;
+		font-size: small;
+	}
+	
+	.socials-img{
+		width: 60px;
+	}
+
+
+	.contact-text{
+		font-size: medium;
+	}
+	
+	#accountform-text{
+		width: 200px;
+		padding-left: 15px;
+		margin: auto 0;
+	}
+
 }
 
 @media(max-width: 600px){
