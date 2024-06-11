@@ -119,6 +119,7 @@ li {
 .div-princ {
 	margin: auto;
 	background-color: #f8dbb0;
+	margin-top: 3.75rem;
 	height: 25rem;
 	width: 450px;
 	border-radius: 50px;
@@ -137,6 +138,7 @@ li {
 	margin: 5px 25px -5px 25px;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
 
 .subtext {
 	margin: 0px 25px;
@@ -165,10 +167,15 @@ li {
 	width: 50px;
 }
 
-.icon_info {
+.icon-info {
 	margin-top: 5px;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	font-size: larger;
+}
+
+#updatecont{
+	display: flex;
+	justify-content: center;
 }
 
 .update{
@@ -322,7 +329,6 @@ li {
 		height: 35px;
 	}
 	
-	
 	.img-recipe {
 		height: 150px;
 		width: auto;
@@ -331,6 +337,10 @@ li {
 
 	.text-recipe {
 		text-align: center;
+	}
+	
+	#updatecont{
+		margin-top: 5rem;
 	}
 
 	.footer{

@@ -48,7 +48,6 @@
 		</div>
 	</form>
 
-	<!-- DA SISTEMARE -->
 	<div class="container">
 		<div class="div-princ" th:each="recipe : ${recipes}">
 		
@@ -66,18 +65,18 @@
 			<div class="info">
 				<div class="div-int">
 					<img class="icons" src="/images/clock.svg"></img>
-					<p class="icon_info" th:text="${recipe.cookTime} + ' min'"></p>
+					<p class="icon-info" th:text="${recipe.cookTime} + ' min'"></p>
 				</div>
 				<div class="div-int">
 					<img class="icons" src="/images/plate.svg"></img>
-					<p class="icon_info" th:text="${recipe.recipeType}"></p>
+					<p class="icon-info" th:text="${recipe.recipeType}"></p>
 				</div>
 				<div class="div-int">
 					<img class="icons" src="/images/puzzle.svg"></img>
-					<p class="icon_info" th:text="${recipe.difficulty}"></p>
+					<p class="icon-info" th:text="${recipe.difficulty}"></p>
 				</div>
 			</div>
-			<div style="display: flex; justify-content: center;">
+			<div id="updatecont">
 				<a class="update" th:if="${userDetails != null}" th:href="@{'/cookUser/formUpdateRecipe' + '/' + ${recipe.id} + '/' + ${userDetails.username}}">Aggiorna</a>
 			</div>
 		</div>
