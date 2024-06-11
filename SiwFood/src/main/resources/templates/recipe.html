@@ -73,13 +73,11 @@
 				<ul>
 					<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">
 						<li class="ingredients-list">
-							<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}"
-								th:text="${ingredient.name}">
-							</a>
-							<div th:if="${ingredient.unitOfMeasure != null}">
-								<span
-									th:text="' ' + ${ingredient.quantityToRecipe[recipe.id]} + ' ' + ${ingredient.unitOfMeasure}">
-								</span>
+							<div th:if="${ingredient.quantityToRecipe[recipe.id]}">
+								<span th:text="${ingredient.name} + '  -  ' + ${ingredient.quantityToRecipe[recipe.id]} + ' ' + ${ingredient.unitOfMeasure}"></span>
+							</div>
+							<div th:unless="${ingredient.quantityToRecipe[recipe.id]}">
+								<span th:text="${ingredient.name}"></span>
 							</div>
 						</li>
 					</div>
