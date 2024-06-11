@@ -44,38 +44,25 @@
 
 	<form th:action="@{/cookUser/formSearchRecipes}" method="post">
 		<div id="add-recipe-form">
-			<label class="text">Cerca ricette</label>
 			<input class="search-bar" type="text" name="name" th:value="${name}" placeholder="Cerca...">
 		</div>
 	</form>
-	<div th:if="${recipes.isEmpty()}">Non ci sono ricette nel sistema</div>
-	<div th:if="${messaggioErrore != null}">
-		<p th:text="${messaggioErrore}">Messaggio Errore</p>
-	</div>
-	<ul th:if="${!recipes.isEmpty()}">
-		<li th:each="recipe : ${recipes}">
-			<a th:href="@{'/recipe' + '/' + ${recipe.id}}" th:text="${recipe.name}"></a>
-			<a th:if="${userDetails != null}" th:href="@{'/cookUser/formUpdateRecipe' + '/' + ${recipe.id} + '/' + ${userDetails.username}}">(Aggiorna)</a>
-		</li>
-	</ul>
+
 	<!-- DA SISTEMARE -->
 	<div class="container">
 		<div class="div-princ" th:each="recipe : ${recipes}">
-
+		
 			<a th:href="@{'/recipe' + '/' + ${recipe.id}}">
 				<img class="img-recipe" th:if="${recipe.urlImage.startsWith('https')}" th:src="${recipe.urlImage}">
 				<img class="img-recipe" th:unless="${recipe.urlImage.startsWith('https')}"
 					th:src="@{/images/__${recipe.urlImage}__}">
 			</a>
-
-			<h2 class="text" th:text="${recipe.name}"></h2>
-
+			<h2 class="text-recipe" th:text="${recipe.name}"></h2>
 			<div class="subtext">Cuoco:
 				<span th:if="${recipe.cook != null}">
 					<span th:text="${recipe.cook.name}	+ ' ' + ${recipe.cook.surname}"></span></span>
 				<span th:unless="${recipe.cook != null}">Non disponibile</span>
 			</div>
-
 			<div class="info">
 				<div class="div-int">
 					<img class="icons" src="/images/clock.svg"></img>
@@ -89,11 +76,13 @@
 					<img class="icons" src="/images/puzzle.svg"></img>
 					<p class="icon_info" th:text="${recipe.difficulty}"></p>
 				</div>
-
+			</div>
+			<div style="display: flex; justify-content: center;">
+				<a class="update" th:if="${userDetails != null}" th:href="@{'/cookUser/formUpdateRecipe' + '/' + ${recipe.id} + '/' + ${userDetails.username}}">Aggiorna</a>
 			</div>
 		</div>
 	</div>
-	
+
 
 	<footer class="footer">
 		<div id="account-form">
@@ -137,7 +126,6 @@
 			navMenu.classList.remove("active");
 		}))
 	</script>
-
 </body>
 
 </html>
