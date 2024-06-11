@@ -21,6 +21,10 @@ body {
   	padding-left: 10%;
 }
 
+.icons_home {
+	height: 50px;
+}
+
 .siwfood-text{
 	font-weight: 500;
 	font-size: x-large;
@@ -71,101 +75,44 @@ li {
 	display: none;
 }
 
-.icons_home {
-	height: 50px;
+.title{
+	text-align: center;
 }
 
-#main-div{
-	display: flex;
-	flex-direction: row;
-}
-
-.search-box{
+#add-recipe-form{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+
+.text{
+	font-size: large;
+	align-items: center;
+
 }
 
 .search-bar {
   display: flex;
   align-items: center;
-  min-width: 250px;
+  min-width: 500px;
   border-radius: 50px;
   background-color: white;
   border: 1px solid black;
-  padding: 0.8rem 0.8rem;
-  
+  padding: 1rem 1rem;
+  margin-top: 2%;
+  margin-bottom: 6%;
+  font-size: large;
 }
 
-.main-div-search{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-decoration: none;
-	margin-bottom: 3.75rem;
-}
 
-.menus-text{
-	color: black;
-}
 
-.index-photos{
-	display: flex;
-	justify-content: space-around;
-	width: 70%;
-	border-radius: 6.25rem;
-	box-shadow: black 1px 5px 10px;
-}
 
-#add-menu{
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	margin-bottom: 2rem;
-}
 
-.add-menu-container{
-	height: 5rem;
-	width: 27.8rem;
-	background-color: #f3c17e;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 6.25rem;
-	box-shadow: black 1px 1px 4px;
-}
 
-.add-menu-texts{
-	text-decoration: none;
-	text-wrap: nowrap;
-	margin-top: 2rem;
-	color: black;
-	font-size: larger;
-	font-weight: 600;
-}
-
-#map{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	margin: 50px auto 5rem auto;
-}
-
-.text-map{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 500px;
-}
-
-p{
-	font-size: larger;
-	text-align: start;
-}
 
 .footer{
-	position: static;
+	position: fixed;
 	bottom: 0;
 	width: 100%;
 	height: 12.5rem;
@@ -202,11 +149,8 @@ p{
 	white-space: wrap;
 }
 
-@media(max-width: 605px){
-	#search-box2{
-		margin-top: -90px;
-	}
-}
+
+
 
 @media(max-width: 768px){
 	
@@ -289,64 +233,48 @@ p{
 		width: 130%;
 		background-color: #f3c17e;
 	}
-	
-	
-	#main-div{
-		flex-wrap: wrap;
-		justify-content: space-evenly;
-		gap: 50px;
-	}
-	
-	.index-photos{
-		width: 150px;
-	}
-	
-	.add-menu-container{
-		height: 4rem;
-		width: 15rem;
-		margin-bottom: 3rem;
-	}
-		
-	
-	
-	
-	#search-box1{
-		margin-top: -90px;
-	}
-	
-	.contact-text{
-		font-size: medium;
-	}
-	
-	#accountform-text{
-		width: 200px;
-		padding-left: 15px;
-		margin: auto 0;
-	}
 
-	#map{
-		display: none;
-	}
 
-	
-	
+
 	.footer{
-		height: 150px;
-		gap: 15px;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 12.5rem;
+		background-color: #f3c17e;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
 	}
-	
-	.socials{
-		width: 100px;
-	}
-	
+
 	.socials-fonts{
-		text-align: center;
-		font-size: small;
+		font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+		display: flex;
+		justify-content: center;
+		font-weight: 600;
 	}
-	
-	.socials-img{
-		width: 60px;
+
+	.socials{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
 	}
+
+	#account-form{
+		display: flex;
+		flex-direction: column;
+		align-content: space-between;
+		justify-content: center;
+	}
+
+	#accountform-text{
+		width: 22rem;
+		margin: 35px auto auto 0;
+		white-space: wrap;
+	}
+
+
+
+
 }
-
-

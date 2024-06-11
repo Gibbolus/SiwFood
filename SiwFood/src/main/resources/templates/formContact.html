@@ -43,46 +43,44 @@
 	</nav>
 
 
-	<div class="container">
+	<h1 class="title">Contattaci</h1>
+	<div id="add-recipe-form">
 		<form>
-			<div class="search-bar">
-				<div class="search-box">
-					<label>Nome</label>
-					<input id="search-input" type="text" name="name"
-						placeholder="Il tuo nome..." />
-				</div>
+			<div>
+				<label class="text">Nome</label>
+				<span><input class="search-bar" required type="name" placeholder="Nome..." /></span>
 			</div>
-			<div class="search-bar">
-				<div class="search-box">
-					<label>Cognome</label>
-					<input id="search-input" type="text" name="surname" placeholder="Il tuo cognome...">
-				</div>
+			<div>
+				<label class="text">Cognome</label>
+				<span><input class="search-bar" required type="surname" placeholder="Cognome..." /></span>
 			</div>
-			<div class="search-bar">
-				<div class="search-box">
-					<label>Paese </label>
-					<select class="paese" name="paese">
-						<option value="italia">Italia</option>
-						<option value="spagna">Spagna</option>
-						<option value="francia">Francia</option>
-						<option value="usa">USA</option>
-						<option value="canada">Canada</option>
-					</select>
-				</div>
+			<div>
+				<label class="text">Email</label>
+				<span><input class="search-bar" required type="email" placeholder="Email..." /></span>
 			</div>
-			<div class="search-bar">
-				<div class="search-box">
-					<div id="label-problem">
-						<label>Descrivi il tuo problema</label>
-						<textarea class="texta" name="subject" placeholder="Scrivi qualcosa..."></textarea>
-					</div>
-				</div>
+			<div>
+				<label class="text">Paese</label>
+				<select class="search-bar" name="paese" required placeholder="Paese...">
+					<option value="italia">Italia</option>
+					<option value="spagna">Spagna</option>
+					<option value="francia">Francia</option>
+					<option value="usa">USA</option>
+					<option value="canada">Canada</option>
+				</select>
 			</div>
-			<input id="submit" type="submit" value="Invia">
+			<div>
+				<label class="text">Difficoltà</label>
+				<textarea class="search-bar" required type="subject" placeholder="Scrivi qualcosa..." /></textarea>
+			</div>
+			<div style="text-align: center;">
+				<input id="submit" type="submit" value="Invia">
+			</div>
 		</form>
 	</div>
 
-		<footer class="footer">
+
+
+	<footer class="footer">
 		<div id="account-form">
 			<div id="accountform-text">
 				<h3>Problemi con il sito?</h3>

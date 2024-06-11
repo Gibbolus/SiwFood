@@ -5,50 +5,136 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title>New Recipe</title>
-	<link rel="stylesheet" href="/css/formContactStyle.css?v=0.1" />
+	<link rel="stylesheet" href="/css/formNewModel.css?v=0.1" />
 	<link rel="icon" href="/images/favicon.ico">
 </head>
 
 <body>
-	<h1>Aggiungi una ricetta</h1>
-	<form th:action="@{/cookUser/recipe}" method="POST" th:object="${recipe}">
-		<br>
-		<div>
+	<nav class="nav-bar">
+		<a href="/">
+			<img class="icons_home" src="/images/home.svg"></img>
+		</a>
+		<h3 class="siwfood-text"> SiwFood </h3>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/recipes">Ricette</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/cooks">Cuochi</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/ingredients">Ingredienti</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
+				</div>
+			</li>
+		</ul>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+	</nav>
+
+
+
+	<h1 class="title">Aggiungi una ricetta</h1>
+	<div id="add-recipe-form">
+		<form th:action="@{/cookUser/recipe}" method="POST" th:object="${recipe}">
 			<div>
-				Nome: <span><input required type="text" th:field="${recipe.name}" placeholder="Nome"/></span>
+				<label class="text">Nome</label>
+				<span><input class="search-bar" required type="text" th:field="${recipe.name}" placeholder="Nome..." /></span>
 			</div>
 			<div>
-				Descrizione: <span><input required type="text" th:field="${recipe.description}" placeholder="Descrizione"/></span>
+				<label class="text">Descrizione</label>
+				<textarea class="search-bar" required type="text" th:field="${recipe.description}" placeholder="Descrizione..." ></textarea>
 			</div>
 			<div>
-				URL immagine: <span><input required type="url" th:field="${recipe.urlImage}" placeholder="URL Immagine"/></span>
+				<label class="text">Immagine</label>
+				<span><input class="search-bar" required type="url" th:field="${recipe.urlImage}" placeholder="URL Immagine..." /></span>
 			</div>
 			<div>
-				Tempo: <span><input required type="number" th:field="${recipe.cookTime}" placeholder="Tempo"/></span>
+				<label class="text">Tempo</label>
+				<span><input class="search-bar" required type="number" th:field="${recipe.cookTime}" placeholder="Tempo..." /></span>
 			</div>
-			
-			<div>Tipo di piatto: 
-				<select required th:field="${recipe.recipeType}" placeholder="Tipo di piatto">
+
+			<div>
+				<label class="text">Tipo di piatto</label>
+				<select class="search-bar" required th:field="${recipe.recipeType}" placeholder="Tipo di piatto">
 					<option value='Antipasto'>Antipasto</option>
-				    <option value='Primo'>Primo</option>
-				    <option value='Secondo'>Secondo</option>
-				    <option value='Dolce'>Dolce</option>
+					<option value='Primo'>Primo</option>
+					<option value='Secondo'>Secondo</option>
+					<option value='Dolce'>Dolce</option>
 				</select>
 			</div>
 			<div>
-				Difficoltà: 
-				<select required th:field="${recipe.difficulty}" placeholder="Difficoltà">
+				<label class="text">Difficoltà</label>
+				<select class="search-bar" required th:field="${recipe.difficulty}" placeholder="Difficoltà">
 					<option value='Facile'>Facile</option>
-				    <option value='Medio'>Medio</option>
-				    <option value='Difficile'>Difficile</option>
+					<option value='Medio'>Medio</option>
+					<option value='Difficile'>Difficile</option>
 				</select>
 			</div>
-			<input type="hidden" name="username" th:value="${userDetails.username}"/>
+			<input type="hidden" name="username" th:value="${userDetails.username}" />
+			<div>
+				<div style="text-align: center;">
+					<input id="submit" type="submit" value="Invia">
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<footer class="footer">
+		<div id="account-form">
+			<div id="accountform-text">
+				<h3 class="contact-text">Problemi con il sito?</h3>
+				<p class="contact-text">
+					Puoi contattarci cliccando
+					<a href="/formContact" style="color: black;">qui</a>
+				</p>
+			</div>
 		</div>
-		<div>
-			<span><button type="submit">Conferma</button></span>
+		<div class="socials">
+			<p class="socials-fonts">Seguici su Instagram</p>
+			<a href="https://www.instagram.com">
+				<img class="socials-img" src="/images/logoInstagram.png"></img>
+			</a>
 		</div>
-	</form>
+		<div class="socials">
+			<p class="socials-fonts">Seguici su Youtube</p>
+			<a href="https://www.youtube.com">
+				<img class="socials-img" src="/images/logoYoutube.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socials-fonts">Seguici su X</p>
+			<a href="https://www.x.com">
+				<img class="socials-img" src="/images/logoX.png"></img>
+			</a>
+		</div>
+	</footer>
+
+
+
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
+
+
+
 </body>
 
 </html>

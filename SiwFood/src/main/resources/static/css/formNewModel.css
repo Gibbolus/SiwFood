@@ -21,6 +21,10 @@ body {
   	padding-left: 10%;
 }
 
+.icons_home {
+	height: 50px;
+}
+
 .siwfood-text{
 	font-weight: 500;
 	font-size: x-large;
@@ -71,98 +75,55 @@ li {
 	display: none;
 }
 
-.icons_home {
-	height: 50px;
+.title{
+	text-align: center;
 }
 
-#main-div{
-	display: flex;
-	flex-direction: row;
-}
 
-.search-box{
+#add-recipe-form{
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
+	margin-bottom: 3rem;
+}
+
+.text{
+	font-size: large;
+}
+
+textarea {
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	font-size: x-large;
 }
 
 .search-bar {
   display: flex;
   align-items: center;
-  min-width: 250px;
+  min-width: 500px;
   border-radius: 50px;
   background-color: white;
   border: 1px solid black;
-  padding: 0.8rem 0.8rem;
-  
+  padding: 1rem 1rem;
+  margin-top: 2%;
+  margin-bottom: 6%;
+  font-size: large;
 }
 
-.main-div-search{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-decoration: none;
-	margin-bottom: 3.75rem;
-}
-
-.menus-text{
-	color: black;
-}
-
-.index-photos{
-	display: flex;
-	justify-content: space-around;
-	width: 70%;
-	border-radius: 6.25rem;
-	box-shadow: black 1px 5px 10px;
-}
-
-#add-menu{
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	margin-bottom: 2rem;
-}
-
-.add-menu-container{
-	height: 5rem;
-	width: 27.8rem;
-	background-color: #f3c17e;
-	display: flex;
+#submit {
 	justify-content: center;
-	align-items: center;
-	border-radius: 6.25rem;
-	box-shadow: black 1px 1px 4px;
+	height: 50px;
+	width: 200px;
+  	background-color: #f3c17e;
+  	color: black;
+  	font-size: large;
+  	border-radius: 15px;
+  	box-shadow: 0 1px black;
+  	cursor: pointer;
 }
 
-.add-menu-texts{
-	text-decoration: none;
-	text-wrap: nowrap;
-	margin-top: 2rem;
-	color: black;
-	font-size: larger;
-	font-weight: 600;
-}
 
-#map{
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	margin: 50px auto 5rem auto;
-}
 
-.text-map{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	width: 500px;
-}
-
-p{
-	font-size: larger;
-	text-align: start;
-}
 
 .footer{
 	position: static;
@@ -202,11 +163,6 @@ p{
 	white-space: wrap;
 }
 
-@media(max-width: 605px){
-	#search-box2{
-		margin-top: -90px;
-	}
-}
 
 @media(max-width: 768px){
 	
@@ -289,44 +245,7 @@ p{
 		width: 130%;
 		background-color: #f3c17e;
 	}
-	
-	
-	#main-div{
-		flex-wrap: wrap;
-		justify-content: space-evenly;
-		gap: 50px;
-	}
-	
-	.index-photos{
-		width: 150px;
-	}
-	
-	.add-menu-container{
-		height: 4rem;
-		width: 15rem;
-		margin-bottom: 3rem;
-	}
-		
-	
-	
-	
-	#search-box1{
-		margin-top: -90px;
-	}
-	
-	.contact-text{
-		font-size: medium;
-	}
-	
-	#accountform-text{
-		width: 200px;
-		padding-left: 15px;
-		margin: auto 0;
-	}
 
-	#map{
-		display: none;
-	}
 
 	
 	
@@ -347,6 +266,20 @@ p{
 	.socials-img{
 		width: 60px;
 	}
+
+
+	.contact-text{
+		font-size: medium;
+	}
+	
+	#accountform-text{
+		width: 200px;
+		padding-left: 15px;
+		margin: auto 0;
+	}
+
+
+
 }
 
 

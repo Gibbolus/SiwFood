@@ -1,8 +1,9 @@
-html, body{
+html,
+body {
 	height: 100%;
-    width: 100%;
-    margin: 0;
-    display: table;
+	width: 100%;
+	margin: 0;
+	display: table;
 }
 
 body {
@@ -16,22 +17,22 @@ body {
 	position: sticky;
 	height: 75px;
 	display: flex;
-  	align-items: center;
-  	margin-bottom: 2%;
-  	padding-left: 10%;
+	align-items: center;
+	margin-bottom: 2%;
+	padding-left: 10%;
 }
 
 .icons_home {
 	height: 50px;
 }
 
-.siwfood-text{
+.siwfood-text {
 	font-weight: 500;
 	font-size: x-large;
 	display: none;
 }
 
-.nav-menu{
+.nav-menu {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
@@ -49,18 +50,18 @@ li {
 	font-size: larger;
 }
 
-.account-reg-log{
+.account-reg-log {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	align-content: center;
 }
 
-#reg-button{
+#reg-button {
 	margin-bottom: 0.5rem;
 }
 
-.reg-log-button{
+.reg-log-button {
 	text-decoration: none;
 	color: black;
 	display: flex;
@@ -71,81 +72,47 @@ li {
 	background-color: #f8dbb0;
 }
 
-.hamburger{
+.hamburger {
 	display: none;
 }
 
+.title{
+	text-align: center;
+}
+
+
+#add-recipe-form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 3rem;
+}
+
+.text{
+	font-size: large;
+}
+
 .search-bar {
-	display: flex;
-	align-items: center;
-	min-width: 700px;
-	border-radius: 50px;
-	background-color: white;
-	border: 1px solid black;
-	margin: 3rem;
+  display: flex;
+  align-items: center;
+  min-width: 500px;
+  border-radius: 50px;
+  background-color: white;
+  border: 1px solid black;
+  padding: 1rem 1rem;
+  margin-top: 2%;
+  margin-bottom: 6%;
+  font-size: large;
 }
 
-.search-box {
-	display: flex;
-	align-items: center;
-	padding: 0.3rem 1rem 0.3rem 1rem;
-	width: 100%;
-}
-
-#search-input {
-	width: 625px;
-}
-
-.search-box input {
-	padding: 1rem;
-	width: 100%;
-	font-size: 1rem;
-	font-weight: 500;
-	border: 0;
-	outline: 0;
-}
-
-.search-box i {
-	font-size: 1.3rem;
-	cursor: pointer;
-}
-
-.search-box input::placeholder {
-	font-size: 1rem;
-	font-weight: 500;
-}
-
-.paese{
-	width: 100%;
-	margin-left: 2%;
-	cursor: pointer;
-	padding: 1% 0;
-	border: none;
-}
-
-label{
-	font-size: larger;
-	color: black;
-	font-weight: 600;
-}
-
-.texta{
-	padding-left: 25px;
-	border: none;
-	width: 100%;
+textarea {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	font-size: x-large;
 }
 
-#label-problem{
-	margin: 10px 0 0 10px;
-	display: flex;
-	flex-direction: row;
-	justify-content: start;
-}
-
 #submit {
-	margin:0 0 5rem 5rem;
+	justify-content: center;
 	height: 50px;
 	width: 200px;
   	background-color: #f3c17e;
@@ -156,7 +123,7 @@ label{
   	cursor: pointer;
 }
 
-.footer{
+.footer {
 	position: static;
 	bottom: 0;
 	width: 100%;
@@ -167,37 +134,37 @@ label{
 	justify-content: space-evenly;
 }
 
-.socials-fonts{
+.socials-fonts {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	display: flex;
 	justify-content: center;
 	font-weight: 600;
 }
 
-.socials{
+.socials {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
 
-#account-form{
+#account-form {
 	display: flex;
 	flex-direction: column;
 	align-content: space-between;
 	justify-content: center;
 }
 
-#accountform-text{
+#accountform-text {
 	width: 22rem;
 	margin: 35px auto auto 0;
 	white-space: wrap;
 }
 
 
-@media(max-width: 768px){
-	
-	.nav-bar{
+@media(max-width: 768px) {
+
+	.nav-bar {
 		min-height: 70px;
 		background-color: #f3c17e;
 		box-shadow: 0 2px black;
@@ -206,21 +173,21 @@ label{
 		align-items: center;
 		padding: 0 24px;
 	}
-	
-	.ali{
+
+	.ali {
 		transition: 0.7s ease;
 	}
-	
-	.ali:hover{
+
+	.ali:hover {
 		color: aliceblue;
 	}
-	
-	.hamburger{
+
+	.hamburger {
 		display: block;
 		cursor: pointer;
 	}
-	
-	.bar{
+
+	.bar {
 		display: block;
 		width: 25px;
 		height: 3px;
@@ -229,18 +196,20 @@ label{
 		transition: all 0.3s ease-in-out;
 		background-color: black;
 	}
-	
-	.hamburger.active .bar:nth-child(2){
+
+	.hamburger.active .bar:nth-child(2) {
 		opacity: 0;
 	}
-	.hamburger.active .bar:nth-child(1){
+
+	.hamburger.active .bar:nth-child(1) {
 		transform: translateY(8px) rotate(45deg);
 	}
-	.hamburger.active .bar:nth-child(3){
+
+	.hamburger.active .bar:nth-child(3) {
 		transform: translateY(-8px) rotate(-45deg);
 	}
-	
-	.nav-menu{
+
+	.nav-menu {
 		display: flex;
 		position: fixed;
 		padding: 0 50px 20px 0;
@@ -252,96 +221,58 @@ label{
 		transition: 0.3s;
 		border-radius: 50px;
 	}
-	
-	.siwfood-text{
+
+	.siwfood-text {
 		display: flex;
 	}
-	
-	.nav-item{
+
+	.nav-item {
 		margin: 20px auto;
 	}
-	
-	.nav-menu.active{
+
+	.nav-menu.active {
 		right: -9%;
 	}
-	
-	.ali{
+
+	.ali {
 		text-decoration: none;
 		color: black;
 	}
-	
-	.reg-log-button{
+
+	.reg-log-button {
 		height: 140%;
 		margin: 5px;
 		width: 130%;
 		background-color: #f3c17e;
 	}
-	
-	.search-bar {
-		min-width: 200px;
-	}
-	
-	#search-input {
-		width: 330px;
-		margin-left: 15px;
-	}
-	
-	.paese{
-		margin-left: 15px;
-		padding: 3% 0;
-	}
-	
-	.texta{
-		width: 20rem;
-		margin-right: 15px;		
-		margin-left: -40px;
-	}
-	
-	.footer{
+
+	.footer {
 		height: 150px;
 		gap: 15px;
 	}
-	
-	.socials{
+
+	.socials {
 		width: 100px;
 	}
-	
-	.socials-fonts{
+
+	.socials-fonts {
 		text-align: center;
 		font-size: small;
 	}
-	
-	.socials-img{
+
+	.socials-img {
 		width: 60px;
 	}
 
 
-	.contact-text{
+	.contact-text {
 		font-size: medium;
 	}
-	
-	#accountform-text{
+
+	#accountform-text {
 		width: 200px;
 		padding-left: 15px;
 		margin: auto 0;
 	}
 
-}
-
-@media(max-width: 600px){
-	
-	
-	#search-input {
-		width: 240px;
-		margin-left: 15px;
-	}
-	
-	.texta{
-		width: 18rem;
-		margin-right: 20px;		
-		margin-left: -40px;
-	}
-	
-	
-	
 }
