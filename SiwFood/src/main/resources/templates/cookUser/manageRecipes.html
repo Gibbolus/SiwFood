@@ -50,7 +50,7 @@
 
 	<div class="container">
 		<div class="div-princ" th:each="recipe : ${recipes}">
-		
+
 			<a th:href="@{'/recipe' + '/' + ${recipe.id}}">
 				<img class="img-recipe" th:if="${recipe.urlImage.startsWith('https')}" th:src="${recipe.urlImage}">
 				<img class="img-recipe" th:unless="${recipe.urlImage.startsWith('https')}"
@@ -77,7 +77,11 @@
 				</div>
 			</div>
 			<div id="updatecont">
-				<a class="update" th:if="${userDetails != null}" th:href="@{'/cookUser/formUpdateRecipe' + '/' + ${recipe.id} + '/' + ${userDetails.username}}">Aggiorna</a>
+				<a class="update" th:if="${userDetails != null}"
+					th:href="@{'/cookUser/formUpdateRecipe' + '/' + ${recipe.id} + '/' + ${userDetails.username}}">Aggiorna</a>
+			</div>
+			<div th:if="${messaggioErrore != null}" class="error-message">
+				<p th:text="${messaggioErrore}">Messaggio Errore</p>
 			</div>
 		</div>
 	</div>
