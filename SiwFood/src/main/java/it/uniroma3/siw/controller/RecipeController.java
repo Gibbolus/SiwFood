@@ -185,7 +185,7 @@ public class RecipeController {
 		if (recipe == null || recipe.getCook() == null || !recipe.getCook().getName().equals(currentUser.getName())
 				|| !recipe.getCook().getSurname().equals(currentUser.getSurname())) {
 			// Gestisci il caso di accesso non autorizzato
-			redirectAttributes.addFlashAttribute("messaggioErrore",	"Non puoi modificare questa recipe perché non ti appartiene!");
+			redirectAttributes.addFlashAttribute("messaggioErrore",	"Non puoi modificare questa ricetta perché non ti appartiene!");
 			return "redirect:/cookUser/manageRecipes";
 		}
 		// Aggiungi la recipe al modello e restituisci la vista
