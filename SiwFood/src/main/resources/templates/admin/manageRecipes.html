@@ -10,24 +10,127 @@
 </head>
 
 <body>
-	<h1 class="title"> Ricette </h1>
+	<nav class="nav-bar">
+		<a href="/">
+			<img class="icons_home" src="/images/home.svg"></img>
+		</a>
+		<h3 class="siwfood-text"> SiwFood </h3>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/recipes">Ricette</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/cooks">Cuochi</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/ingredients">Ingredienti</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
+				</div>
+			</li>
+		</ul>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+	</nav>
+	<h1 class="title">Ricette</h1>
+	
 
 	<form th:action="@{/admin/searchRecipes}" method="post">
 		<div>
 			<span>search</span>
-			<input type="text" name="name" th:value="${name}" placeholder="Ricerca...">
+			<input class="search-bar" type="text" name="name" th:value="${name}" placeholder="Ricerca...">
 		</div>
 	</form>
+	
+	<div style="display: flex; justify-content: center; font-size: x-large;" th:if="${recipes.isEmpty()}">Non hai ancora alcuna ricetta</div>
+	<div th:if="${messaggioErrore != null}">
+		<p th:text="${messaggioErrore}">Messaggio Errore</p>
+	</div>
 
+	<div class="container">
+		<div class="div-princ" th:each="recipe : ${recipes}">
+			<a th:href="@{'/recipe' + '/' + ${recipe.id}}">
+				<img class="img-recipe" th:if="${recipe.urlImage.startsWith('https')}" th:src="${recipe.urlImage}">
+				<img class="img-recipe" th:unless="${recipe.urlImage.startsWith('https')}"
+					th:src="@{/images/__${recipe.urlImage}__}">
+			</a>
+			<h2 class="text-recipe" th:text="${recipe.name}"></h2>
+			<div class="subtext">Cuoco:
+				<span th:if="${recipe.cook != null}">
+					<span th:text="${recipe.cook.name}	+ ' ' + ${recipe.cook.surname}"></span></span>
+				<span th:unless="${recipe.cook != null}">Non disponibile</span>
+			</div>
+			<div class="info">
+				<div class="div-int">
+					<img class="icons" src="/images/clock.svg"></img>
+					<p class="icon-info" th:text="${recipe.cookTime} + ' min'"></p>
+				</div>
+				<div class="div-int">
+					<img class="icons" src="/images/plate.svg"></img>
+					<p class="icon-info" th:text="${recipe.recipeType}"></p>
+				</div>
+				<div class="div-int">
+					<img class="icons" src="/images/puzzle.svg"></img>
+					<p class="icon-info" th:text="${recipe.difficulty}"></p>
+				</div>
+			</div>
+			<div id="updatecont">
+				<a class="update" th:if="${userDetails != null}" th:href="@{'/admin/formUpdateRecipe' + '/' + ${recipe.id}}">Aggiorna</a>
+				<a th:href="@{'/admin/deleteRecipe/' + ${recipe.id}}">(Elimina)</a>
+			</div>
+		</div>
+	</div>
 
-	<div th:if="${recipes.isEmpty()}">Non ci sono ricette nel sistema</div>
-	<ul th:if="${!recipes.isEmpty()}">
-		<li th:each="recipe : ${recipes}">
-			<a th:href="@{'/recipe' + '/' + ${recipe.id}}" th:text="${recipe.name}"></a>
-			<a th:href="@{'/admin/formUpdateRecipe' + '/' + ${recipe.id}}">(Aggiorna)</a>
-			<a th:href="@{'/admin/deleteRecipe/' + ${recipe.id}}">(Elimina)</a>
-		</li>
-	</ul>
+	<footer class="footer">
+		<div id="account-form">
+			<div id="accountform-text">
+				<h3 class="contact-text">Problemi con il sito?</h3>
+				<p class="contact-text">
+					Puoi contattarci cliccando
+					<a href="/formContact" style="color: black;">qui</a>
+				</p>
+			</div>
+		</div>
+		<div class="socials">
+			<p class="socials-fonts">Seguici su Instagram</p>
+			<a href="https://www.instagram.com">
+				<img class="socials-img" src="/images/logoInstagram.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socials-fonts">Seguici su Youtube</p>
+			<a href="https://www.youtube.com">
+				<img class="socials-img" src="/images/logoYoutube.png"></img>
+			</a>
+		</div>
+		<div class="socials">
+			<p class="socials-fonts">Seguici su X</p>
+			<a href="https://www.x.com">
+				<img class="socials-img" src="/images/logoX.png"></img>
+			</a>
+		</div>
+	</footer>
+
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
 </body>
 
 </html>

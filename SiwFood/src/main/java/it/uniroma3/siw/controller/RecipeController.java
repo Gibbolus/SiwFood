@@ -177,18 +177,17 @@ public class RecipeController {
 	@GetMapping(value = "/cookUser/formUpdateRecipe/{id}/{username}")
 	public String formUpdateRecipeCook(@PathVariable("id") Long id, @PathVariable("username") String username,
 			Model model, RedirectAttributes redirectAttributes) {
-		// Recupera l'utente dal repository
+
 		Credentials tempUser = credentialsRepository.findByUsername(username);
 		User currentUser = tempUser.getUser();
-		// Recupera la recipe dal repository
+
 		Recipe recipe = recipeRepository.findById(id).orElse(null);
 		if (recipe == null || recipe.getCook() == null || !recipe.getCook().getName().equals(currentUser.getName())
 				|| !recipe.getCook().getSurname().equals(currentUser.getSurname())) {
-			// Gestisci il caso di accesso non autorizzato
-			redirectAttributes.addFlashAttribute("messaggioErrore",	"Non puoi modificare questa ricetta perché non ti appartiene!");
+
 			return "redirect:/cookUser/manageRecipes";
 		}
-		// Aggiungi la recipe al modello e restituisci la vista
+
 		model.addAttribute("recipe", recipe);
 		return "cookUser/formUpdateRecipe.html";
 	}
