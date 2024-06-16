@@ -149,8 +149,8 @@ li {
 #map{
 	display: flex;
 	flex-direction: row;
-	justify-content: space-evenly;
-	margin: 50px auto 5rem auto;
+	gap: 10rem;
+	margin: 50px 2rem 5rem 2rem;
 }
 
 .text-map{

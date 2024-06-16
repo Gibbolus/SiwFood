@@ -42,13 +42,8 @@
 	</nav>
 	<h1 class="title">Ricette</h1>
 
-	<form th:action="@{/cookUser/formSearchRecipes}" method="post">
-		<div id="add-recipe-form">
-			<input class="search-bar" type="text" name="name" th:value="${name}" placeholder="Cerca...">
-		</div>
-	</form>
 	
-	<div style="display: flex; justify-content: center; font-size: x-large;" th:if="${recipes.isEmpty()}">Non ci sono ricette nel sistema</div>
+	<div style="display: flex; justify-content: center; font-size: x-large;" th:if="${recipes.isEmpty()}">Non hai ancora alcuna ricetta</div>
 	<div th:if="${messaggioErrore != null}">
 		<p th:text="${messaggioErrore}">Messaggio Errore</p>
 	</div>
