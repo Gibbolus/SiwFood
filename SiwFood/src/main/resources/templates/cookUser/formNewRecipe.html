@@ -28,7 +28,8 @@
 			<li class="nav-item">
 				<div class="account-reg-log">
 					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
-					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
 					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>
@@ -47,19 +48,23 @@
 		<form th:action="@{/cookUser/recipe}" method="POST" th:object="${recipe}">
 			<div>
 				<label class="text">Nome</label>
-				<span><input class="search-bar" required type="text" th:field="${recipe.name}" placeholder="Nome..." /></span>
+				<span><input class="search-bar" required type="text" th:field="${recipe.name}"
+						placeholder="Nome..." /></span>
 			</div>
 			<div>
 				<label class="text">Descrizione</label>
-				<textarea class="search-bar" required type="text" th:field="${recipe.description}" placeholder="Descrizione..." ></textarea>
+				<textarea class="search-bar" required type="text" th:field="${recipe.description}"
+					placeholder="Descrizione..."></textarea>
 			</div>
 			<div>
 				<label class="text">Immagine</label>
-				<span><input class="search-bar" required type="url" th:field="${recipe.urlImage}" placeholder="URL Immagine..." /></span>
+				<span><input class="search-bar" required type="url" th:field="${recipe.urlImage}"
+						placeholder="URL Immagine..." /></span>
 			</div>
 			<div>
 				<label class="text">Tempo</label>
-				<span><input class="search-bar" required type="number" th:field="${recipe.cookTime}" placeholder="Tempo..." /></span>
+				<span><input class="search-bar" required type="number" th:field="${recipe.cookTime}"
+						placeholder="Tempo..." /></span>
 			</div>
 
 			<div>

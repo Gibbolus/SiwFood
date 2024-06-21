@@ -43,10 +43,9 @@
 	<h1 class="title">Ricette</h1>
 	
 
-	<form th:action="@{/admin/searchRecipes}" method="post">
+	<form style="display: flex; justify-content: center;" th:action="@{/admin/searchRecipes}" method="post">
 		<div>
-			<span>search</span>
-			<input class="search-bar" type="text" name="name" th:value="${name}" placeholder="Ricerca...">
+			<input class="search-bar" type="text" name="name" th:value="${name}" placeholder="Cerca...">
 		</div>
 	</form>
 	
@@ -82,9 +81,11 @@
 					<p class="icon-info" th:text="${recipe.difficulty}"></p>
 				</div>
 			</div>
-			<div id="updatecont">
-				<a class="update" th:if="${userDetails != null}" th:href="@{'/admin/formUpdateRecipe' + '/' + ${recipe.id}}">Aggiorna</a>
-				<a th:href="@{'/admin/deleteRecipe/' + ${recipe.id}}">(Elimina)</a>
+			<div style="display: flex; justify-content: center;">
+				<div id="updatecont">
+					<a class="update" th:if="${userDetails != null}" th:href="@{'/admin/formUpdateRecipe' + '/' + ${recipe.id}}">Aggiorna</a>
+					<a class="remove" th:href="@{'/admin/deleteRecipe/' + ${recipe.id}}">Elimina</a>
+				</div>
 			</div>
 		</div>
 	</div>

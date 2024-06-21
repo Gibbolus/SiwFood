@@ -75,7 +75,7 @@
 					<p class="icon-info" th:text="${recipe.difficulty}"></p>
 				</div>
 			</div>
-			<div id="updatecont">
+			<div id="updatecont" style="width: 200px; margin: -15px auto">
 				<a class="update" th:if="${userDetails != null}"
 					th:href="@{'/cookUser/formUpdateRecipe' + '/' + ${recipe.id} + '/' + ${userDetails.username}}">Aggiorna</a>
 			</div>

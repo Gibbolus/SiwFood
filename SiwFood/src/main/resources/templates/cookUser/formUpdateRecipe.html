@@ -98,33 +98,7 @@
 			<span th:unless="${recipe.cook != null}">Non disponibile</span>
 		</div>
 	</div>
-
 	<div th:unless="${recipe}">Non esiste</div>
-
-
-
-
-
-
-
-
-
-
-	<ul>
-		<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">
-			<li>
-				<div th:if="${ingredient.quantityToRecipe[recipe.id]}">
-				</div>
-
-			</li>
-		</div>
-	</ul>
-
-
-
-
-
-
 
 
 	<footer class="footer">

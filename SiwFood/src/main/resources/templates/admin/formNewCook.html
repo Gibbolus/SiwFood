@@ -5,32 +5,83 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title>Nuovo cook</title>
-	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+	<link rel="stylesheet" href="/css/formNewModel.css?v=0.1" />
 	<link rel="icon" href="/images/favicon.ico">
 </head>
 
 <body>
-	<h1>Aggiungi un new cook!</h1>
-	<form th:action="@{/cooks}" method="POST" th:object="${cook}">
-		<div>
-			<span th:text="${messaggioErrore}">Errore</span>
+	<nav class="nav-bar">
+		<a href="/">
+			<img class="icons_home" src="/images/home.svg"></img>
+		</a>
+		<h3 class="siwfood-text"> SiwFood </h3>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/recipes">Ricette</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/cooks">Cuochi</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/ingredients">Ingredienti</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
+				</div>
+			</li>
+		</ul>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
 		</div>
-		<div>
-			Nome: <span><input required type="text" th:field="${cook.name}" /></span>
-		</div>
-		<div>
-			Cogname: <span><input required type="text" th:field="${cook.surname}" /></span>
-		</div>
-		<div>
-			Data Di Nascita (dd-MM-yyyy): <span><input required type="date" th:field="${cook.year}" /></span>
-		</div>
-		<div>
-			URL immagine: <span><input type="url" th:field="${cook.urlImage}" /></span>
-		</div>
-		<div>
-			<span><button type="submit">Conferma</button></span>
-		</div>
-	</form>
+	</nav>
+
+	<h1 class="title">Aggiungi un cuoco</h1>
+	<div id="add-recipe-form">
+		<form th:action="@{/admin/cooks}" method="POST" th:object="${cook}">
+			<div>
+				<label class="text">Nome</label>
+				<span><input class="search-bar" type="text" th:field="${cook.name}" placeholder="Nome..." required /></span>
+			</div>
+			<div>
+				<label class="text">Cognome</label>
+				<span><input class="search-bar" type="text" th:field="${cook.surname}" placeholder="Cognome..." required /></span>
+			</div>
+			<div>
+				<label class="text">Data Di Nascita</label>
+				<span><input class="search-bar" type="date" th:field="${cook.year}" placeholder="Data di nascita..." required /></span>
+			</div>
+			<div>
+				<label class="text">Foto</label>
+				<span><input class="search-bar" type="url" th:field="${cook.urlImage}" placeholder="Foto..." required /></span>
+			</div>
+			<div>
+				<div style="text-align: center;">
+					<input id="submit" type="submit" value="Invia">
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
+	
+	
 </body>
 
 </html>
