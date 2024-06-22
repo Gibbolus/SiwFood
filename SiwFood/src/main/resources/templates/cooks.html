@@ -49,7 +49,7 @@
 	</nav>
 
 	<h1 class="title">Tutti i nostri cuochi</h1>
-	<div th:if="${cooks.isEmpty()}">Non ci sono cuochi nel sistema</div>
+	<div style="display: flex; justify-content: center; font-size: larger; margin: 2rem;" th:if="${cooks.isEmpty()}">Non ci sono cuochi nel sistema</div>
 
 	<div class="container">
 		<div id="div-princ-cooks" class="div-princ" th:each="cook : ${cooks}">

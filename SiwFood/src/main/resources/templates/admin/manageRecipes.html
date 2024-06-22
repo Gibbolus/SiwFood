@@ -43,13 +43,12 @@
 	<h1 class="title">Ricette</h1>
 	
 
-	<form style="display: flex; justify-content: center;" th:action="@{/admin/searchRecipes}" method="post">
+	<form style="display: flex; justify-content: center;" th:action="@{/admin/formSearchRecipes}" method="post">
 		<div>
 			<input class="search-bar" type="text" name="name" th:value="${name}" placeholder="Cerca...">
 		</div>
 	</form>
 	
-	<div style="display: flex; justify-content: center; font-size: x-large;" th:if="${recipes.isEmpty()}">Non hai ancora alcuna ricetta</div>
 	<div th:if="${messaggioErrore != null}">
 		<p th:text="${messaggioErrore}">Messaggio Errore</p>
 	</div>
@@ -82,43 +81,13 @@
 				</div>
 			</div>
 			<div style="display: flex; justify-content: center;">
-				<div id="updatecont">
+				<div class="updatecont">
 					<a class="update" th:if="${userDetails != null}" th:href="@{'/admin/formUpdateRecipe' + '/' + ${recipe.id}}">Aggiorna</a>
 					<a class="remove" th:href="@{'/admin/deleteRecipe/' + ${recipe.id}}">Elimina</a>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<footer class="footer">
-		<div id="account-form">
-			<div id="accountform-text">
-				<h3 class="contact-text">Problemi con il sito?</h3>
-				<p class="contact-text">
-					Puoi contattarci cliccando
-					<a href="/formContact" style="color: black;">qui</a>
-				</p>
-			</div>
-		</div>
-		<div class="socials">
-			<p class="socials-fonts">Seguici su Instagram</p>
-			<a href="https://www.instagram.com">
-				<img class="socials-img" src="/images/logoInstagram.png"></img>
-			</a>
-		</div>
-		<div class="socials">
-			<p class="socials-fonts">Seguici su Youtube</p>
-			<a href="https://www.youtube.com">
-				<img class="socials-img" src="/images/logoYoutube.png"></img>
-			</a>
-		</div>
-		<div class="socials">
-			<p class="socials-fonts">Seguici su X</p>
-			<a href="https://www.x.com">
-				<img class="socials-img" src="/images/logoX.png"></img>
-			</a>
-		</div>
-	</footer>
 
 	<script>
 		const hamburger = document.querySelector(".hamburger");

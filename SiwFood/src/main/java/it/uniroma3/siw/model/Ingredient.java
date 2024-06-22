@@ -39,22 +39,13 @@ public class Ingredient {
 	 * una collezione di elementi di valore associati alla classe Ingrediente.
 	 */
 
-	@CollectionTable(name = "quantita_per_ricetta", joinColumns = @JoinColumn(name = "ingredient_id"))
+	@CollectionTable(name = "quantita_ricetta", joinColumns = @JoinColumn(name = "ingredient_id"))
 	/*
 	 * Questa annotazione specifica il nome della tabella che verrà utilizzata per
 	 * memorizzare la collezione di elementi. Nel nostro caso, la tabella si chiama
 	 * quantita_per_ricetta. L'elemento joinColumns all'interno di @CollectionTable
 	 * specifica la colonna che verrà utilizzata per unire (join) questa tabella con
 	 * la tabella della classe che contiene la collezione, ovvero Ingrediente.
-	 */
-
-	@MapKeyJoinColumn(name = "recipe_id")
-	/*
-	 * Questa annotazione specifica la colonna nella tabella di mapping che
-	 * rappresenta la chiave della mappa. In questo caso, la chiave della mappa è
-	 * un'istanza della classe Ricetta, quindi @MapKeyJoinColumn specifica che la
-	 * colonna ricetta_id nella tabella di mapping rappresenta la chiave della
-	 * mappa.
 	 */
 
 	@Column(name = "quantity")

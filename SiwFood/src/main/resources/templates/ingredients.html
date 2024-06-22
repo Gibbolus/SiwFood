@@ -48,7 +48,7 @@
 	</nav>
 
 	<h1 class="title">Tutti i nostri ingredienti</h1>
-	<div th:if="${ingredients.isEmpty()}">Non ci sono ingredienti nel sistema</div>
+	<div style="display: flex; justify-content: center; font-size: larger; margin: 2rem;" th:if="${ingredients.isEmpty()}">Non ci sono ingredienti nel sistema</div>
 
 	<div class="container" th:if="${!ingredients.isEmpty()}">
 		<div id="div-princ-ingredients" class="div-princ" th:each="ingredient : ${ingredients}">

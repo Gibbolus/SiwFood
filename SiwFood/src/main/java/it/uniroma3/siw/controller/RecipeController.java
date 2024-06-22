@@ -164,7 +164,6 @@ public class RecipeController {
 	public String addCook(@PathVariable("idRecipe") Long recipeId, Model model) {
 		model.addAttribute("cooks", cookService.findAll());
 		model.addAttribute("recipe", recipeRepository.findById(recipeId).get());
-		// Ritorna il name della pagina HTML da visualizzare
 		return "/admin/addCook.html";
 	}
 

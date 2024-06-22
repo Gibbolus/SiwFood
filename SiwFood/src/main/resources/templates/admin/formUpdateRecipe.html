@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
 	<nav class="nav-bar">
 		<a href="/">
 			<img class="icons_home" src="/images/home.svg"></img>
@@ -92,7 +91,7 @@
 					</div>
 				</ul>
 				<div style="width: 200px;">
-					<a th:href="@{'/cookUser/updateIngredients/' + ${recipe.id}}">
+					<a th:href="@{'/admin/updateIngredients/' + ${recipe.id}}">
 						<input id="submit" type="submit" value="Modifica">
 					</a>
 				</div>
@@ -112,9 +111,13 @@
 				</a>
 			</div>
 		</div>
-
-		<div class="eliminate">
-			<a  th:href="@{'admin/deleteRecipe/' + ${recipe.id}}"> ELIMINA </a>
+		<div class="bottom">
+			<div class="back">
+				<a href="/admin/manageRecipes"> Fine </a>
+			</div>
+			<div class="eliminate">
+				<a th:href="@{'admin/deleteRecipe/' + ${recipe.id}}"> ELIMINA </a>
+			</div>
 		</div>
 	</div>
 	<div th:unless="${recipe}">Non esiste</div>

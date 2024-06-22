@@ -74,15 +74,10 @@
 		</div>
 	</div>
 
-	<div id="add-menu" th:if="${userDetails != null}">
-		<a class="add-menu-texts"  href="/admin/formNewCook">
+	<div id="add-menu" style="gap: 2.6rem;" th:if="${userDetails != null}">
+		<a class="add-menu-texts" href="/admin/formNewCook">
 			<div class="add-menu-container">
 				<span> Aggiungi un cuoco</span>
-			</div>
-		</a>
-		<a class="add-menu-texts" href="/admin/manageCooks">
-			<div class="add-menu-container">
-				 <span> Gestisci i cuochi</span>
 			</div>
 		</a>
 		<a class="add-menu-texts" href="/admin/formNewRecipe">
@@ -90,17 +85,22 @@
 				<span>Aggiungi una ricetta</span>
 			</div>
 		</a>
-		<a class="add-menu-texts" href="/admin/manageRecipes">
-			<div class="add-menu-container">
-				<span> Gestisci le ricette</span>
-			</div>
-		</a>
 		<a class="add-menu-texts" href="/admin/formNewIngredient">
 			<div class="add-menu-container">
 				<span> Aggiungi un ingrediente</span>
 			</div>
 		</a>
-		<a class="add-menu-texts" href="/admin/manageIngredient">
+		<a class="add-menu-texts" href="/admin/manageCooks">
+			<div class="add-menu-container">
+				 <span> Gestisci i cuochi</span>
+			</div>
+		</a>
+		<a class="add-menu-texts" href="/admin/manageRecipes">
+			<div class="add-menu-container">
+				<span> Gestisci le ricette</span>
+			</div>
+		</a>
+		<a class="add-menu-texts" href="/admin/manageIngredients">
 			<div class="add-menu-container">
 				<span> Gestisci gli ingredienti </span>
 			</div>

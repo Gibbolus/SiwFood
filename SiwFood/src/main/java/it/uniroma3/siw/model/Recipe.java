@@ -120,8 +120,8 @@ public class Recipe {
 			return true;
 		if (o == null || getClass() != o.getClass())
 			return false;
-		Recipe r = (Recipe) o;
-		return Objects.equals(name, r.name) && Objects.equals(cook, r.cook);
+		Recipe recipe = (Recipe) o;
+		return Objects.equals(name, recipe.name) && Objects.equals(cook, recipe.cook);
 	}
 
 }

@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title>Recipes</title>
-	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+	<link rel="stylesheet" href="/css/manageRecipes.css?v=0.1" />
 	<link rel="icon" href="/images/favicon.ico">
 </head>
 
@@ -39,21 +39,53 @@
 			<span class="bar"></span>
 		</div>
 	</nav>
+	
 
-
-	<h1> Cuochi </h1>
-	<form th:action="@{/admin/searchCooks}" method="post">
+	<h1 class="title">Cuochi</h1>
+	
+	<form style="display: flex; justify-content: center;" th:action="@{/admin/formSearchCooks}" method="post">
 		<div>
-			<span> Cerca </span>
-			<input type="text" name="name" placeholder="Ricerca...">
+			<input class="search-bar" type="text" name="name" th:value="${name}" placeholder="Cerca...">
 		</div>
 	</form>
-	<ul th:if="${!cooks.isEmpty()}">
-		<li th:each="cook : ${cooks}">
-			<a th:href="@{'/cook' + '/' + ${cook.id}}" th:text="${cook.name} + ' ' + ${cook.surname}"></a>
-			<a th:href="@{'/admin/deleteCook/' + ${cook.id}}">(Elimina)</a>
-		</li>
-	</ul>
+	<div style="display: flex; justify-content: center; font-size: larger; margin: 2rem;" th:if="${cooks.isEmpty()}">Non ci sono cuochi nel sistema</div>
+	
+		
+	<div class="container">
+		<div class="div-princ" th:each="cook : ${cooks}">
+			<a th:href="@{'/cook' + '/' + ${cook.id}}">
+				<img class="img-cooks" th:if="${cook.urlImage.startsWith('https')}" th:src="${cook.urlImage}">
+				<img class="img-cooks" th:unless="${cook.urlImage.startsWith('https')}"
+					th:src="@{/images/__${cook.urlImage}__}">
+			</a>
+			<h2 class="text-recipe" th:text="${cook.name} + ' ' + ${cook.surname}"></h2>
+		
+			<div style="display: flex; justify-content: center;">
+				<div class="updatecont" id="update-cooks">
+					<a class="remove" th:href="@{'/admin/deleteCook/' + ${cook.id}}">Elimina</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
+	
 </body>
 
 </html>

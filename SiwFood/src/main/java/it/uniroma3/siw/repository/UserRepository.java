@@ -10,5 +10,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	
 	public User findBySurname(String surname);
 		
+	public User findByNameAndSurname(String name, String surname);
 }
 

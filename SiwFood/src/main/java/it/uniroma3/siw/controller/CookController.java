@@ -12,23 +12,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Cook;
+import it.uniroma3.siw.model.Credentials;
+import it.uniroma3.siw.model.Recipe;
+import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.repository.CookRepository;
+import it.uniroma3.siw.repository.CredentialsRepository;
+import it.uniroma3.siw.repository.RecipeRepository;
+import it.uniroma3.siw.repository.UserRepository;
 import it.uniroma3.siw.service.CookService;
 import jakarta.persistence.EntityManager;
 
 @Controller
 public class CookController {
-	
-	@Autowired CookRepository cookRepository;
-	
-	@Autowired CookService cookService;
 
-	@Autowired EntityManager entityManager;
-	
-	
+	@Autowired
+	CookRepository cookRepository;
+
+	@Autowired
+	CookService cookService;
+
+	@Autowired
+	RecipeRepository recipeRepository;
+
+	@Autowired
+	UserRepository userRepository;
+
+	@Autowired
+	CredentialsRepository credentialsRepository;
+
+	@Autowired
+	EntityManager entityManager;
+
 	@GetMapping(value = "/cook/{id}")
 	public String getCook(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("cook", this.cookRepository.findById(id).get());
+		model.addAttribute("cook", this.cookService.findById(id));
 		return "cook.html";
 	}
 
@@ -37,40 +54,40 @@ public class CookController {
 		model.addAttribute("cooks", this.cookService.findAll());
 		return "cooks.html";
 	}
-	
+
 	@GetMapping(value = "/admin/formNewCook")
 	public String formNewCook(Model model) {
 		model.addAttribute("cook", new Cook());
 		return "admin/formNewCook.html";
 	}
-	
+
 	@GetMapping(value = "/admin/manageCooks")
 	public String ShowCookAdmin(Model model) {
 		model.addAttribute("cooks", this.cookService.findAll());
 		return "/admin/manageCooks.html";
 	}
-	
+
 	@GetMapping(value = "/formSearchCooks")
 	public String SearchCooks() {
 		return "formSearchCooks.html";
 	}
-	
+
 	@PostMapping(value = "/formSearchCooks")
 	public String searchCooks(Model model, @RequestParam String name) {
-		String query = "SELECT c FROM Cook c WHERE LOWER(c.name) LIKE LOWER('%"+ name + "%')";
+		String query = "SELECT c FROM Cook c WHERE LOWER(c.name) LIKE LOWER('%" + name + "%')";
 		List<Cook> cooks = this.entityManager.createQuery(query, Cook.class).getResultList();
 		model.addAttribute("cooks", cooks);
 		return "cooks.html";
 	}
-	
+
 	@PostMapping(value = "admin/formSearchCooks")
 	public String searchCooksAdmin(Model model, @RequestParam String name) {
-		String query = "SELECT c FROM Cook c WHERE LOWER(c.name) LIKE LOWER('%"+ name + "%')";
+		String query = "SELECT c FROM Cook c WHERE LOWER(c.name) LIKE LOWER('%" + name + "%')";
 		List<Cook> cooks = this.entityManager.createQuery(query, Cook.class).getResultList();
 		model.addAttribute("cooks", cooks);
 		return "/admin/manageCooks.html";
 	}
-	
+
 	@PostMapping(value = "/admin/cooks")
 	public String newCook(@ModelAttribute("cook") Cook cook, Model model) {
 		if (!cookRepository.existsByNameAndSurname(cook.getName(), cook.getSurname())) {
@@ -82,11 +99,27 @@ public class CookController {
 			return "/admin/formNewCook.html";
 		}
 	}
-	
+
 	@GetMapping(value = "/admin/deleteCook/{cookId}")
 	public String deleteCookAdmin(@PathVariable("cookId") Long cookId, Model model) {
-		cookService.deleteById(cookId);
-        return "redirect:/admin/manageCooks";
+		Cook currentCook = cookService.findById(cookId);
+		User currentUser = userRepository.findByNameAndSurname(currentCook.getName(), currentCook.getSurname());
+
+		if (!currentCook.getRecipes().isEmpty()) {
+			Recipe recipe = recipeRepository.findByCookId(cookId);
+			recipe.setCook(null);
+		}
+		
+		if (currentUser != null) {
+			Credentials currentCredentials = credentialsRepository.findById(currentUser.getId()).get();
+			if (currentCredentials.getRole().equals("COOK")) {
+				userRepository.deleteById(currentUser.getId());
+				credentialsRepository.deleteById(currentCredentials.getId());
+			}
+		}
+		cookRepository.deleteById(cookId);
+
+		return "redirect:/admin/manageCooks";
 	}
-	
+
 }

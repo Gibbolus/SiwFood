@@ -48,7 +48,7 @@
 	</nav>
 
 	<h1 class="title">Tutte le nostre ricette</h1>
-	<div th:if="${recipes.isEmpty()}">Non ci sono ricette nel sistema</div>
+	<div style="display: flex; justify-content: center; font-size: larger; margin: 2rem;" th:if="${recipes.isEmpty()}">Non ci sono ricette nel sistema</div>
 
 	<div class="container">
 		<div class="div-princ" th:each="recipe : ${recipes}">

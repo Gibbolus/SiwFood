@@ -135,11 +135,18 @@ li {
 	box-shadow: black 1px 1px 5px;
 }
 
+.img-cooks {
+	margin: 0.5rem 0.8rem;
+	height: 18rem;
+	width: auto;
+	border-radius: 50px;
+	box-shadow: black 1px 1px 5px;
+}
+
 .text-recipe {
 	margin: 5px 25px -5px 25px;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
 
 .subtext {
 	margin: 0px 25px;
@@ -174,7 +181,7 @@ li {
 	font-size: larger;
 }
 
-#updatecont{
+.updatecont{
 	display: flex;
 	justify-content: space-evenly;
 	background-color: #f3c17e;
@@ -189,6 +196,10 @@ li {
 	font-weight: 600;
   	cursor: pointer;
   	margin-top: -14px;
+}
+
+#update-cooks{
+	margin-top: 25px;
 }
 
 .update{
