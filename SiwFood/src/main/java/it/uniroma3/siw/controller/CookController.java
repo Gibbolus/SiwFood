@@ -106,16 +106,16 @@ public class CookController {
 		User currentUser = userRepository.findByNameAndSurname(currentCook.getName(), currentCook.getSurname());
 
 		if (!currentCook.getRecipes().isEmpty()) {
-			Recipe recipe = recipeRepository.findByCookId(cookId);
-			recipe.setCook(null);
+			List<Recipe> recipes = recipeRepository.findByCookId(cookId);
+			for(Recipe r : recipes) {
+				r.setCook(null);
+			}
 		}
 		
 		if (currentUser != null) {
 			Credentials currentCredentials = credentialsRepository.findById(currentUser.getId()).get();
-			if (currentCredentials.getRole().equals("COOK")) {
-				userRepository.deleteById(currentUser.getId());
-				credentialsRepository.deleteById(currentCredentials.getId());
-			}
+			userRepository.deleteById(currentUser.getId());
+			credentialsRepository.deleteById(currentCredentials.getId());
 		}
 		cookRepository.deleteById(cookId);
 

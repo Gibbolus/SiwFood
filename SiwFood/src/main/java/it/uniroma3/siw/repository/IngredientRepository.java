@@ -23,5 +23,7 @@ public interface IngredientRepository extends CrudRepository<Ingredient, Long>{
 	        + "from recipe_ingredients_utilizzati ir "
 	        + "where ir.recipe_id = :recipeId)", nativeQuery=true)
 	public Iterable<Ingredient> findIngredientsNotInRecipe(@Param("recipeId") Long recipeId);
+	
+	
 
 }

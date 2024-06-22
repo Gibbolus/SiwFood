@@ -17,5 +17,5 @@ public interface RecipeRepository extends CrudRepository<Recipe, Long> {
 	
 	public List<Recipe> findByCook(Cook cook);
 	
-	public Recipe findByCookId(Long Id);
+	public List<Recipe> findByCookId(Long Id);
 }

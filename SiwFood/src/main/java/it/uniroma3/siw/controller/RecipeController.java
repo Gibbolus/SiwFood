@@ -374,12 +374,16 @@ public class RecipeController {
 
 	@GetMapping(value = "/admin/deleteRecipe/{recipeId}")
 	public String deleteRecipeAdmin(@PathVariable("recipeId") Long recipeId, Model model) {
+		Recipe recipe = recipeService.findById(recipeId);
+		recipe.setIngredientsUtilizzati(null);
 		recipeService.deleteById(recipeId);
         return "redirect:/admin/manageRecipes";
 	}
 
 	@GetMapping(value = "/cookUser/deleteRecipe/{recipeId}")
 	public String deleteRicettaCuoco(@PathVariable("recipeId") Long recipeId, Model model) {
+		Recipe recipe = recipeService.findById(recipeId);
+		recipe.setIngredientsUtilizzati(null);
 		recipeService.deleteById(recipeId);
         return "redirect:/cookUser/manageRecipes";
 	}

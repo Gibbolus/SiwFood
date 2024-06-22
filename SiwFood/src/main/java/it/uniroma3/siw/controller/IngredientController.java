@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.model.Ingredient;
+import it.uniroma3.siw.model.Recipe;
 import it.uniroma3.siw.repository.IngredientRepository;
+import it.uniroma3.siw.repository.RecipeRepository;
 import it.uniroma3.siw.service.IngredientService;
+import it.uniroma3.siw.service.RecipeService;
 import jakarta.persistence.EntityManager;
 
 
@@ -26,6 +29,7 @@ public class IngredientController {
 	
 	@Autowired EntityManager entityManager;
 	
+	@Autowired RecipeService recipeService;
 	
 	
 	@GetMapping(value = "/ingredient/{id}")
@@ -106,7 +110,16 @@ public class IngredientController {
 	
 	@GetMapping(value = "/admin/deleteIngredient/{ingredientId}")
 	public String deleteIngredientAdmin(@PathVariable("ingredientId") Long ingredientId, Model model) {
-		ingredientService.deleteById(ingredientId);
+		Iterable<Recipe> recipe = recipeService.findAll();
+		Ingredient i = ingredientService.findById(ingredientId);
+		for(Recipe r : recipe) {
+			if(!r.getIngredientsUtilizzati().contains(i)){
+				ingredientService.deleteById(ingredientId);
+			}
+			else {
+				model.addAttribute("messaggioErrore", "Non puoi eliminare questo ingrediente perchè fa parte di alcune ricette");
+			}
+		}
         return "redirect:/admin/manageIngredients";
 	}
 	
