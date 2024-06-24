@@ -5,28 +5,74 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title>Recipes</title>
-	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+	<link rel="stylesheet" href="/css/manageRecipes.css?v=0.1" />
 	<link rel="icon" href="/images/favicon.ico">
 </head>
 
 <body>
-	<h1> Ingredienti </h1>
+	<nav class="nav-bar">
+		<a href="/">
+			<img class="icons_home" src="/images/home.svg"></img>
+		</a>
+		<h3 class="siwfood-text"> SiwFood </h3>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/recipes">Ricette</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/cooks">Cuochi</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/ingredients">Ingredienti</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati</a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
+				</div>
+			</li>
+		</ul>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+	</nav>
+	
+	<h1 class="title">Ingredienti </h1>
 
+	<div th:if="${messaggioErrore != null}">
+		<span th:text="${messaggioErrore}"> Messaggio Errore </span>
+	</div>
 
-	<form th:action="@{/admin/searchIngredients}" method="post">
+	<form class="center" th:action="@{/admin/searchIngredients}" method="post">
 		<div>
-			<span>search</span>
-			<input type="text" name="name" th:value="${name}" placeholder="Ricerca...">
+			<input class="search-bar" type="text" name="name" th:value="${name}" placeholder="Cerca...">
 		</div>
 	</form>
-	<div th:if="${ingredients.isEmpty()}">Non ci sono ingredienti nel sistema</div>
-	<ul th:if="${!ingredients.isEmpty()}">
-		<li th:each="ingredient : ${ingredients}">
-			<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}"
-				th:text="${ingredient.name}"></a>
-			<a th:href="@{'/admin/deleteIngredient/' + ${ingredient.id}}">(Elimina)</a>
-		</li>
-	</ul>
+	
+	<div class="center" th:if="${ingredients.isEmpty()}">Non ci sono ingredienti nel sistema</div>
+	
+	<div class="container">
+		<div id="div-princ-ingredient" class="div-princ" th:each="ingredient : ${ingredients}">
+			<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}">
+				<img class="img-recipe" th:if="${ingredient.urlImage.startsWith('https')}"
+					th:src="${ingredient.urlImage}">
+				<img class="img-recipe" th:unless="${ingredient.urlImage.startsWith('https')}"
+					th:src="@{/images/__${ingredient.urlImage}__}">
+			</a>
+			<span class="text-ingredient" th:text="${ingredient.name}"></span>
+
+
+			<div class="center">
+				<div class="updatecont" style="margin-top: 15px;">
+					<a class="update" th:href="@{'/admin/deleteIngredient/' + ${ingredient.id}}">Elimina</a>
+				</div>
+			</div>
+		</div>
+	</div>	
+			
 </body>
 
 </html>

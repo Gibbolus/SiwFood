@@ -54,7 +54,7 @@
 				</span>
 			</div>
 			<div>
-				<label class="text">Cogname</label>
+				<label class="text">Cognome</label>
 				<br>
 				<span><input class="search-bar" type="text" placeholder="Cognome..." required
 						th:field="${user.surname}" /></span>
@@ -77,7 +77,7 @@
 			</div>
 			<div>
 				<label class="text">Data Di Nascita</label>
-				<span><input class="search-bar" type="date" required th:field="${user.year}" /></span>
+				<span><input class="search-bar" type="date" required th:field="${user.year}"/></span>
 				<span th:if="${#fields.hasErrors('user.year')}" th:errors="${user.year}">
 				</span>
 			</div>

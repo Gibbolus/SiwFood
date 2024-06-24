@@ -115,9 +115,6 @@
 			<div class="back">
 				<a href="/admin/manageRecipes"> Fine </a>
 			</div>
-			<div class="eliminate">
-				<a th:href="@{'admin/deleteRecipe/' + ${recipe.id}}"> ELIMINA </a>
-			</div>
 		</div>
 	</div>
 	<div th:unless="${recipe}">Non esiste</div>

@@ -41,6 +41,12 @@
 		</div>
 	</nav>
 
+	<h1 class="title">Aggiungi un cuoco</h1>
+	<form style="display: flex; justify-content: center;" th:action="@{/admin/formSearchCooks}" method="post">
+		<div>
+			<input class="search-bar" type="text" name="name" th:value="${name}" placeholder="Cerca...">
+		</div>
+	</form>
 
 	<div style="display: flex; justify-content: center; font-size: larger; margin: 2rem;" th:if="${cooks.isEmpty()}">Non
 		ci sono cuochi nel sistema</div>

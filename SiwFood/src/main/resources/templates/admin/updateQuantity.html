@@ -1,62 +1,117 @@
 <!DOCTYPE html>
 <html lang="it">
- 
+
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>Ricette</title>
-	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+	<title>Update Ricette</title>
+	<link rel="stylesheet" href="/css/updateStyles.css?v=0.1" />
 	<link rel="icon" href="/images/favicon.ico">
 </head>
 
 <body>
-
-	<span><img width="15%" th:src=${recipe.urlImage} /></span>
-	<h1 th:text="${recipe.name}">Nome Ricetta</h1>
-
-	<div th:if="${recipe.cook}">
-		<br>
-		<p>Cuoco: <span th:text="${recipe.cook.name} + ' ' + ${recipe.cook.surname}"></span></p>
-	</div>
-	<div th:unless="${recipe.cook}">
-		<p>Non c'è nessun cuoco per questa ricetta.</p>
-	</div>
-	<strong>Lista degli ingredienti:</strong>
-	<ul>
-		<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">
-			<li>
-				<div th:if="${ingredient.quantityToRecipe[recipe.id]}">
-					<span th:text="${ingredient.name} + ' ' + ${ingredient.quantityToRecipe[recipe.id]}"></span>
-				</div>
-				<div th:unless="${ingredient.quantityToRecipe[recipe.id]}">
-					<span th:text="${ingredient.name}"></span>		
-				</div>
-				<form th:action="@{/admin/updateQuantity}" method="POST">
-					
-					<input type="hidden" name="recipeId" th:value="${recipe.id}" />
-					<input type="hidden" name="ingredientId" th:value="${ingredient.id}" />
-					<input type="number" name="quantityValue" required th:value="${ingredient.quantityToRecipe[recipe.id]}" min="0">
-					<select name="quantityUnit" required>
-						<option value="grammi">Grammi</option>
-						<option value="etti">Etti</option>
-						<option value="litri">Litri</option>
-						<option value="millilitri">Millilitri</option>
-						<option value="cucchiai">Cucchiai</option>
-						<option value="spicchi">Spicchi</option>
-						<option value="">Unità</option>
-					</select>
-					
-					<a th:href="@{'/admin/formUpdateRecipe/'+ ${recipe.id} + '/' + ${userDetails.username}}">
-						<button type="submit">Fine</button></a>
-				</form>
+	<nav class="nav-bar">
+		<a href="/">
+			<img class="icons_home" src="/images/home.svg"></img>
+		</a>
+		<h3 class="siwfood-text"> SiwFood </h3>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/recipes">Ricette</a>
 			</li>
+			<li class="nav-item">
+				<a class="ali" href="/cooks">Cuochi</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/ingredients">Ingredienti</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
+				</div>
+			</li>
+		</ul>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
 		</div>
-	</ul>
+	</nav>
 
-	<div>
-		<span th:text="${recipe.description}"></span>
+
+
+	<div th:if="${recipe}">
+		<h1 id="name-text" th:text="${recipe.name}">Nome ricetta</h1>
+		<div class="photo-and-text">
+			<div>
+				<img class="img-recipe" th:if="${recipe.urlImage.startsWith('https')}" th:src="${recipe.urlImage}">
+				<img class="img-recipe" th:unless="${recipe.urlImage.startsWith('https')}"
+					th:src="@{/images/__${recipe.urlImage}__}">
+			</div>
+			<div class="description"> Descrizione:
+				<br>
+				<span class="description-span" th:text="${recipe.description}"></span>
+				<span class="description-span" th:if="${recipe.description == null}"> Non disponibile </span>
+				<div id="recipe-infos">
+					<div class="info">
+						<img class="icons" src="/images/clock.svg"></img>
+						<p class="icon-info" th:text="${recipe.cookTime} + ' min'"></p>
+					</div>
+					<div class="info">
+						<img class="icons" src="/images/plate.svg"></img>
+						<p class="icon-info" th:text="${recipe.recipeType}"></p>
+					</div>
+
+					<div class="info">
+						<img class="icons" src="/images/puzzle.svg"></img>
+						<p class="icon-info" th:text="${recipe.difficulty}"></p>
+					</div>
+				</div>
+				<span id="ingredients-text">Lista degli ingredienti:</span>
+				<ul>
+					<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">
+						<li class="ingredients-list">
+							<div>
+								<span th:text="${ingredient.name}"></span>
+								<form th:action="@{/admin/updateQuantity}" method="POST">
+									<input type="hidden" name="recipeId" th:value="${recipe.id}" />
+									<input type="hidden" name="ingredientId" th:value="${ingredient.id}" />
+									<input class="search-bar"  type="number" name="quantityValue" required
+										th:value="${ingredient.quantityToRecipe[recipe.id]}" min="0">
+									<select class="search-bar"  name="quantityUnit" required>
+										<option value="grammi">Grammi</option>
+										<option value="etti">Etti</option>
+										<option value="litri">Litri</option>
+										<option value="millilitri">Millilitri</option>
+										<option value="cucchiai">Cucchiai</option>
+										<option value="spicchi">Spicchi</option>
+										<option value="">Unità</option>
+									</select>
+									<a th:href="@{'/admin/formUpdateRecipe/'+ ${recipe.id} + '/' + ${userDetails.username}}">
+										<button class="back" id="back-id" type="submit">Fine</button>
+									</a>
+								</form>
+							</div>
+						</li>
+					</div>
+				</ul>
+			</div>
+		</div>
+		<div id="cook-text">Cuoco:
+			<div th:if="${recipe.cook}">
+				<span th:text="${recipe.cook.name}	+ ' ' + ${recipe.cook.surname}"></span>
+			</div>
+			<div th:unless="${recipe.cook}">
+				<span>Non disponibile</span>
+			</div>
+		</div>
 	</div>
-	<span th:if="${recipe.description== null}"> Non disponibile </span>
+
+
+	<div th:unless="${recipe}">Non esiste</div>
 	 
 </body>
 

@@ -11,6 +11,11 @@ body {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.center{
+	display: flex;
+	justify-content: center;
+}
+
 .nav-bar {
 	background-color: #f3c17e;
 	box-shadow: 0 2px black;
@@ -127,6 +132,10 @@ li {
 	box-shadow: #74361a 4px 4px 30px;
 }
 
+#div-princ-ingredient{
+	height: 18rem;
+}
+
 .img-recipe {
 	margin: 0.5rem 0 0 0.5rem;
 	height: 12rem;
@@ -143,8 +152,50 @@ li {
 	box-shadow: black 1px 1px 5px;
 }
 
+.img-recipe {
+	display: flex;
+	justify-content: center;
+	margin: 0.5rem auto;
+	height: 12rem;
+	width: auto;
+	max-width: 25rem;
+	border-radius: 50px;
+	box-shadow: black 1px 1px 5px;
+}
+
+.bottom{
+	display: flex;
+	justify-content: center;
+	gap: 50px;
+}
+
+.back{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color:  #f3c17e;
+	font-size: large;
+  	border-radius: 35px;
+  	box-shadow: 1px 3px 2px black;
+  	cursor: pointer;
+	height: 50px;
+	width: 200px;
+}
+
+.back a{
+	color: black;
+	text-decoration: none;	
+}
+
 .text-recipe {
 	margin: 5px 25px -5px 25px;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.text-ingredient{
+	display: flex;
+	justify-content: center;
+	font-size: x-large;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 

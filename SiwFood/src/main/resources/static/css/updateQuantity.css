@@ -1,0 +1,91 @@
+html, body{
+	height: 100%;
+    width: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+	background-color: #fceec9;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.nav-bar {
+	background-color: #f3c17e;
+	box-shadow: 0 2px black;
+	position: sticky;
+	height: 75px;
+	display: flex;
+  	align-items: center;
+  	margin-bottom: 2%;
+  	padding-left: 10%;
+}
+
+.icons_home {
+	height: 50px;
+}
+
+.siwfood-text{
+	font-weight: 500;
+	font-size: x-large;
+	display: none;
+}
+
+.nav-menu{
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+}
+
+.ali {
+	text-decoration: none;
+	color: black;
+}
+
+li {
+	list-style: none;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	font-size: larger;
+}
+
+.account-reg-log{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
+}
+
+#reg-button{
+	margin-bottom: 0.5rem;
+}
+
+.reg-log-button{
+	text-decoration: none;
+	color: black;
+	display: flex;
+	justify-content: center;
+	height: 110%;
+	width: 140%;
+	border-radius: 1rem;
+	background-color: #f8dbb0;
+}
+
+.hamburger{
+	display: none;
+}
+
+#name-text{
+	margin: 2% 0 2% 10%;
+}
+
+.img-recipe {
+	margin: 0 auto auto 3rem;
+	height: auto;
+	width: 45rem;
+	border-radius: 50px;
+	box-shadow: black 1px 1px 5px;
+}
+
+
