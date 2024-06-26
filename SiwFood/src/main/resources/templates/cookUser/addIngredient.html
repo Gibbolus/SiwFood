@@ -5,31 +5,115 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<title>Recipes</title>
-	<link rel="stylesheet" href="/css/styles.css?v=0.1" />
+	<link rel="stylesheet" href="/css/manageRecipes.css?v=0.1" />
 	<link rel="icon" href="/images/favicon.ico">
 </head>
 
 <body>
+	<nav class="nav-bar">
+		<a href="/">
+			<img class="icons_home" src="/images/home.svg"></img>
+		</a>
+		<h3 class="siwfood-text"> SiwFood </h3>
+		<ul class="nav-menu">
+			<li class="nav-item">
+				<a class="ali" href="/recipes">Ricette</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/cooks">Cuochi</a>
+			</li>
+			<li class="nav-item">
+				<a class="ali" href="/ingredients">Ingredienti</a>
+			</li>
+			<li class="nav-item">
+				<div class="account-reg-log">
+					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
+					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register"> Registrati
+					</a>
+					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
+				</div>
+			</li>
+		</ul>
+		<div class="hamburger">
+			<span class="bar"></span>
+			<span class="bar"></span>
+			<span class="bar"></span>
+		</div>
+	</nav>
 
-	<h3 th:text="'Ingredienti della ricetta' +' ' + ${recipe.name}"></h3>
-	<div th:if="${recipe.ingredientsUtilizzati.isEmpty()}">Non ci sono ingredienti per questa ricetta</div>
-	<li th:each="ingredient : ${recipe.ingredientsUtilizzati}">
-		<span th:text="${ingredient.name}"></span>
-		<a th:href="@{'/cookUser/removeIngredientFromRecipe/'+ ${ingredient.id}+'/'+${recipe.id}}">-
-			(rimuovi)</a>
-	</li>
-	<br>
-	<li th:each="ingredient : ${ingredientsToAdd}">
-		<span th:text="${ingredient.name}"></span>
-		<a th:href="@{'/cookUser/addIngredientToRecipe/'+ ${ingredient.id}+'/'+${recipe.id}}">-
-			(aggiungi)</a>
-	</li>
-	<div>
-		<a th:href="@{'/cookUser/formUpdateRecipe/'+ ${recipe.id} + '/' + ${userDetails.username}}">
-			<button type="button">Fine</button></a>
+	<h1 class="title">Aggiungi un ingrediente</h1>
+
+	<form class="center" th:action="@{/formSearchIngredients}" method="post">
+		<div>
+			<input class="search-bar" type="text" name="name" th:value="${name}" placeholder="Cerca...">
+		</div>
+	</form>
+
+	<h2 class="center" th:text="'Ingredienti della ricetta' + ' ' + ${recipe.name}"></h2>
+
+
+	<div class="center" style="font-size: larger;" th:if="${recipe.ingredientsUtilizzati.isEmpty()}">Non ci sono
+		ingredienti per questa ricetta </div>
+
+	<div class="container">
+		<div id="div-princ-ingredient" class="div-princ" th:each="ingredient : ${recipe.ingredientsUtilizzati}">
+			<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}">
+				<img class="img-recipe" th:if="${ingredient.urlImage.startsWith('https')}"
+					th:src="${ingredient.urlImage}">
+				<img class="img-recipe" th:unless="${ingredient.urlImage.startsWith('https')}"
+					th:src="@{/images/__${ingredient.urlImage}__}">
+			</a>
+			<span class="text-ingredient" th:text="${ingredient.name}"></span>
+
+
+			<div class="center">
+				<div class="updatecont" style="margin-top: 15px;">
+					<a class="update"
+						th:href="@{'/cookUser/removeIngredientFromRecipe/'+ ${ingredient.id}+'/'+${recipe.id}}">Rimuovi</a>
+				</div>
+			</div>
+		</div>
 	</div>
 
 
+	<div class="bottom">
+		<div class="back">
+			<a th:href="@{'/cookUser/formUpdateRecipe/' + ${recipe.id} + '/' + ${userDetails.username}}"> Fine </a>
+		</div>
+	</div>
+
+	<div class="container">
+		<div id="div-princ-ingredient" class="div-princ" th:each="ingredient : ${ingredientsToAdd}">
+			<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}">
+				<img class="img-recipe" th:if="${ingredient.urlImage.startsWith('https')}"
+					th:src="${ingredient.urlImage}">
+				<img class="img-recipe" th:unless="${ingredient.urlImage.startsWith('https')}"
+					th:src="@{/images/__${ingredient.urlImage}__}">
+			</a>
+			<span class="text-ingredient" th:text="${ingredient.name}"></span>
+
+
+			<div class="center">
+				<div class="updatecont" style="margin-top: 15px;">
+					<a class="update"
+						th:href="@{'/cookUser/addIngredientToRecipe/' + ${ingredient.id} + '/' + ${recipe.id}}">Aggiungi</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const hamburger = document.querySelector(".hamburger");
+		const navMenu = document.querySelector(".nav-menu");
+		hamburger.addEventListener("click", () => {
+			hamburger.classList.toggle("active");
+			navMenu.classList.toggle("active");
+		})
+		document.querySelectorAll(".nav-link").forEach(n => n.addeaddEventListener("click", () => {
+			hamburger.classList.remove("active");
+			navMenu.classList.remove("active");
+		}))
+	</script>
 </body>
 
 </html>

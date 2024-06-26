@@ -30,6 +30,7 @@ import it.uniroma3.siw.repository.RecipeRepository;
 import it.uniroma3.siw.service.CookService;
 import it.uniroma3.siw.service.IngredientService;
 import it.uniroma3.siw.service.RecipeService;
+import it.uniroma3.siw.service.UserService;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 
@@ -53,7 +54,6 @@ public class RecipeController {
 	@Autowired CredentialsRepository credentialsRepository;
 
 	@Autowired EntityManager entityManager;
-	
 	
 	@GetMapping(value = "/recipe/{id}")
 	public String getRecipe(@PathVariable("id") Long id, Model model) {
@@ -380,12 +380,12 @@ public class RecipeController {
         return "redirect:/admin/manageRecipes";
 	}
 
-	@GetMapping(value = "/cookUser/deleteRecipe/{recipeId}")
-	public String deleteRicettaCuoco(@PathVariable("recipeId") Long recipeId, Model model) {
+	@GetMapping(value = "/cookUser/deleteRecipe/{recipeId}/{username}")
+	public String deleteRicettaCuoco(@PathVariable("recipeId") Long recipeId, @PathVariable("username") String username, Model model) {
 		Recipe recipe = recipeService.findById(recipeId);
 		recipe.setIngredientsUtilizzati(null);
 		recipeService.deleteById(recipeId);
-        return "redirect:/cookUser/manageRecipes";
+        return "redirect:/cookUser/manageRecipes/" + username;
 	}
 	
 	

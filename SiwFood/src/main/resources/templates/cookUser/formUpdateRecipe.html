@@ -74,12 +74,17 @@
 					<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">
 						<li class="ingredients-list">
 							<div th:if="${ingredient.quantityToRecipe[recipe.id]}">
-								<span th:text="${ingredient.name} + '  -  ' + ${ingredient.quantityToRecipe[recipe.id]} + ' ' + ${ingredient.unitOfMeasure}"></span>
-								<a class="modify-quantity" th:href="@{'/cookUser/updateQuantity/' + ${ingredient.id} + '/' + ${recipe.id}}"> Modifica Quantità </a>
+								<span
+									th:text="${ingredient.name} + '  -  ' + ${ingredient.quantityToRecipe[recipe.id]} + ' ' + ${ingredient.unitOfMeasure}"></span>
+								<a class="modify-quantity"
+									th:href="@{'/cookUser/updateQuantity/' + ${ingredient.id} + '/' + ${recipe.id}}">
+									Modifica Quantità </a>
 							</div>
 							<div th:unless="${ingredient.quantityToRecipe[recipe.id]}">
 								<span th:text="${ingredient.name}"></span>
-								<a class="modify-quantity" th:href="@{'/cookUser/updateQuantity/' + ${ingredient.id} + '/' + ${recipe.id}}"> Modifica Quantità </a>
+								<a class="modify-quantity"
+									th:href="@{'/cookUser/updateQuantity/' + ${ingredient.id} + '/' + ${recipe.id}}">
+									Modifica Quantità </a>
 							</div>
 						</li>
 					</div>
@@ -96,6 +101,11 @@
 				<span th:text="${recipe.cook.name}	+ ' ' + ${recipe.cook.surname}"></span>
 			</span>
 			<span th:unless="${recipe.cook != null}">Non disponibile</span>
+		</div>
+		<div class="bottom">
+			<div class="back" style="margin-bottom: 4rem;">
+				<a th:href="@{'/cookUser/manageRecipes' + '/' + ${userDetails.username}}"> Fine </a>
+			</div>
 		</div>
 	</div>
 	<div th:unless="${recipe}">Non esiste</div>
