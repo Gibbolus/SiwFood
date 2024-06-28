@@ -58,10 +58,7 @@
 	<div class="container">
 		<div id="div-princ-ingredient" class="div-princ" th:each="ingredient : ${recipe.ingredientsUtilizzati}">
 			<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}">
-				<img class="img-recipe" th:if="${ingredient.urlImage.startsWith('https')}"
-					th:src="${ingredient.urlImage}">
-				<img class="img-recipe" th:unless="${ingredient.urlImage.startsWith('https')}"
-					th:src="@{/images/__${ingredient.urlImage}__}">
+				<img class="img-recipe" th:src="@{/images/__${ingredient.urlImage}__}">
 			</a>
 			<span class="text-ingredient" th:text="${ingredient.name}"></span>
 
@@ -85,10 +82,7 @@
 	<div class="container">
 		<div id="div-princ-ingredient" class="div-princ" th:each="ingredient : ${ingredientsToAdd}">
 			<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}">
-				<img class="img-recipe" th:if="${ingredient.urlImage.startsWith('https')}"
-					th:src="${ingredient.urlImage}">
-				<img class="img-recipe" th:unless="${ingredient.urlImage.startsWith('https')}"
-					th:src="@{/images/__${ingredient.urlImage}__}">
+				<img class="img-recipe" th:src="@{/images/__${ingredient.urlImage}__}">
 			</a>
 			<span class="text-ingredient" th:text="${ingredient.name}"></span>
 

@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -14,6 +16,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Cook {
@@ -27,6 +30,9 @@ public class Cook {
 	public String surname;
 
 	public String urlImage;
+	
+	@Transient
+	private MultipartFile immagine;
 
 	@Column(length = 2000)
 	public String description;
@@ -34,7 +40,7 @@ public class Cook {
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	public LocalDate year;
 
-	@OneToMany(mappedBy = "cook", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "cook", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	private List<Recipe> recipes;
 
 	public Cook() {

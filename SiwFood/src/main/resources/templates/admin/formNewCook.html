@@ -43,7 +43,7 @@
 
 	<h1 class="title">Aggiungi un cuoco</h1>
 	<div id="add-recipe-form">
-		<form th:action="@{/admin/cooks}" method="POST" th:object="${cook}">
+		<form th:action="@{/admin/cooks}" method="POST" th:object="${cook}" enctype="multipart/form-data">
 			<div>
 				<label class="text">Nome</label>
 				<span><input class="search-bar" type="text" th:field="${cook.name}" placeholder="Nome..." required /></span>
@@ -58,7 +58,7 @@
 			</div>
 			<div>
 				<label class="text">Foto</label>
-				<span><input class="search-bar" type="url" th:field="${cook.urlImage}" placeholder="Foto..." required /></span>
+				<span><input class="search-bar" type="file" name="immagine" placeholder="Foto..." required/></span>
 			</div>
 			<div>
 				<div style="text-align: center;">

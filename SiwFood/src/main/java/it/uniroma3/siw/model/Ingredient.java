@@ -3,13 +3,7 @@ package it.uniroma3.siw.model;
 import java.util.Map;
 import java.util.Objects;
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.*;
 
@@ -25,6 +19,9 @@ public class Ingredient {
 	private String unitOfMeasure;
 
 	private String urlImage;
+	
+	@Transient
+	private MultipartFile immagine;
 
 	@Column(length = 2000)
 	private String description;

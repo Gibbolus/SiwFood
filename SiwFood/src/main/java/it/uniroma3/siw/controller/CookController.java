@@ -1,15 +1,22 @@
 package it.uniroma3.siw.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Cook;
 import it.uniroma3.siw.model.Credentials;
@@ -24,6 +31,8 @@ import jakarta.persistence.EntityManager;
 
 @Controller
 public class CookController {
+
+	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
 
 	@Autowired
 	CookRepository cookRepository;
@@ -89,15 +98,26 @@ public class CookController {
 	}
 
 	@PostMapping(value = "/admin/cooks")
-	public String newCook(@ModelAttribute("cook") Cook cook, Model model) {
+	public String newCook(@ModelAttribute("cook") Cook cook, @RequestParam("immagine") MultipartFile file, Model model) {
 		if (!cookRepository.existsByNameAndSurname(cook.getName(), cook.getSurname())) {
-			this.cookService.save(cook);
-			model.addAttribute("cook", cook);
-			return "cook.html";
-		} else {
-			model.addAttribute("messaggioErrore", "Questo cuoco esiste già");
-			return "/admin/formNewCook.html";
+			if(!file.isEmpty()) {
+				try {
+					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+					Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+					Files.write(path, file.getBytes());
+					cook.setUrlImage(fileName);
+					
+					this.cookService.save(cook);
+					
+					model.addAttribute("cook", cook);
+					return "cook";
+				} catch (IOException e) {
+					e.printStackTrace();
+					return "admin/formNewCook.html";
+				}
+			}
 		}
+		return "admin/formNewCook.html";
 	}
 
 	@GetMapping(value = "/admin/deleteCook/{cookId}")
@@ -107,11 +127,11 @@ public class CookController {
 
 		if (!currentCook.getRecipes().isEmpty()) {
 			List<Recipe> recipes = recipeRepository.findByCookId(cookId);
-			for(Recipe r : recipes) {
+			for (Recipe r : recipes) {
 				r.setCook(null);
 			}
 		}
-		
+
 		if (currentUser != null) {
 			Credentials currentCredentials = credentialsRepository.findById(currentUser.getId()).get();
 			userRepository.deleteById(currentUser.getId());

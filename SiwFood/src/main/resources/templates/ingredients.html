@@ -53,10 +53,7 @@
 	<div class="container" th:if="${!ingredients.isEmpty()}">
 		<div id="div-princ-ingredients" class="div-princ" th:each="ingredient : ${ingredients}">
 			<a th:href="@{'/ingredient' + '/' + ${ingredient.id}}">
-				<img class="img-ingredient" th:if="${ingredient.urlImage.startsWith('https')}"
-					th:src="${ingredient.urlImage}">
-				<img class="img-ingredient" th:unless="${ingredient.urlImage.startsWith('https')}"
-					th:src="@{/images/__${ingredient.urlImage}__}">
+				<img class="img-ingredient" th:src="@{/images/__${ingredient.urlImage}__}">
 			</a>
 
 			<h2 style="text-align: center;" class="text" th:text="${ingredient.name}"></h2>

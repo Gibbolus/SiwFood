@@ -3,13 +3,18 @@ package it.uniroma3.siw.model;
 import java.util.Objects;
 import java.util.Set;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Recipe {
@@ -30,11 +35,14 @@ public class Recipe {
 	private String difficulty;
 
 	private String recipeType;
+	
+	@Transient
+	private MultipartFile immagine;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
 	private Cook cook;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
 	private Set<Ingredient> ingredientsUtilizzati;
 
 	public Set<Ingredient> getIngredientsUtilizzati() {

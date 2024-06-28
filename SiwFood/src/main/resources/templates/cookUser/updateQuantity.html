@@ -47,9 +47,7 @@
 		<h1 id="name-text" th:text="${recipe.name}">Nome ricetta</h1>
 		<div class="photo-and-text">
 			<div>
-				<img class="img-recipe" th:if="${recipe.urlImage.startsWith('https')}" th:src="${recipe.urlImage}">
-				<img class="img-recipe" th:unless="${recipe.urlImage.startsWith('https')}"
-					th:src="@{/images/__${recipe.urlImage}__}">
+				<img class="img-recipe" th:src="@{/images/__${recipe.urlImage}__}">
 			</div>
 			<div class="description"> Descrizione:
 				<br>

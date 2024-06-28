@@ -54,9 +54,7 @@
 	<div class="container">
 		<div class="div-princ" th:each="cook : ${cooks}">
 			<a th:href="@{'/cook' + '/' + ${cook.id}}">
-				<img class="img-cooks" th:if="${cook.urlImage.startsWith('https')}" th:src="${cook.urlImage}">
-				<img class="img-cooks" th:unless="${cook.urlImage.startsWith('https')}"
-					th:src="@{/images/__${cook.urlImage}__}">
+				<img class="img-cooks" th:src="@{/images/__${cook.urlImage}__}">
 			</a>
 			<h2 class="text-recipe" th:text="${cook.name} + ' ' + ${cook.surname}"></h2>
 		

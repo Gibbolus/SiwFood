@@ -46,9 +46,7 @@
 		<h1 id="name-text" th:text="${cook.name} + ' ' + ${cook.surname}">Info cook</h1>
 		<div class="photo-and-text">
 			<div>
-				<img class="img-cook" th:if="${cook.urlImage.startsWith('https')}" th:src="${cook.urlImage}">
-				<img class="img-cook" th:unless="${cook.urlImage.startsWith('https')}"
-					th:src="@{/images/__${cook.urlImage}__}">
+				<img class="img-cook" th:src="@{/images/__${cook.urlImage}__}">
 			</div>
 			<div class="description">
 				<br>
