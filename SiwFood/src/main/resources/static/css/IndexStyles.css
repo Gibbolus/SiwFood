@@ -32,7 +32,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
-	width: 100%;
+	width: 110%;
 }
 
 .ali {
@@ -259,7 +259,7 @@ p{
 		position: fixed;
 		padding: 0 50px 20px 0;
 		right: -35%;
-		top: 61px;
+		top: 55px;
 		flex-direction: column;
 		background-color: #f8dbb0;
 		width: 25%;

@@ -45,7 +45,7 @@
 
 	<div id="form-main">
 		<h1>Registrazione</h1>
-		<form th:action="@{/register}" method="POST">
+		<form th:action="@{/register}" method="POST" enctype="multipart/form-data">
 			<div>
 				<label class="text">Nome</label>
 				<span><input class="search-bar" type="text" placeholder="Nome..." required
@@ -70,10 +70,7 @@
 			</div>
 			<div>
 				<label class="text">Foto</label>
-				<span><input class="search-bar" type="url" placeholder="Foto..." required
-						th:field="${user.urlImage}" /></span>
-				<span th:if="${#fields.hasErrors('user.urlImage')}" th:errors="${user.urlImage}">
-				</span>
+				<span><input class="search-bar" type="file" name="immagine" placeholder="Foto..." required/></span>
 			</div>
 			<div>
 				<label class="text">Data Di Nascita</label>

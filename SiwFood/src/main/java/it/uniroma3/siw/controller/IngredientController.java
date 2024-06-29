@@ -1,26 +1,34 @@
 package it.uniroma3.siw.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import it.uniroma3.siw.model.Ingredient;
 import it.uniroma3.siw.model.Recipe;
 import it.uniroma3.siw.repository.IngredientRepository;
-import it.uniroma3.siw.repository.RecipeRepository;
 import it.uniroma3.siw.service.IngredientService;
 import it.uniroma3.siw.service.RecipeService;
 import jakarta.persistence.EntityManager;
 
 @Controller
 public class IngredientController {
+
+	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
 
 	@Autowired
 	IngredientRepository ingredientRepository;
@@ -80,15 +88,26 @@ public class IngredientController {
 	}
 
 	@PostMapping(value = "/admin/ingredient")
-	public String newIngredient(@ModelAttribute("ingredient") Ingredient ingredient, Model model) {
+	public String newIngredient(@ModelAttribute("ingredient") Ingredient ingredient,
+			@RequestParam("immagine") MultipartFile file, Model model) {
 		if (!ingredientRepository.existsByName(ingredient.getName())) {
-			this.ingredientService.save(ingredient);
-			model.addAttribute("ingredient", ingredient);
-			return "ingredient.html";
-		} else {
-			model.addAttribute("messaggioErrore", "Questo ingredient esiste già");
-			return "/admin/formNewIngredient.html";
+			if (!file.isEmpty())
+				try {
+					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+					Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+					Files.write(path, file.getBytes());
+					ingredient.setUrlImage(fileName);
+
+					this.ingredientRepository.save(ingredient);
+					model.addAttribute("ingredient", ingredient);
+					return "ingredient.html";
+
+				} catch (IOException e) {
+					e.printStackTrace();
+					return "formNewIngredient.html";
+				}
 		}
+		return "formNewIngredient.html";
 	}
 
 	@GetMapping(value = "/cookUser/formNewIngredient")
@@ -98,25 +117,36 @@ public class IngredientController {
 	}
 
 	@PostMapping(value = "/cookUser/ingredient")
-	public String newIngredientCook(@ModelAttribute("ingredient") Ingredient ingredient, Model model) {
+	public String newIngredientCook(@ModelAttribute("ingredient") Ingredient ingredient, @RequestParam("immagine") MultipartFile file, Model model) {
 		if (!ingredientRepository.existsByName(ingredient.getName())) {
-			this.ingredientService.save(ingredient);
-			model.addAttribute("ingredient", ingredient);
-			return "ingredient.html";
-		} else {
-			model.addAttribute("messaggioErrore", "Questo ingredient esiste già");
-			return "/cookUser/formNewIngredient.html";
+			if (!file.isEmpty())
+				try {
+					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+					Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+					Files.write(path, file.getBytes());
+					ingredient.setUrlImage(fileName);
+
+					this.ingredientRepository.save(ingredient);
+					model.addAttribute("ingredient", ingredient);
+					return "ingredient.html";
+
+				} catch (IOException e) {
+					e.printStackTrace();
+					return "formNewIngredient.html";
+				}
 		}
+		return "formNewIngredient.html";
 	}
 
 	@GetMapping(value = "/admin/deleteIngredient/{ingredientId}")
 	public String deleteIngredientAdmin(@PathVariable("ingredientId") Long ingredientId, Model model) {
 		Iterable<Recipe> recipes = recipeService.findAll();
 		Ingredient i = ingredientService.findById(ingredientId);
-		for(Recipe recipe : recipes)
-			for(Ingredient ingredient : recipe.getIngredientsUtilizzati())
-				if(ingredient.getName().equals(i.getName())) {
-					model.addAttribute("messaggioErrore", "Non puoi eliminare questo ingrediente perchè fa parte di alcune ricette");
+		for (Recipe recipe : recipes)
+			for (Ingredient ingredient : recipe.getIngredientsUtilizzati())
+				if (ingredient.getName().equals(i.getName())) {
+					model.addAttribute("messaggioErrore",
+							"Non puoi eliminare questo ingrediente perchè fa parte di alcune ricette");
 					return "redirect:/admin/manageIngredients";
 				}
 		ingredientService.deleteById(ingredientId);

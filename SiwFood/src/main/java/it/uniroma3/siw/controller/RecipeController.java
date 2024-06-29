@@ -1,5 +1,10 @@
 package it.uniroma3.siw.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -9,12 +14,14 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.uniroma3.siw.controller.validator.RecipeValidator;
@@ -30,31 +37,41 @@ import it.uniroma3.siw.repository.RecipeRepository;
 import it.uniroma3.siw.service.CookService;
 import it.uniroma3.siw.service.IngredientService;
 import it.uniroma3.siw.service.RecipeService;
-import it.uniroma3.siw.service.UserService;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 
 @Controller
 public class RecipeController {
 
-	@Autowired RecipeRepository recipeRepository;
+	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
 
-	@Autowired RecipeService recipeService;
+	@Autowired
+	RecipeRepository recipeRepository;
 
-	@Autowired RecipeValidator recipeValidator;
+	@Autowired
+	RecipeService recipeService;
 
-	@Autowired CookService cookService;
-	
-	@Autowired IngredientService ingredientService;
+	@Autowired
+	RecipeValidator recipeValidator;
 
-	@Autowired CookRepository cookRepository;
+	@Autowired
+	CookService cookService;
 
-	@Autowired IngredientRepository ingredientRepository;
+	@Autowired
+	IngredientService ingredientService;
 
-	@Autowired CredentialsRepository credentialsRepository;
+	@Autowired
+	CookRepository cookRepository;
 
-	@Autowired EntityManager entityManager;
-	
+	@Autowired
+	IngredientRepository ingredientRepository;
+
+	@Autowired
+	CredentialsRepository credentialsRepository;
+
+	@Autowired
+	EntityManager entityManager;
+
 	@GetMapping(value = "/recipe/{id}")
 	public String getRecipe(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("recipe", this.recipeRepository.findById(id).get());
@@ -66,15 +83,15 @@ public class RecipeController {
 		model.addAttribute("recipes", this.recipeService.findAll());
 		return "recipes.html";
 	}
-	
+
 	@GetMapping(value = "/formContact")
 	public String formContact() {
 		return "formContact.html";
-	}	
-	
+	}
+
 	@PostMapping(value = "/formSearchRecipes")
 	public String searchRecipes(Model model, @RequestParam String name) {
-		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%"+ name + "%')";
+		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%" + name + "%')";
 		List<Recipe> recipes = this.entityManager.createQuery(query, Recipe.class).getResultList();
 		model.addAttribute("recipes", recipes);
 		return "recipes.html";
@@ -82,7 +99,7 @@ public class RecipeController {
 
 	@PostMapping(value = "admin/formSearchRecipes")
 	public String searchRecipesAdmin(Model model, @RequestParam String name) {
-		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%"+ name + "%')";
+		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%" + name + "%')";
 		List<Recipe> recipes = this.entityManager.createQuery(query, Recipe.class).getResultList();
 		model.addAttribute("recipes", recipes);
 		return "/admin/manageRecipes.html";
@@ -90,7 +107,7 @@ public class RecipeController {
 
 	@PostMapping(value = "cookUser/formSearchRecipes")
 	public String searchRecipesCook(Model model, @RequestParam String name) {
-		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%"+ name + "%')";
+		String query = "SELECT r FROM Recipe r WHERE LOWER(r.name) LIKE LOWER('%" + name + "%')";
 		List<Recipe> recipes = this.entityManager.createQuery(query, Recipe.class).getResultList();
 		model.addAttribute("recipes", recipes);
 		return "/cookUser/manageRecipes.html";
@@ -101,12 +118,12 @@ public class RecipeController {
 		model.addAttribute("recipes", this.recipeService.findAll());
 		return "/admin/manageRecipes.html";
 	}
-	
+
 	@GetMapping(value = "/cookUser/manageRecipes/{username}")
 	public String ShowRecipeCook(@PathVariable("username") String username, Model model) {
-	    Credentials tempUser = credentialsRepository.findByUsername(username);
-	    User currentUser = tempUser.getUser();
-	    Cook currentCook = this.cookRepository.findByNameAndSurname(currentUser.getName(), currentUser.getSurname());
+		Credentials tempUser = credentialsRepository.findByUsername(username);
+		User currentUser = tempUser.getUser();
+		Cook currentCook = this.cookRepository.findByNameAndSurname(currentUser.getName(), currentUser.getSurname());
 		model.addAttribute("recipes", currentCook.getRecipes());
 		return "/cookUser/manageRecipes.html";
 	}
@@ -118,46 +135,68 @@ public class RecipeController {
 	}
 
 	@PostMapping(value = "/admin/recipe")
-	public String newRecipe(@Valid @ModelAttribute("recipe") Recipe recipe, BindingResult bindingResult,
-			Model model) {
+	public String newRecipe(@Valid @ModelAttribute("recipe") Recipe recipe,
+			@RequestParam("immagine") MultipartFile file, BindingResult bindingResult, Model model) {
 		this.recipeValidator.validate(recipe, bindingResult);
 		if (!bindingResult.hasErrors()) {
-			this.recipeRepository.save(recipe);
-			model.addAttribute("recipe", recipe);
-			return "recipe.html";
-		} else {
-			return "/admin/formNewRecipe.html";
+			if (!file.isEmpty())
+				try {
+					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+					Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+					Files.write(path, file.getBytes());
+					recipe.setUrlImage(fileName);
+
+					this.recipeRepository.save(recipe);
+					model.addAttribute("recipe", recipe);
+					return "recipe.html";
+
+				} catch (IOException e) {
+					e.printStackTrace();
+					return "formNewRecipe.html";
+				}
 		}
+		return "formNewRecipe.html";
 	}
 
 	@GetMapping(value = "/cookUser/formNewRecipe/{username}")
 	public String formNewRecipeCook(@PathVariable("username") String username, Model model) {
-	    Credentials tempUser = credentialsRepository.findByUsername(username);
-	    User currentUser = tempUser.getUser();
-	    Cook currentCook = this.cookRepository.findByNameAndSurname(currentUser.getName(), currentUser.getSurname());
-	    Recipe recipe = new Recipe();
-	    model.addAttribute("cook", currentCook);
-	    model.addAttribute("cookId", currentCook.getId());
-	    model.addAttribute("recipe", recipe);
-	    model.addAttribute("userDetails", tempUser); // Aggiungi userDetails al modello
-	    return "cookUser/formNewRecipe.html";
+		Credentials tempUser = credentialsRepository.findByUsername(username);
+		User currentUser = tempUser.getUser();
+		Cook currentCook = this.cookRepository.findByNameAndSurname(currentUser.getName(), currentUser.getSurname());
+		Recipe recipe = new Recipe();
+		model.addAttribute("cook", currentCook);
+		model.addAttribute("cookId", currentCook.getId());
+		model.addAttribute("recipe", recipe);
+		model.addAttribute("userDetails", tempUser); // Aggiungi userDetails al modello
+		return "cookUser/formNewRecipe.html";
 	}
 
-
 	@PostMapping(value = "/cookUser/recipe")
-	public String newRecipeCook(@Valid @ModelAttribute("recipe") Recipe recipe, BindingResult bindingResult, @RequestParam("username") String username, Model model) {
+	public String newRecipeCook(@Valid @ModelAttribute("recipe") Recipe recipe, BindingResult bindingResult,
+			@RequestParam("username") String username, @RequestParam("immagine") MultipartFile file, Model model) {
 		Credentials tempUser = credentialsRepository.findByUsername(username);
 		User currentUser = tempUser.getUser();
 		Cook currentCook = this.cookRepository.findByNameAndSurname(currentUser.getName(), currentUser.getSurname());
 		recipe.setCook(currentCook);
 		this.recipeValidator.validate(recipe, bindingResult);
 		if (!bindingResult.hasErrors()) {
-			this.recipeRepository.save(recipe);
-			model.addAttribute("recipe", recipe);
-			return "recipe.html";
-		} else {
-			return "cookUser/formNewRecipe.html";
+			if (!file.isEmpty())
+				try {
+					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+					Path path = Paths.get(UPLOAD_DIR + File.separator + fileName);
+					Files.write(path, file.getBytes());
+					recipe.setUrlImage(fileName);
+
+					this.recipeRepository.save(recipe);
+					model.addAttribute("recipe", recipe);
+					return "recipe.html";
+
+				} catch (IOException e) {
+					e.printStackTrace();
+					return "formNewRecipe.html";
+				}
 		}
+		return "cookUser/formNewRecipe.html";
 	}
 
 	@GetMapping(value = "/admin/addCook/{idRecipe}")
@@ -285,6 +324,7 @@ public class RecipeController {
 
 		return "cookUser/addIngredient.html";
 	}
+
 	private List<Ingredient> ingredientsToAdd(Long recipeId) {
 		List<Ingredient> ingredientsToAdd = new ArrayList<>();
 
@@ -293,7 +333,7 @@ public class RecipeController {
 		}
 		return ingredientsToAdd;
 	}
-	
+
 	@GetMapping(value = "/cookUser/updateQuantity/{ingredientId}/{recipeId}")
 	public String formUpdateQuantity(@PathVariable("recipeId") Long recipeId,
 			@PathVariable("ingredientId") Long ingredientId, Model model) {
@@ -301,16 +341,14 @@ public class RecipeController {
 		model.addAttribute("ingredient", ingredientRepository.findById(ingredientId).get());
 		return "/cookUser/updateQuantity.html";
 	}
-	
+
 	@PostMapping(value = "/cookUser/updateQuantity")
 	public String updateQuantity(@RequestParam("ingredientId") Long ingredientId,
-								 @RequestParam("recipeId") Long recipeId,
-								 @RequestParam("quantityValue") Integer quantityValue, 
-								 @RequestParam("quantityUnit") String quantityUnit,
-								 Model model) {
+			@RequestParam("recipeId") Long recipeId, @RequestParam("quantityValue") Integer quantityValue,
+			@RequestParam("quantityUnit") String quantityUnit, Model model) {
 		Optional<Ingredient> optionalIngredient = ingredientRepository.findById(ingredientId);
 		Optional<Recipe> optionalRecipe = recipeRepository.findById(recipeId);
-		
+
 		if (optionalIngredient.isPresent() && optionalRecipe.isPresent()) {
 			Ingredient ingredient = optionalIngredient.get();
 			Recipe recipe = optionalRecipe.get();
@@ -327,7 +365,8 @@ public class RecipeController {
 	}
 
 	@GetMapping(value = "/admin/updateQuantity/{ingredientId}/{recipeId}")
-	public String formUpdateQuantityAdmin(@PathVariable("recipeId") Long recipeId, @PathVariable("ingredientId") Long ingredientId, Model model) {
+	public String formUpdateQuantityAdmin(@PathVariable("recipeId") Long recipeId,
+			@PathVariable("ingredientId") Long ingredientId, Model model) {
 		model.addAttribute("recipe", recipeRepository.findById(recipeId).get());
 		model.addAttribute("ingredient", ingredientRepository.findById(ingredientId).get());
 		return "/admin/updateQuantity.html";
@@ -335,10 +374,8 @@ public class RecipeController {
 
 	@PostMapping(value = "/admin/updateQuantity")
 	public String updateQuantityAdmin(@RequestParam("ingredientId") Long ingredientId,
-								 @RequestParam("recipeId") Long recipeId,
-								 @RequestParam("quantityValue") Integer quantityValue, 
-								 @RequestParam("quantityUnit") String quantityUnit,
-								 Model model) {
+			@RequestParam("recipeId") Long recipeId, @RequestParam("quantityValue") Integer quantityValue,
+			@RequestParam("quantityUnit") String quantityUnit, Model model) {
 		Optional<Ingredient> optionalIngredient = ingredientRepository.findById(ingredientId);
 		Optional<Recipe> optionalRecipe = recipeRepository.findById(recipeId);
 
@@ -349,14 +386,14 @@ public class RecipeController {
 			quantityToRecipe.put(recipe.getId(), quantityValue);
 			ingredient.setUnitOfMeasure(quantityUnit);
 			ingredient.setQuantityToRecipe(quantityToRecipe);
-			ingredientRepository.save(ingredient);			// Aggiorna l'ingrediente nel database
+			ingredientRepository.save(ingredient); // Aggiorna l'ingrediente nel database
 			model.addAttribute("recipe", recipeRepository.findById(recipeId).get());
 			model.addAttribute("ingredient", ingredientRepository.findById(ingredientId).get());
 			model.addAttribute("quantityValue", quantityValue);
 		}
 		return "admin/formUpdateRecipe.html";
 	}
-	
+
 	public Integer getQuantityPerRecipe(Long ingredientId, Long recipeId) {
 		Optional<Ingredient> optionalIngredient = ingredientRepository.findById(ingredientId);
 		Optional<Recipe> optionalRecipe = recipeRepository.findById(recipeId);
@@ -370,24 +407,22 @@ public class RecipeController {
 			throw new RuntimeException("Ingrediente o Ricetta non trovati");
 		}
 	}
-	
 
 	@GetMapping(value = "/admin/deleteRecipe/{recipeId}")
 	public String deleteRecipeAdmin(@PathVariable("recipeId") Long recipeId, Model model) {
 		Recipe recipe = recipeService.findById(recipeId);
 		recipe.setIngredientsUtilizzati(null);
 		recipeService.deleteById(recipeId);
-        return "redirect:/admin/manageRecipes";
+		return "redirect:/admin/manageRecipes";
 	}
 
 	@GetMapping(value = "/cookUser/deleteRecipe/{recipeId}/{username}")
-	public String deleteRicettaCuoco(@PathVariable("recipeId") Long recipeId, @PathVariable("username") String username, Model model) {
+	public String deleteRicettaCuoco(@PathVariable("recipeId") Long recipeId, @PathVariable("username") String username,
+			Model model) {
 		Recipe recipe = recipeService.findById(recipeId);
 		recipe.setIngredientsUtilizzati(null);
 		recipeService.deleteById(recipeId);
-        return "redirect:/cookUser/manageRecipes/" + username;
+		return "redirect:/cookUser/manageRecipes/" + username;
 	}
-	
-	
-	
+
 }

@@ -45,7 +45,7 @@
 
 	<h1 class="title">Aggiungi una ricetta</h1>
 	<div id="add-recipe-form">
-		<form th:action="@{/cookUser/recipe}" method="POST" th:object="${recipe}">
+		<form th:action="@{/cookUser/recipe}" method="POST" th:object="${recipe}" enctype="multipart/form-data">
 			<div>
 				<label class="text">Nome</label>
 				<span><input class="search-bar" required type="text" th:field="${recipe.name}"
@@ -58,8 +58,7 @@
 			</div>
 			<div>
 				<label class="text">Immagine</label>
-				<span><input class="search-bar" required type="url" th:field="${recipe.urlImage}"
-						placeholder="URL Immagine..." /></span>
+				<span><input class="search-bar" type="file" name="immagine" placeholder="Foto..." required/></span>
 			</div>
 			<div>
 				<label class="text">Tempo</label>
