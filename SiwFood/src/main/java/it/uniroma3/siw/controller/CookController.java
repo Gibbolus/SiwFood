@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ import it.uniroma3.siw.repository.CredentialsRepository;
 import it.uniroma3.siw.repository.RecipeRepository;
 import it.uniroma3.siw.repository.UserRepository;
 import it.uniroma3.siw.service.CookService;
+import it.uniroma3.siw.validator.CookValidator;
 import jakarta.persistence.EntityManager;
 
 @Controller
@@ -36,22 +38,25 @@ public class CookController {
 	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
 	
 	@Autowired
-	CookRepository cookRepository;
+	private CookRepository cookRepository;
 
 	@Autowired
-	CookService cookService;
+	private CookService cookService;
 
 	@Autowired
-	RecipeRepository recipeRepository;
+	private RecipeRepository recipeRepository;
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
 	@Autowired
-	CredentialsRepository credentialsRepository;
+	private CredentialsRepository credentialsRepository;
 
 	@Autowired
-	EntityManager entityManager;
+	private EntityManager entityManager;
+
+	@Autowired
+	private CookValidator cookValidator;
 
 	@GetMapping(value = "/cook/{id}")
 	public String getCook(@PathVariable("id") Long id, Model model) {
@@ -99,8 +104,10 @@ public class CookController {
 	}
 
 	@PostMapping(value = "/admin/cooks")
-	public String newCook(@ModelAttribute("cook") Cook cook, @RequestParam("immagine") MultipartFile file, Model model) {
-		if (!cookRepository.existsByNameAndSurname(cook.getName(), cook.getSurname())) {
+	public String newCook(@ModelAttribute("cook") Cook cook, @RequestParam("immagine") MultipartFile file, BindingResult bindingResult, Model model) {
+		
+		this.cookValidator.validate(cook, bindingResult);
+		if (!bindingResult.hasErrors()) {
 			if(!file.isEmpty()) {
 				try {
 					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -114,11 +121,11 @@ public class CookController {
 					return "cook";
 				} catch (IOException e) {
 					e.printStackTrace();
-					return "admin/formNewCook.html";
+					return "/admin/formNewCook.html";
 				}
 			}
 		}
-		return "admin/formNewCook.html";
+		return "/admin/formNewCook.html";
 	}
 
 	@GetMapping(value = "/admin/deleteCook/{cookId}")

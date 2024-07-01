@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,25 +24,30 @@ import it.uniroma3.siw.model.Recipe;
 import it.uniroma3.siw.repository.IngredientRepository;
 import it.uniroma3.siw.service.IngredientService;
 import it.uniroma3.siw.service.RecipeService;
+import it.uniroma3.siw.validator.IngredientValidator;
 import jakarta.persistence.EntityManager;
 
 @Controller
 public class IngredientController {
 
-	//private static final String UPLOAD_DIR = "C:\\Users\\gabri\\OneDrive\\Documenti\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
+	// private static final String UPLOAD_DIR =
+	// "C:\\Users\\gabri\\OneDrive\\Documenti\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
 	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
-	
-	@Autowired
-	IngredientRepository ingredientRepository;
 
 	@Autowired
-	IngredientService ingredientService;
+	private IngredientRepository ingredientRepository;
 
 	@Autowired
-	EntityManager entityManager;
+	private IngredientService ingredientService;
 
 	@Autowired
-	RecipeService recipeService;
+	private EntityManager entityManager;
+
+	@Autowired
+	private RecipeService recipeService;
+
+	@Autowired
+	private IngredientValidator ingredientValidator;
 
 	@GetMapping(value = "/ingredient/{id}")
 	public String getIngredient(@PathVariable("id") Long id, Model model) {
@@ -89,9 +95,12 @@ public class IngredientController {
 	}
 
 	@PostMapping(value = "/admin/ingredient")
-	public String newIngredient(@ModelAttribute("ingredient") Ingredient ingredient,
+	public String newIngredient(@ModelAttribute("ingredient") Ingredient ingredient, BindingResult bindingResult,
 			@RequestParam("immagine") MultipartFile file, Model model) {
-		if (!ingredientRepository.existsByName(ingredient.getName())) {
+
+		this.ingredientValidator.validate(ingredient, bindingResult);
+
+		if (!bindingResult.hasErrors()) {
 			if (!file.isEmpty())
 				try {
 					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -105,10 +114,10 @@ public class IngredientController {
 
 				} catch (IOException e) {
 					e.printStackTrace();
-					return "formNewIngredient.html";
+					return "/admin/formNewIngredient.html";
 				}
 		}
-		return "formNewIngredient.html";
+		return "/admin/formNewIngredient.html";
 	}
 
 	@GetMapping(value = "/cookUser/formNewIngredient")
@@ -118,8 +127,11 @@ public class IngredientController {
 	}
 
 	@PostMapping(value = "/cookUser/ingredient")
-	public String newIngredientCook(@ModelAttribute("ingredient") Ingredient ingredient, @RequestParam("immagine") MultipartFile file, Model model) {
-		if (!ingredientRepository.existsByName(ingredient.getName())) {
+	public String newIngredientCook(@ModelAttribute("ingredient") Ingredient ingredient, BindingResult bindingResult,
+			@RequestParam("immagine") MultipartFile file, Model model) {
+
+		this.ingredientValidator.validate(ingredient, bindingResult);
+		if (!bindingResult.hasErrors()) {
 			if (!file.isEmpty())
 				try {
 					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -133,10 +145,10 @@ public class IngredientController {
 
 				} catch (IOException e) {
 					e.printStackTrace();
-					return "formNewIngredient.html";
+					return "/cookUser/formNewIngredient.html";
 				}
 		}
-		return "formNewIngredient.html";
+		return "/cookUser/formNewIngredient.html";
 	}
 
 	@GetMapping(value = "/admin/deleteIngredient/{ingredientId}")

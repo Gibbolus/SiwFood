@@ -21,6 +21,9 @@ public class RecipeValidator implements Validator{
 				&& recipeRepository.existsByNameAndCook(recipe.getName(), recipe.getCook())) {
 			errors.reject("recipe.duplicate");
 		}
+		if(recipe.getCookTime()>200 || recipe.getCookTime()<0) {
+			errors.reject("recipe.time");
+		}
 	}
 	
 	@Override

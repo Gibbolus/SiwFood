@@ -46,6 +46,9 @@
 
 	<div id="add-recipe-form">
 		<form th:action="@{/admin/recipe}" method="POST" th:object="${recipe}" enctype="multipart/form-data">
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p  style="text-align: center; color: red; font-size: large;" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
 			<div>
 				<label class="text">Nome</label>
 				<span><input class="search-bar" required type="text" th:field="${recipe.name}"

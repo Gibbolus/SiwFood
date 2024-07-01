@@ -34,7 +34,6 @@ import it.uniroma3.siw.repository.CookRepository;
 import it.uniroma3.siw.repository.IngredientRepository;
 import it.uniroma3.siw.repository.RecipeRepository;
 import it.uniroma3.siw.service.CookService;
-import it.uniroma3.siw.service.IngredientService;
 import it.uniroma3.siw.service.RecipeService;
 import it.uniroma3.siw.validator.RecipeValidator;
 import jakarta.persistence.EntityManager;
@@ -43,35 +42,32 @@ import jakarta.validation.Valid;
 @Controller
 public class RecipeController {
 
-	//private static final String UPLOAD_DIR = "C:\\Users\\gabri\\OneDrive\\Documenti\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
+	// private static final String UPLOAD_DIR = "C:\\Users\\gabri\\OneDrive\\Documenti\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
 	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
-	
-	@Autowired
-	RecipeRepository recipeRepository;
 
 	@Autowired
-	RecipeService recipeService;
+	private RecipeRepository recipeRepository;
 
 	@Autowired
-	RecipeValidator recipeValidator;
+	private RecipeService recipeService;
 
 	@Autowired
-	CookService cookService;
+	private RecipeValidator recipeValidator;
 
 	@Autowired
-	IngredientService ingredientService;
+	private CookService cookService;
 
 	@Autowired
-	CookRepository cookRepository;
+	private CookRepository cookRepository;
 
 	@Autowired
-	IngredientRepository ingredientRepository;
+	private IngredientRepository ingredientRepository;
 
 	@Autowired
-	CredentialsRepository credentialsRepository;
+	private CredentialsRepository credentialsRepository;
 
 	@Autowired
-	EntityManager entityManager;
+	private EntityManager entityManager;
 
 	@GetMapping(value = "/recipe/{id}")
 	public String getRecipe(@PathVariable("id") Long id, Model model) {
@@ -153,10 +149,10 @@ public class RecipeController {
 
 				} catch (IOException e) {
 					e.printStackTrace();
-					return "formNewRecipe.html";
+					return "/admin/formNewRecipe.html";
 				}
 		}
-		return "formNewRecipe.html";
+		return "/admin/formNewRecipe.html";
 	}
 
 	@GetMapping(value = "/cookUser/formNewRecipe/{username}")
@@ -194,10 +190,10 @@ public class RecipeController {
 
 				} catch (IOException e) {
 					e.printStackTrace();
-					return "formNewRecipe.html";
+					return "/cookUser/formNewRecipe.html";
 				}
 		}
-		return "cookUser/formNewRecipe.html";
+		return "/cookUser/formNewRecipe.html";
 	}
 
 	@GetMapping(value = "/admin/addCook/{idRecipe}")
@@ -210,7 +206,7 @@ public class RecipeController {
 	@GetMapping(value = "/admin/formUpdateRecipe/{id}")
 	public String formUpdateRecipe(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("recipe", recipeRepository.findById(id).get());
-		return "admin/formUpdateRecipe.html";
+		return "/admin/formUpdateRecipe.html";
 	}
 
 	@GetMapping(value = "/cookUser/formUpdateRecipe/{id}/{username}")
