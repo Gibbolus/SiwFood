@@ -61,18 +61,25 @@
 						<img class="icons" src="/images/plate.svg"></img>
 						<p class="icon-info" th:text="${recipe.recipeType}"></p>
 					</div>
-	
+
 					<div class="info">
 						<img class="icons" src="/images/puzzle.svg"></img>
 						<p class="icon-info" th:text="${recipe.difficulty}"></p>
 					</div>
 				</div>
+				<div id="cook-text">Cuoco:
+					<span th:if="${recipe.cook != null}">
+						<span th:text="${recipe.cook.name}	+ ' ' + ${recipe.cook.surname}"></span>
+					</span>
+					<span th:unless="${recipe.cook != null}">Non disponibile</span>
+				</div>
 				<span id="ingredients-text">Lista degli ingredienti:</span>
-				<ul>
+				<ul th:unless="${recipe.ingredientsUtilizzati} != null">
 					<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">
 						<li class="ingredients-list">
 							<div th:if="${ingredient.quantityToRecipe[recipe.id]}">
-								<span th:text="${ingredient.name} + '  -  ' + ${ingredient.quantityToRecipe[recipe.id]} + ' ' + ${ingredient.unitOfMeasure}"></span>
+								<span
+									th:text="${ingredient.name} + '  -  ' + ${ingredient.quantityToRecipe[recipe.id]} + ' ' + ${ingredient.unitOfMeasure}"></span>
 							</div>
 							<div th:unless="${ingredient.quantityToRecipe[recipe.id]}">
 								<span th:text="${ingredient.name}"></span>
@@ -80,13 +87,10 @@
 						</li>
 					</div>
 				</ul>
+				<div th:if="${recipe.ingredientsUtilizzati} != null">
+					Non ci sono ingredienti per questa ricetta
+				</div>
 			</div>
-		</div>
-		<div id="cook-text">Cuoco:
-			<span th:if="${recipe.cook != null}">
-				<span th:text="${recipe.cook.name}	+ ' ' + ${recipe.cook.surname}"></span>
-			</span>
-			<span th:unless="${recipe.cook != null}">Non disponibile</span>
 		</div>
 	</div>
 

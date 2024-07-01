@@ -77,7 +77,7 @@ li {
 }
 
 #name-text{
-	margin: 2% 0 2% 10%;
+	text-align: center;
 }
 
 .photo-and-text{
@@ -115,11 +115,12 @@ li {
 	flex-direction: column;
 	font-size: larger;
 	font-weight: 700;
+	margin-top: 3%;
 }
 
 .description-span{
 	width: 50rem;
-	font-weight: 500;
+	font-weight: 400;
 }
 
 #recipe-infos{
@@ -171,7 +172,6 @@ li {
 }
 
 #cook-text{
-	margin: 2% 0 2% 10%;
 	font-size: larger;
 	font-weight: 700;
 }
