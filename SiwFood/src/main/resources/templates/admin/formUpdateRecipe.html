@@ -68,6 +68,20 @@
 						<p class="icon-info" th:text="${recipe.difficulty}"></p>
 					</div>
 				</div>
+				<div id="cook-text">Cuoco:
+					<div th:if="${recipe.cook}">
+						<span th:text="${recipe.cook.name}	+ ' ' + ${recipe.cook.surname}"></span>
+						<a th:href="@{'/admin/addCook' + '/' + ${recipe.id}}">
+							<button class="cook-button" type="button">Modifica cuoco</button>
+						</a>
+					</div>
+					<div th:unless="${recipe.cook}">
+						<span>Non disponibile</span>
+						<a th:href="@{'/admin/addCook' + '/' + ${recipe.id}}">
+							<button class="cook-button" type="button">Aggiungi cuoco</button>
+						</a>
+					</div>
+				</div>
 				<span id="ingredients-text">Lista degli ingredienti:</span>
 				<ul>
 					<div th:each="ingredient: ${recipe.ingredientsUtilizzati}">
@@ -93,20 +107,6 @@
 						<input id="submit" type="submit" value="Modifica">
 					</a>
 				</div>
-			</div>
-		</div>
-		<div id="cook-text">Cuoco:
-			<div th:if="${recipe.cook}">
-				<span th:text="${recipe.cook.name}	+ ' ' + ${recipe.cook.surname}"></span>
-				<a th:href="@{'/admin/addCook' + '/' + ${recipe.id}}">
-					<button class="cook-button" type="button">Modifica cuoco</button>
-				</a>
-			</div>
-			<div th:unless="${recipe.cook}">
-				<span>Non disponibile</span>
-				<a th:href="@{'/admin/addCook' + '/' + ${recipe.id}}">
-					<button class="cook-button" type="button">Aggiungi cuoco</button>
-				</a>
 			</div>
 		</div>
 		<div class="bottom">
