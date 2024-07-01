@@ -26,6 +26,10 @@ public class IngredientService {
 		return ingredientRepository.findByName(name);
 	}
 	
+	public boolean existByName(String name) {
+		return ingredientRepository.existsByName(name);
+	}
+	
 	public void deleteById(Long id) {
         ingredientRepository.deleteById(id);
     }

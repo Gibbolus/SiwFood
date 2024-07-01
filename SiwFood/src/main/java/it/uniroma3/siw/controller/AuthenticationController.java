@@ -27,13 +27,16 @@ import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.CookService;
 import it.uniroma3.siw.service.UserService;
+import it.uniroma3.siw.validator.CredentialsValidator;
+import it.uniroma3.siw.validator.UserValidator;
 import jakarta.validation.Valid;
 
 @Controller
 public class AuthenticationController {
 
-	private static final String UPLOAD_DIR = "C:\\Users\\gabri\\OneDrive\\Documenti\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
-
+	//private static final String UPLOAD_DIR = "C:\\Users\\gabri\\OneDrive\\Documenti\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
+	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
+	
 	@Autowired
 	private CredentialsService credentialsService;
 
@@ -42,7 +45,13 @@ public class AuthenticationController {
 
 	@Autowired
 	private CookService cookService;
-
+	
+    @Autowired 
+    private CredentialsValidator credentialsValidator;
+    
+    @Autowired 
+    private UserValidator userValidator;
+    
 	@GetMapping(value = "/register")
 	public String showRegisterForm(Model model) {
 		model.addAttribute("user", new User());
@@ -99,8 +108,11 @@ public class AuthenticationController {
 	public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult userBindingResult,
 			@Valid @ModelAttribute("credentials") Credentials credentials, BindingResult credentialsBindingResult,
 			@RequestParam("immagine") MultipartFile file, Model model) {
+		
+		this.credentialsValidator.validate(credentials, credentialsBindingResult);
+		this.userValidator.validate(user, userBindingResult);
 
-		if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+		if (!credentialsBindingResult.hasErrors() && !userBindingResult.hasErrors()) {
 			if (!file.isEmpty())
 				try {
 					String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -109,11 +121,12 @@ public class AuthenticationController {
 					user.setUrlImage(fileName);
 				} catch (IOException e) {
 					e.printStackTrace();
-					return "registerUser";
+					return "formRegisterUser";
 				}
 
-			userService.saveUser(user);
 			credentials.setUser(user);
+			userService.saveUser(user);
+			
 			credentialsService.saveCredentials(credentials);
 
 			Cook newCook = new Cook();
@@ -124,8 +137,8 @@ public class AuthenticationController {
 			this.cookService.save(newCook);
 
 			model.addAttribute("user", user);
-			return "registrationSuccessful";
+			return "registrationSuccessful.html";
 		}
-		return "registerUser";
+		return "formRegisterUser.html";
 	}
 }

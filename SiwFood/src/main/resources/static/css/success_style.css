@@ -137,6 +137,18 @@ li {
 }
 
 
+.register-error {
+	text-align: center;
+}
+
+.register-error .error {
+	color: red;
+	font-size: 17px;
+}
+
+
+
+
 @media(max-width: 768px){
 	
 	.nav-bar{

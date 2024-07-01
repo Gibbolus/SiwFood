@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import it.uniroma3.siw.controller.validator.RecipeValidator;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.Cook;
 import it.uniroma3.siw.model.Ingredient;
@@ -37,14 +36,16 @@ import it.uniroma3.siw.repository.RecipeRepository;
 import it.uniroma3.siw.service.CookService;
 import it.uniroma3.siw.service.IngredientService;
 import it.uniroma3.siw.service.RecipeService;
+import it.uniroma3.siw.validator.RecipeValidator;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 
 @Controller
 public class RecipeController {
 
-	private static final String UPLOAD_DIR = "C:\\Users\\gabri\\OneDrive\\Documenti\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
-
+	//private static final String UPLOAD_DIR = "C:\\Users\\gabri\\OneDrive\\Documenti\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
+	private static final String UPLOAD_DIR = "C:\\Users\\Gabriele\\git\\SiwFood\\SiwFood\\src\\main\\resources\\static\\images";
+	
 	@Autowired
 	RecipeRepository recipeRepository;
 

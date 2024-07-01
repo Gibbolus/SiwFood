@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	<title>
-		SiwFood - Registrazione
-	</title>
+	<title> SiwFood - Registrazione </title>
 	<link rel="stylesheet" href="/css/register_style.css" />
 	<link rel="icon" href="/images/favicon.ico">
 </head>
@@ -29,10 +27,7 @@
 			</li>
 			<li class="nav-item">
 				<div class="account-reg-log">
-					<a th:if="${userDetails}" id="reg-button" class="reg-log-button" href="/logout"> Logout </a>
-					<a th:unless="${userDetails}" id="reg-button" class="reg-log-button" href="/register">
-						Registrati</a>
-					<a th:unless="${userDetails}" class="reg-log-button" href="/login"> Login </a>
+					<a class="reg-log-button" href="/login"> Login </a>
 				</div>
 			</li>
 		</ul>
@@ -45,54 +40,40 @@
 
 	<div id="form-main">
 		<h1>Registrazione</h1>
-		<form th:action="@{/register}" method="POST" enctype="multipart/form-data">
+		<form th:action="@{/register}" method="POST" th:object="${credentials}" enctype="multipart/form-data">
+			<div th:if="${#fields.hasGlobalErrors()}">
+				<p  style="text-align: center; color: red; font-size: large;" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+			</div>
 			<div>
 				<label class="text">Nome</label>
-				<span><input class="search-bar" type="text" placeholder="Nome..." required
-						th:field="${user.name}" /></span>
-				<span th:if="${#fields.hasErrors('user.name')}" th:errors="${user.name}">
+				<span><input class="search-bar" type="text" placeholder="Nome..." required th:field="${user.name}" /></span>
 				</span>
 			</div>
 			<div>
 				<label class="text">Cognome</label>
 				<br>
-				<span><input class="search-bar" type="text" placeholder="Cognome..." required
-						th:field="${user.surname}" /></span>
-				<span th:if="${#fields.hasErrors('user.surname')}" th:errors="${user.surname}">
+				<span><input class="search-bar" type="text" placeholder="Cognome..." required th:field="${user.surname}" /></span>
 				</span>
 			</div>
 			<div>
 				<label class="text">Email</label>
-				<span><input class="search-bar" type="text" placeholder="Email..." required
-						th:field="${user.email}" /></span>
-				<span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}">
-				</span>
+				<span><input class="search-bar" type="text" placeholder="Email..." required th:field="${user.email}" /></span>
 			</div>
 			<div>
 				<label class="text">Foto</label>
-				<span><input class="search-bar" type="file" name="immagine" placeholder="Foto..." required/></span>
+				<span><input class="search-bar" type="file" name="immagine" placeholder="Foto..." required /></span>
 			</div>
 			<div>
 				<label class="text">Data Di Nascita</label>
-				<span><input class="search-bar" type="date" required th:field="${user.year}"/></span>
-				<span th:if="${#fields.hasErrors('user.year')}" th:errors="${user.year}">
-				</span>
+				<span><input class="search-bar" type="date" required th:field="${user.year}" /></span>
 			</div>
 			<div>
 				<label class="text">Username</label>
-				<span>
-					<input class="search-bar" type="text" placeholder="Username..." required
-						th:field="${credentials.username}" />
-				</span>
-				<span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}">
-				</span>
+				<span><input class="search-bar" type="text" placeholder="Username..." required th:field="${credentials.username}" /></span>
 			</div>
 			<div>
 				<label class="text">Password</label>
-				<span><input class="search-bar" type="password" placeholder="Password..." required
-						th:field="${credentials.password}" />
-				</span>
-				<span th:if="${#fields.hasErrors('credentials.password')}" th:errors="${credentials.password}">
+				<span><input class="search-bar" type="password" placeholder="Password..." required th:field="${credentials.password}" />
 				</span>
 			</div>
 			<div style="text-align: center;">
