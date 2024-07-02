@@ -42,26 +42,31 @@
 		<h1>Registrazione</h1>
 		<form th:action="@{/register}" method="POST" th:object="${credentials}" enctype="multipart/form-data">
 			<div th:if="${#fields.hasGlobalErrors()}">
-				<p  style="text-align: center; color: red; font-size: large;" th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+				<p style="text-align: center; color: red; font-size: large;" th:each="err : ${#fields.globalErrors()}"
+					th:text="${err}">...</p>
 			</div>
 			<div>
 				<label class="text">Nome</label>
-				<span><input class="search-bar" type="text" placeholder="Nome..." required th:field="${user.name}" /></span>
+				<span><input class="search-bar" type="text" placeholder="Nome..." required
+						th:field="${user.name}" /></span>
 				</span>
 			</div>
 			<div>
 				<label class="text">Cognome</label>
 				<br>
-				<span><input class="search-bar" type="text" placeholder="Cognome..." required th:field="${user.surname}" /></span>
+				<span><input class="search-bar" type="text" placeholder="Cognome..." required
+						th:field="${user.surname}" /></span>
 				</span>
 			</div>
 			<div>
 				<label class="text">Email</label>
-				<span><input class="search-bar" type="text" placeholder="Email..." required th:field="${user.email}" /></span>
+				<span><input class="search-bar" type="text" placeholder="Email..." required
+						th:field="${user.email}" /></span>
 			</div>
 			<div>
 				<label class="text">Foto</label>
-				<span><input class="search-bar" type="file" name="immagine" placeholder="Foto..." required /></span>
+					<input hidden id="upload" type="file" name="immagine" placeholder="Foto..." required />
+				<label for="upload" class="search-bar"> Scegli Immagine </label>
 			</div>
 			<div>
 				<label class="text">Data Di Nascita</label>
@@ -69,11 +74,13 @@
 			</div>
 			<div>
 				<label class="text">Username</label>
-				<span><input class="search-bar" type="text" placeholder="Username..." required th:field="${credentials.username}" /></span>
+				<span><input class="search-bar" type="text" placeholder="Username..." required
+						th:field="${credentials.username}" /></span>
 			</div>
 			<div>
 				<label class="text">Password</label>
-				<span><input class="search-bar" type="password" placeholder="Password..." required th:field="${credentials.password}" />
+				<span><input class="search-bar" type="password" placeholder="Password..." required
+						th:field="${credentials.password}" />
 				</span>
 			</div>
 			<div style="text-align: center;">
